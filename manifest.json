@@ -5,6 +5,7 @@
   "description": "Cryptographically timestamps every AI conversation turn using RFC 3161 via Sigill.",
   "permissions": ["storage", "unlimitedStorage"],
   "host_permissions": [
+    "https://api.sigill.ai/*",
     "https://claude.ai/*",
     "https://chatgpt.com/*",
     "https://gemini.google.com/*"
