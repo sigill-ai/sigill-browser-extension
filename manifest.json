@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Sigill — AI Conversation Timestamper",
+  "version": "0.1.0",
+  "description": "Cryptographically timestamps every AI conversation turn using RFC 3161 via Sigill.",
+  "permissions": ["storage", "unlimitedStorage"],
+  "host_permissions": [
+    "https://claude.ai/*",
+    "https://chatgpt.com/*",
+    "https://gemini.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background/worker.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Sigill Timestamper"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://claude.ai/*"],
+      "js": ["content/shared.js", "content/claude.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://chatgpt.com/*"],
+      "js": ["content/shared.js", "content/chatgpt.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://gemini.google.com/*"],
+      "js": ["content/shared.js", "content/gemini.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

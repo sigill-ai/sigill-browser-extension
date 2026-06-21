@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sigill Timestamper</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="header">
+    <span class="logo">Sigill</span>
+    <span class="tagline">AI Timestamper</span>
+  </div>
+
+  <section class="section">
+    <label class="label" for="apiKey">API Key</label>
+    <div class="key-row">
+      <input type="password" id="apiKey" class="input" placeholder="Bearer token" autocomplete="off" spellcheck="false" />
+      <button class="btn-ghost" id="toggleKey">Show</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">Platforms</div>
+    <div class="toggle-row">
+      <span>Claude</span>
+      <label class="toggle">
+        <input type="checkbox" id="claudeEnabled" checked />
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="toggle-row">
+      <span>ChatGPT</span>
+      <label class="toggle">
+        <input type="checkbox" id="chatgptEnabled" checked />
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="toggle-row">
+      <span>Gemini</span>
+      <label class="toggle">
+        <input type="checkbox" id="geminiEnabled" checked />
+        <span class="slider"></span>
+      </label>
+    </div>
+  </section>
+
+  <section class="section footer-section">
+    <span class="stats" id="stats">0 turns stamped</span>
+    <button class="btn" id="exportBtn">Export log</button>
+  </section>
+
+  <script src="popup.js"></script>
+</body>
+</html>
