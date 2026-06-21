@@ -1,9 +1,7 @@
 // Selectors: [data-testid="human-turn"] / [data-testid="assistant-turn"]
 // Update these if Claude's DOM structure changes.
 
-(async () => {
-  if (!(await sigillEnabled('claude'))) return;
-
+(() => {
   const processed = new WeakSet();
   const watching = new WeakSet();
   const timers = new WeakMap();
@@ -42,6 +40,7 @@
     document.querySelectorAll('[data-testid="assistant-turn"]').forEach(el => attach(el, 'assistant'));
   }
 
+  console.debug('[Sigill] claude adapter active');
   new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
   scan();
 })();

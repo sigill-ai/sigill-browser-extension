@@ -3,14 +3,11 @@
 // so these top-level declarations are available in every adapter.
 
 async function sigillStamp(platform, role, text, conversationId) {
-  chrome.runtime.sendMessage({ type: 'STAMP', platform, role, text, conversationId }).catch(() => {});
-}
-
-async function sigillEnabled(platform) {
-  try {
-    const data = await chrome.storage.sync.get(['apiKey', `${platform}Enabled`]);
-    return !!data.apiKey && data[`${platform}Enabled`] !== false;
-  } catch {
-    return false;
-  }
+  chrome.runtime.sendMessage({ type: 'STAMP', platform, role, text, conversationId })
+    .then(res => {
+      if (res?.ok) console.debug(`[Sigill] stamped ${platform} ${role} (${text.length} chars)`);
+      else if (res?.skipped) console.debug('[Sigill] skipped — no API key or platform disabled');
+      else if (res?.error) console.warn('[Sigill] stamp error:', res.error);
+    })
+    .catch(() => {});
 }

@@ -1,9 +1,7 @@
 // Selectors: [data-message-author-role="user"] / [data-message-author-role="assistant"]
 // Update these if ChatGPT's DOM structure changes.
 
-(async () => {
-  if (!(await sigillEnabled('chatgpt'))) return;
-
+(() => {
   const processed = new WeakSet();
   const watching = new WeakSet();
   const timers = new WeakMap();
@@ -39,10 +37,14 @@
   }
 
   function scan() {
-    document.querySelectorAll('[data-message-author-role="user"]').forEach(el => attach(el, 'user'));
-    document.querySelectorAll('[data-message-author-role="assistant"]').forEach(el => attach(el, 'assistant'));
+    const userEls = document.querySelectorAll('[data-message-author-role="user"]');
+    const assistantEls = document.querySelectorAll('[data-message-author-role="assistant"]');
+    console.debug(`[Sigill] scan: ${userEls.length} user, ${assistantEls.length} assistant elements`);
+    userEls.forEach(el => attach(el, 'user'));
+    assistantEls.forEach(el => attach(el, 'assistant'));
   }
 
+  console.debug('[Sigill] chatgpt adapter active');
   new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
   scan();
 })();

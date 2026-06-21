@@ -1,9 +1,7 @@
 // Selectors: user-query / model-response (Angular custom elements)
 // Update these if Gemini's DOM structure changes.
 
-(async () => {
-  if (!(await sigillEnabled('gemini'))) return;
-
+(() => {
   const processed = new WeakSet();
   const watching = new WeakSet();
   const timers = new WeakMap();
@@ -16,7 +14,6 @@
   function scheduleStamp(el, role) {
     if (processed.has(el)) return;
     clearTimeout(timers.get(el));
-    // Gemini renders slightly slower; use a longer debounce for assistant turns
     timers.set(el, setTimeout(() => {
       if (processed.has(el)) return;
       const text = el.innerText?.trim();
@@ -44,6 +41,7 @@
     document.querySelectorAll('model-response').forEach(el => attach(el, 'assistant'));
   }
 
+  console.debug('[Sigill] gemini adapter active');
   new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
   scan();
 })();

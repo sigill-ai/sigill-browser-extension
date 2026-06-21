@@ -11,7 +11,9 @@ async function load() {
   });
 
   const stats = await chrome.runtime.sendMessage({ type: 'GET_STATS' }).catch(() => ({ count: 0 }));
-  $('stats').textContent = `${stats?.count ?? 0} turns stamped`;
+  const noKey = !data.apiKey;
+  $('stats').textContent = noKey ? 'Add your API key above to start' : `${stats?.count ?? 0} turns stamped`;
+  $('stats').style.color = noKey ? '#f59e0b' : '#94a3b8';
 }
 
 async function save() {
