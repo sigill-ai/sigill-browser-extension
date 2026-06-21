@@ -1,10 +1,10 @@
 // Selectors: [data-message-author-role="user"] / [data-message-author-role="assistant"]
-// Update these if ChatGPT's DOM structure changes.
 
 (() => {
   const processed = new WeakSet();
-  const watching = new WeakSet();
-  const timers = new WeakMap();
+  const watching  = new WeakSet();
+  const timers    = new WeakMap();
+  let lastPrompt  = '';
 
   function conversationId() {
     const m = location.pathname.match(/\/c\/([^/?]+)/);
@@ -19,9 +19,15 @@
       const text = el.innerText?.trim();
       if (!text) return;
       processed.add(el);
-      const res = await sigillStamp('chatgpt', role, text, conversationId());
-      if (res?.ok) sigillInjectBadge(el, role);
-    }, role === 'assistant' ? 800 : 150));
+      if (role === 'user') {
+        lastPrompt = text;
+        console.debug('[Sigill] chatgpt: captured prompt');
+      } else {
+        const res = await sigillStampTurn('chatgpt', conversationId(), lastPrompt, text);
+        lastPrompt = '';
+        if (res?.ok) sigillInjectBadge(el);
+      }
+    }, role === 'assistant' ? 800 : 50));
   }
 
   function attach(el, role) {
@@ -38,11 +44,11 @@
   }
 
   function scan() {
-    const userEls = document.querySelectorAll('[data-message-author-role="user"]');
-    const assistantEls = document.querySelectorAll('[data-message-author-role="assistant"]');
-    console.debug(`[Sigill] scan: ${userEls.length} user, ${assistantEls.length} assistant elements`);
-    userEls.forEach(el => attach(el, 'user'));
-    assistantEls.forEach(el => attach(el, 'assistant'));
+    const u = document.querySelectorAll('[data-message-author-role="user"]');
+    const a = document.querySelectorAll('[data-message-author-role="assistant"]');
+    console.debug(`[Sigill] chatgpt scan: ${u.length} user, ${a.length} assistant`);
+    u.forEach(el => attach(el, 'user'));
+    a.forEach(el => attach(el, 'assistant'));
   }
 
   console.debug('[Sigill] chatgpt adapter active');

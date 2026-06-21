@@ -1,10 +1,14 @@
-// Selectors: [data-testid="human-turn"] / [data-testid="assistant-turn"]
-// Update these if Claude's DOM structure changes.
+// Primary selectors: [data-testid="human-turn"] / [data-testid="assistant-turn"]
+// Fallbacks added because Claude's DOM has changed across versions.
 
 (() => {
   const processed = new WeakSet();
-  const watching = new WeakSet();
-  const timers = new WeakMap();
+  const watching  = new WeakSet();
+  const timers    = new WeakMap();
+  let lastPrompt  = '';
+
+  const USER_SELECTORS      = ['[data-testid="human-turn"]', '[data-testid="user-message"]'];
+  const ASSISTANT_SELECTORS = ['[data-testid="assistant-turn"]', '[data-testid="assistant-message"]', '.font-claude-message'];
 
   function conversationId() {
     return location.pathname.split('/').filter(Boolean).at(-1) ?? 'unknown';
@@ -18,9 +22,15 @@
       const text = el.innerText?.trim();
       if (!text) return;
       processed.add(el);
-      const res = await sigillStamp('claude', role, text, conversationId());
-      if (res?.ok) sigillInjectBadge(el, role);
-    }, role === 'assistant' ? 800 : 150));
+      if (role === 'user') {
+        lastPrompt = text;
+        console.debug('[Sigill] claude: captured prompt');
+      } else {
+        const res = await sigillStampTurn('claude', conversationId(), lastPrompt, text);
+        lastPrompt = '';
+        if (res?.ok) sigillInjectBadge(el);
+      }
+    }, role === 'assistant' ? 800 : 50));
   }
 
   function attach(el, role) {
@@ -36,9 +46,20 @@
     scheduleStamp(el, role);
   }
 
+  function queryAll(selectors) {
+    for (const sel of selectors) {
+      const els = document.querySelectorAll(sel);
+      if (els.length) return { sel, els };
+    }
+    return { sel: null, els: [] };
+  }
+
   function scan() {
-    document.querySelectorAll('[data-testid="human-turn"]').forEach(el => attach(el, 'user'));
-    document.querySelectorAll('[data-testid="assistant-turn"]').forEach(el => attach(el, 'assistant'));
+    const { sel: uSel, els: uEls } = queryAll(USER_SELECTORS);
+    const { sel: aSel, els: aEls } = queryAll(ASSISTANT_SELECTORS);
+    console.debug(`[Sigill] claude scan: ${uEls.length} user (${uSel}), ${aEls.length} assistant (${aSel})`);
+    uEls.forEach(el => attach(el, 'user'));
+    aEls.forEach(el => attach(el, 'assistant'));
   }
 
   console.debug('[Sigill] claude adapter active');

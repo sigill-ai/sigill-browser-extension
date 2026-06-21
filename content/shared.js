@@ -1,7 +1,9 @@
-async function sigillStamp(platform, role, text, conversationId) {
+// Stamps a complete conversation turn (prompt + output) as one AiEvidenceEnvelope.
+// The badge is injected on the assistant element since that's where the turn completes.
+async function sigillStampTurn(platform, conversationId, prompt, output) {
   try {
-    const res = await chrome.runtime.sendMessage({ type: 'STAMP', platform, role, text, conversationId });
-    if (res?.ok) console.debug(`[Sigill] stamped ${platform} ${role} (${text.length} chars)`);
+    const res = await chrome.runtime.sendMessage({ type: 'STAMP_TURN', platform, conversationId, prompt, output });
+    if (res?.ok) console.debug(`[Sigill] stamped ${platform} turn`);
     else if (res?.skipped) console.debug('[Sigill] skipped — no API key or platform disabled');
     else if (res?.error) console.warn('[Sigill] stamp error:', res.error);
     return res;
@@ -10,7 +12,7 @@ async function sigillStamp(platform, role, text, conversationId) {
   }
 }
 
-function sigillInjectBadge(el, role) {
+function sigillInjectBadge(el) {
   if (el.dataset.sigillDone) return;
   el.dataset.sigillDone = '1';
 
@@ -28,8 +30,7 @@ function sigillInjectBadge(el, role) {
     <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>`;
 
-  // Walk up from el to find a container, then look for the buttons row
-  // (the row with copy/thumbs/share action buttons — 2+ direct <button> children)
+  // Try to inject alongside existing action buttons (copy/thumbs/share row)
   const container = el.closest('article') || el.parentElement;
   let buttonsRow = null;
   if (container) {
@@ -44,10 +45,9 @@ function sigillInjectBadge(el, role) {
   if (buttonsRow) {
     buttonsRow.appendChild(a);
   } else {
-    // Fallback: small badge below the message, aligned to match user/assistant side
     const wrapper = document.createElement('div');
     wrapper.className = 'sigill-stamp';
-    wrapper.style.cssText = `margin-top:5px;display:flex;align-items:center;justify-content:${role === 'user' ? 'flex-end' : 'flex-start'};`;
+    wrapper.style.cssText = 'margin-top:5px;display:flex;align-items:center;';
     wrapper.appendChild(a);
     el.appendChild(wrapper);
   }

@@ -1,10 +1,10 @@
 // Selectors: user-query / model-response (Angular custom elements)
-// Update these if Gemini's DOM structure changes.
 
 (() => {
   const processed = new WeakSet();
-  const watching = new WeakSet();
-  const timers = new WeakMap();
+  const watching  = new WeakSet();
+  const timers    = new WeakMap();
+  let lastPrompt  = '';
 
   function conversationId() {
     const m = location.pathname.match(/\/([^/?]+)$/);
@@ -19,9 +19,15 @@
       const text = el.innerText?.trim();
       if (!text) return;
       processed.add(el);
-      const res = await sigillStamp('gemini', role, text, conversationId());
-      if (res?.ok) sigillInjectBadge(el, role);
-    }, role === 'assistant' ? 1200 : 150));
+      if (role === 'user') {
+        lastPrompt = text;
+        console.debug('[Sigill] gemini: captured prompt');
+      } else {
+        const res = await sigillStampTurn('gemini', conversationId(), lastPrompt, text);
+        lastPrompt = '';
+        if (res?.ok) sigillInjectBadge(el);
+      }
+    }, role === 'assistant' ? 1200 : 50));
   }
 
   function attach(el, role) {
@@ -38,8 +44,11 @@
   }
 
   function scan() {
-    document.querySelectorAll('user-query').forEach(el => attach(el, 'user'));
-    document.querySelectorAll('model-response').forEach(el => attach(el, 'assistant'));
+    const u = document.querySelectorAll('user-query');
+    const a = document.querySelectorAll('model-response');
+    console.debug(`[Sigill] gemini scan: ${u.length} user, ${a.length} assistant`);
+    u.forEach(el => attach(el, 'user'));
+    a.forEach(el => attach(el, 'assistant'));
   }
 
   console.debug('[Sigill] gemini adapter active');
