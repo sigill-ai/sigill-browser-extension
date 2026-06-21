@@ -12,9 +12,20 @@
   "background": {
     "service_worker": "background/worker.js"
   },
+  "icons": {
+    "16": "icons/logo-16.png",
+    "32": "icons/logo-32.png",
+    "48": "icons/logo-48.png",
+    "128": "icons/logo-128.png"
+  },
   "action": {
     "default_popup": "popup/popup.html",
-    "default_title": "Sigill Timestamper"
+    "default_title": "Sigill Timestamper",
+    "default_icon": {
+      "16": "icons/logo-16.png",
+      "32": "icons/logo-32.png",
+      "48": "icons/logo-48.png"
+    }
   },
   "content_scripts": [
     {
