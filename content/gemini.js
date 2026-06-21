@@ -20,7 +20,7 @@
       if (!text) return;
       processed.add(el);
       const res = await sigillStamp('gemini', role, text, conversationId());
-      if (res?.ok) sigillInjectBadge(el);
+      if (res?.ok) sigillInjectBadge(el, role);
     }, role === 'assistant' ? 1200 : 150));
   }
 

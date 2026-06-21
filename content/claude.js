@@ -19,7 +19,7 @@
       if (!text) return;
       processed.add(el);
       const res = await sigillStamp('claude', role, text, conversationId());
-      if (res?.ok) sigillInjectBadge(el);
+      if (res?.ok) sigillInjectBadge(el, role);
     }, role === 'assistant' ? 800 : 150));
   }
 
