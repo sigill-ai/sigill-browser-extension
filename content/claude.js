@@ -13,12 +13,13 @@
   function scheduleStamp(el, role) {
     if (processed.has(el)) return;
     clearTimeout(timers.get(el));
-    timers.set(el, setTimeout(() => {
+    timers.set(el, setTimeout(async () => {
       if (processed.has(el)) return;
       const text = el.innerText?.trim();
       if (!text) return;
       processed.add(el);
-      sigillStamp('claude', role, text, conversationId());
+      const res = await sigillStamp('claude', role, text, conversationId());
+      if (res?.ok) sigillInjectBadge(el);
     }, role === 'assistant' ? 800 : 150));
   }
 
