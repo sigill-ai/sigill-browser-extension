@@ -1,57 +1,37 @@
 // Selectors: user-query / model-response (Angular custom elements)
 
 (() => {
-  const processed = new WeakSet();
-  const watching  = new WeakSet();
-  const timers    = new WeakMap();
-  let lastPrompt  = '';
-
   function conversationId() {
     const m = location.pathname.match(/\/([^/?]+)$/);
     return m?.[1] ?? 'unknown';
   }
 
-  function scheduleStamp(el, role) {
-    if (processed.has(el)) return;
-    clearTimeout(timers.get(el));
-    timers.set(el, setTimeout(async () => {
-      if (processed.has(el)) return;
-      const text = el.innerText?.trim();
-      if (!text) return;
-      processed.add(el);
-      if (role === 'user') {
-        lastPrompt = text;
-        console.debug('[Sigill] gemini: captured prompt');
-      } else {
-        const res = await sigillStampTurn('gemini', conversationId(), lastPrompt, text);
-        lastPrompt = '';
-        if (res?.ok) sigillInjectBadge(el);
-      }
-    }, role === 'assistant' ? 1200 : 50));
+  function normalizeText(text) {
+    let cleaned = text.trim();
+    // Strip leading UI button labels Gemini injects before the response (e.g. "Show code", "Hide code")
+    cleaned = cleaned.replace(/^((?:Show|Hide) code\s*\n+)+/i, '');
+    cleaned = cleaned.replace(/^You said\b\s*/i, '');
+    cleaned = cleaned.replace(/^Gemini said\b\s*/i, '');
+    return cleaned.trim();
   }
 
-  function attach(el, role) {
-    if (watching.has(el)) return;
-    watching.add(el);
-    if (role === 'assistant') {
-      const obs = new MutationObserver(() => {
-        if (processed.has(el)) { obs.disconnect(); return; }
-        scheduleStamp(el, role);
-      });
-      obs.observe(el, { childList: true, subtree: true, characterData: true });
-    }
-    scheduleStamp(el, role);
+  function isComplete(pair) {
+    const output = normalizeText(pair.output);
+    if (!Boolean(output) || /^(thinking|generating|drafting|gemini said|show code|hide code)$/i.test(output)) return false;
+    // Thumbs/copy buttons only appear after Gemini finishes responding.
+    return Boolean(pair.assistantEl.querySelector(
+      'thumbs-up-button, thumbs-down-button, button[aria-label*="thumb" i], button[aria-label*="helpful" i]'
+    ));
   }
 
-  function scan() {
-    const u = document.querySelectorAll('user-query');
-    const a = document.querySelectorAll('model-response');
-    console.debug(`[Sigill] gemini scan: ${u.length} user, ${a.length} assistant`);
-    u.forEach(el => attach(el, 'user'));
-    a.forEach(el => attach(el, 'assistant'));
-  }
-
-  console.debug('[Sigill] gemini adapter active');
-  new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
-  scan();
+  sigillObserveTurns({
+    platform: 'gemini',
+    label: 'gemini',
+    conversationId,
+    getUsers: () => [...document.querySelectorAll('user-query')],
+    getAssistants: () => [...document.querySelectorAll('model-response')],
+    normalizeText,
+    isComplete,
+    assistantDelay: 600,
+  });
 })();

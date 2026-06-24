@@ -1,57 +1,72 @@
 // Selectors: [data-message-author-role="user"] / [data-message-author-role="assistant"]
 
 (() => {
-  const processed = new WeakSet();
-  const watching  = new WeakSet();
-  const timers    = new WeakMap();
-  let lastPrompt  = '';
-
   function conversationId() {
     const m = location.pathname.match(/\/c\/([^/?]+)/);
     return m?.[1] ?? 'unknown';
   }
 
-  function scheduleStamp(el, role) {
-    if (processed.has(el)) return;
-    clearTimeout(timers.get(el));
-    timers.set(el, setTimeout(async () => {
-      if (processed.has(el)) return;
-      const text = el.innerText?.trim();
-      if (!text) return;
-      processed.add(el);
-      if (role === 'user') {
-        lastPrompt = text;
-        console.debug('[Sigill] chatgpt: captured prompt');
-      } else {
-        const res = await sigillStampTurn('chatgpt', conversationId(), lastPrompt, text);
-        lastPrompt = '';
-        if (res?.ok) sigillInjectBadge(el);
+  function isGenerating() {
+    return [
+      '[data-testid="stop-button"]',
+      '[aria-label*="Stop generating" i]',
+      '[aria-label*="Stop streaming" i]',
+      'button[aria-label*="Stop" i]',
+    ].some(sel => {
+      try {
+        return Boolean(document.querySelector(sel));
+      } catch {
+        return false;
       }
-    }, role === 'assistant' ? 800 : 50));
+    });
   }
 
-  function attach(el, role) {
-    if (watching.has(el)) return;
-    watching.add(el);
-    if (role === 'assistant') {
-      const obs = new MutationObserver(() => {
-        if (processed.has(el)) { obs.disconnect(); return; }
-        scheduleStamp(el, role);
-      });
-      obs.observe(el, { childList: true, subtree: true, characterData: true });
+  function normalizeText(text) {
+    const lines = text.trim().split(/\n+/).map(line => line.trim()).filter(Boolean);
+    if (!lines.length) return '';
+    if (!/^Thought for\b/i.test(lines[0])) return text.trim();
+
+    lines.shift();
+    if (lines.length > 1 && !/[.!?:;)]$/.test(lines[0]) && lines[0].length < 120) {
+      lines.shift();
     }
-    scheduleStamp(el, role);
+    return lines.join('\n').trim();
   }
 
-  function scan() {
-    const u = document.querySelectorAll('[data-message-author-role="user"]');
-    const a = document.querySelectorAll('[data-message-author-role="assistant"]');
-    console.debug(`[Sigill] chatgpt scan: ${u.length} user, ${a.length} assistant`);
-    u.forEach(el => attach(el, 'user'));
-    a.forEach(el => attach(el, 'assistant'));
+  function getText(el) {
+    if (el.getAttribute('data-message-author-role') !== 'assistant') {
+      return el.innerText?.trim() ?? '';
+    }
+
+    const markdown = [...el.querySelectorAll('.markdown')].filter(node => {
+      const text = node.innerText?.trim();
+      return text && !node.closest('[aria-expanded],[data-testid*="thought" i],[class*="thought" i],[class*="reason" i]');
+    });
+    if (markdown.length) return markdown.map(node => node.innerText.trim()).join('\n\n');
+
+    return normalizeText(el.innerText ?? '');
   }
 
-  console.debug('[Sigill] chatgpt adapter active');
-  new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
-  scan();
+  function isComplete(pair) {
+    if (isGenerating()) return false;
+    // Action buttons (copy, thumbs up/down, regenerate) only appear after streaming finishes.
+    // These are outside .markdown so they don't match inline code-copy buttons.
+    return Boolean(pair.assistantEl.querySelector(
+      '[data-testid="copy-turn-action-button"], [data-testid="thumbs-up-button"], [data-testid="thumbs-down-button"],' +
+      'button[aria-label*="thumbs up" i], button[aria-label*="thumbs down" i]'
+    ));
+  }
+
+  sigillObserveTurns({
+    platform: 'chatgpt',
+    label: 'chatgpt',
+    conversationId,
+    getUsers: () => [...document.querySelectorAll('[data-message-author-role="user"]')],
+    getAssistants: () => [...document.querySelectorAll('[data-message-author-role="assistant"]')],
+    getText,
+    normalizeText,
+    isBusy: isGenerating,
+    isComplete,
+    assistantDelay: 600,
+  });
 })();
