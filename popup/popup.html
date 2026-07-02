@@ -24,8 +24,8 @@
       <li>The token and the full envelope are stored locally. The timestamp proves the conversation existed at that moment.</li>
     </ol>
     <p class="info-note">The TSA only ever sees a hash — your conversation content never leaves the browser during stamping.</p>
-    <div class="info-title" style="margin-top:10px;">Sealing — explicit upload to Sigill</div>
-    <p>When you click <strong>Seal log</strong>, the full JSONL log is uploaded to Sigill and signed with a <strong>CAdES detached signature</strong>. You receive the original log and a separate <code>.p7s</code> signature file. Sealing is always a deliberate action — nothing is uploaded automatically.</p>
+    <div class="info-title" style="margin-top:10px;">Sealing — signing the whole bundle</div>
+    <p>When you click <strong>Seal log</strong>, the evidence bundle (chained records + anchor stamps) is hashed locally and only the hash is sent to Sigill, which returns a <strong>CAdES detached signature</strong>. You receive the bundle and a separate <code>.p7s</code> signature file — the content itself never leaves the browser.</p>
   </div>
 
   <section class="section">
@@ -94,15 +94,39 @@
       <button class="btn-ghost" id="refreshCertsBtn" title="Refresh certificates">Refresh</button>
       <button class="btn" id="sealBtn">Seal log</button>
     </div>
-    <div class="seal-hint">Sealing uploads the JSONL export to Sigill and downloads the original plus a detached signature.</div>
+    <div class="seal-hint">Seals the evidence bundle: hashed locally, signed by Sigill, downloads the bundle plus a detached .p7s signature.</div>
     <div class="seal-status" id="sealStatus"></div>
   </section>
 
+  <section class="section" id="devSection" hidden>
+    <div class="section-title">Developer</div>
+    <div class="toggle-row">
+      <span>Record fixtures</span>
+      <label class="toggle">
+        <input type="checkbox" id="fixtureCapture" checked />
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="seal-hint">Records the raw platform API streams behind each chat turn, locally only. Development builds only.</div>
+    <div class="footer-row" style="margin-top:8px;">
+      <span class="stats" id="fixtureStats">No fixtures yet</span>
+      <div class="footer-actions">
+        <button class="btn btn-danger" id="clearFixturesBtn">Clear</button>
+        <button class="btn" id="exportFixturesBtn">Export</button>
+      </div>
+    </div>
+    <div class="footer-row" style="margin-top:6px;">
+      <button class="btn-ghost btn-block" id="debugBtn" title="Export capture debug log">Export debug log</button>
+    </div>
+  </section>
+
   <section class="section footer-section">
-    <span class="stats" id="stats">0 turns stamped</span>
-    <div class="footer-actions">
-      <button class="btn btn-danger" id="clearBtn">Clear log</button>
-      <button class="btn" id="exportBtn">Export log</button>
+    <div class="footer-row">
+      <span class="stats" id="stats">0 turns stamped</span>
+      <div class="footer-actions">
+        <button class="btn btn-danger" id="clearBtn">Clear log</button>
+        <button class="btn" id="exportBtn">Export log</button>
+      </div>
     </div>
   </section>
 

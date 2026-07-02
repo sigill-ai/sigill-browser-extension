@@ -1,324 +1,164 @@
-// Stamps a complete conversation turn (prompt + output) as one AiEvidenceEnvelope.
-// The badge is injected on the assistant element since that's where the turn completes.
-async function sigillStampTurn(platform, conversationId, prompt, output) {
+// Sigill content script — badge display for network-stamped turns.
+//
+// Evidence capture and stamping happen entirely in the network layer
+// (content/interceptor.js → content/relay.js → background/worker.js). This
+// script only decorates the page: it places a badge when the worker reports a
+// stamped turn, and restores badges on reload where the platform exposes
+// message IDs in the DOM. A missing badge never affects the evidence.
+
+// Dev builds carry version_name "x.y.z-dev"; the public zip has it stripped.
+const SIGILL_DEV = /-dev$/.test(chrome.runtime.getManifest().version_name ?? '');
+
+function sigillDebugLog(entry) {
+  if (!SIGILL_DEV) return;
+  chrome.runtime.sendMessage({ type: 'DEBUG_ENTRY', entry }).catch(() => {});
+  document.dispatchEvent(new CustomEvent('sigill:debug', { detail: entry }));
+}
+
+const SIGILL_PLATFORM = (() => {
+  const host = location.host;
+  for (const [h, platform] of [
+    ['claude.ai', 'claude'],
+    ['chatgpt.com', 'chatgpt'],
+    ['gemini.google.com', 'gemini'],
+  ]) {
+    if (host === h || host.endsWith('.' + h)) return platform;
+  }
+  return null;
+})();
+
+function sigillConversationId() {
+  if (SIGILL_PLATFORM === 'chatgpt') {
+    return location.pathname.match(/\/c\/([^/?]+)/)?.[1] ?? null;
+  }
+  return location.pathname.split('/').filter(Boolean).at(-1) ?? null;
+}
+
+// --- badge placement ---------------------------------------------------------
+// Platforms re-render messages after streaming completes (Claude's React swap
+// wipes anything injected mid-stream), so placement is CONVERGENT, not
+// one-shot: stamped evidence lands in a target registry, and an ensure-loop
+// (re-)injects whenever the platform removes a badge.
+//
+// Element resolution per target, strongest first:
+//   message-id — [data-message-id] lookup (ChatGPT exposes message uuids)
+//   index      — nth assistant element; indices come from the worker, which
+//                maps the platform's own history response onto the ledger
+//                (BADGE_POSITIONS — Claude)
+//   latest     — last assistant element, only within 30s of stamping (live
+//                fallback for Claude/Gemini; the resolved element is then
+//                pinned so later turns can't steal the badge)
+
+const SIGILL_ASSISTANT_SELECTORS = {
+  claude: ['[data-is-streaming]', '[data-testid="assistant-turn"]', '[data-testid="assistant-message"]', '.font-claude-message'],
+  chatgpt: ['[data-message-author-role="assistant"]'],
+  gemini: ['model-response'],
+};
+
+const sigillBadgeTargets = new Map(); // evidenceId -> { evidence, mode, index?, el?, bornAt }
+
+chrome.runtime.onMessage.addListener(msg => {
+  if (msg?.type === 'NETWORK_TURN_STAMPED') {
+    sigillDebugLog({
+      type: 'badge_notify',
+      platform: msg.platform,
+      ts: new Date().toISOString(),
+      messageId: msg.messageId,
+      evidenceId: msg.evidenceId,
+    });
+    sigillBadgeConversation = sigillConversationId(); // sync before ensure — a stale marker would wipe this target
+    sigillBadgeTargets.set(msg.evidenceId, { evidence: msg, mode: 'latest', el: null, bornAt: Date.now() });
+    sigillEnsureBadges();
+  } else if (msg?.type === 'BADGE_POSITIONS') {
+    sigillDebugLog({
+      type: 'badge_positions',
+      platform: msg.platform,
+      ts: new Date().toISOString(),
+      count: msg.turns?.length ?? 0,
+      conversationId: msg.conversationId,
+    });
+    sigillBadgeConversation = sigillConversationId();
+    for (const t of msg.turns ?? []) {
+      sigillBadgeTargets.set(t.evidenceId, { evidence: t, mode: 'index', index: t.index, el: null, bornAt: Date.now() });
+    }
+    sigillEnsureBadges();
+  }
+});
+
+function sigillAssistantElements() {
+  for (const sel of SIGILL_ASSISTANT_SELECTORS[SIGILL_PLATFORM] ?? []) {
+    try {
+      const els = [...document.querySelectorAll(sel)];
+      if (els.length) return els;
+    } catch { /* bad selector — display only */ }
+  }
+  return [];
+}
+
+let sigillBadgeConversation = null;
+
+function sigillEnsureBadges() {
+  const conversationId = sigillConversationId();
+  if (conversationId !== sigillBadgeConversation) {
+    // SPA navigation — stale targets must not decorate another conversation
+    sigillBadgeConversation = conversationId;
+    sigillBadgeTargets.clear();
+    return;
+  }
+  if (!sigillBadgeTargets.size) return;
+
+  const els = sigillAssistantElements();
+  for (const target of sigillBadgeTargets.values()) {
+    let el = target.el?.isConnected ? target.el : null;
+    if (!el && target.evidence.messageId) {
+      try {
+        el = document.querySelector(`[data-message-id="${CSS.escape(target.evidence.messageId)}"]`);
+      } catch { /* invalid id chars */ }
+    }
+    if (!el && target.mode === 'index') el = els[target.index] ?? null;
+    if (!el && target.mode === 'latest' && Date.now() - target.bornAt < 30000) el = els.at(-1) ?? null;
+    if (!el) continue;
+    target.el = el; // pin: re-renders re-inject here, later turns can't steal it
+    sigillInjectBadge(el, target.evidence);
+  }
+}
+
+setInterval(sigillEnsureBadges, 2000);
+
+// Restore on load where the DOM carries message ids (ChatGPT). Claude restore
+// arrives as BADGE_POSITIONS when the platform's own history request is
+// captured; Gemini has no restore path (live badges only).
+
+async function sigillLoadStampedTurns() {
+  const conversationId = sigillConversationId();
+  if (!SIGILL_PLATFORM || !conversationId) return;
+  let res = null;
   try {
-    const res = await chrome.runtime.sendMessage({ type: 'STAMP_TURN', platform, conversationId, prompt, output });
-    if (res?.ok) console.log(`[Sigill] stamped ${platform} turn`, res.evidenceId);
-    else if (res?.skipped) console.log('[Sigill] skipped — no API key or platform disabled');
-    else if (res?.error) console.warn('[Sigill] stamp error:', res.error);
-    return res;
-  } catch {
-    return null;
+    res = await chrome.runtime.sendMessage({
+      type: 'GET_STAMPED_TURNS',
+      platform: SIGILL_PLATFORM,
+      conversationId,
+    });
+  } catch { return; }
+  sigillBadgeConversation = conversationId;
+  for (const turn of res?.turns ?? []) {
+    if (!turn.messageId || sigillBadgeTargets.has(turn.evidenceId)) continue;
+    sigillBadgeTargets.set(turn.evidenceId, { evidence: turn, mode: 'message-id', el: null, bornAt: Date.now() });
   }
+  sigillEnsureBadges();
 }
 
-async function sigillGetStampedTurns(platform, conversationId) {
-  try {
-    return await chrome.runtime.sendMessage({ type: 'GET_STAMPED_TURNS', platform, conversationId });
-  } catch {
-    return { turns: [] };
+setTimeout(sigillLoadStampedTurns, 1500);
+let sigillLastLoadedConversation = null;
+setInterval(() => {
+  const conversationId = sigillConversationId();
+  if (conversationId && conversationId !== sigillLastLoadedConversation) {
+    sigillLastLoadedConversation = conversationId;
+    sigillLoadStampedTurns();
   }
-}
+}, 2500);
 
-function sigillText(el) {
-  return el?.innerText?.trim() ?? '';
-}
-
-function sigillNormalizedText(el, normalizeText, getText = sigillText, role = null) {
-  const extracted = getText(el, role);
-  const text = role === 'user' && !extracted ? sigillText(el) : extracted;
-  return normalizeText(text).trim();
-}
-
-function sigillDocumentOrder(a, b) {
-  if (a === b) return 0;
-  return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_PRECEDING ? 1 : -1;
-}
-
-function sigillDefaultPairs(users, assistants, normalizeText = text => text, getText = sigillText) {
-  const nodes = [
-    ...users.map(el => ({ el, role: 'user' })),
-    ...assistants.map(el => ({ el, role: 'assistant' })),
-  ].sort((a, b) => sigillDocumentOrder(a.el, b.el));
-
-  const pairs = [];
-  let prompt = '';
-  let userEl = null;
-  let waitingForAssistant = false;
-  for (const node of nodes) {
-    const text = sigillNormalizedText(node.el, normalizeText, getText, node.role);
-    if (!text) continue;
-    if (node.role === 'user') {
-      prompt = text;
-      userEl = node.el;
-      waitingForAssistant = true;
-    } else if (prompt && waitingForAssistant && text) {
-      pairs.push({ userEl, assistantEl: node.el, prompt, output: text, index: pairs.length });
-      waitingForAssistant = false;
-    }
-  }
-  return pairs;
-}
-
-function sigillObserveTurns({
-  platform,
-  conversationId,
-  getUsers,
-  getAssistants,
-  makePairs = sigillDefaultPairs,
-  getText = sigillText,
-  normalizeText = text => text,
-  isBusy = () => false,
-  isComplete = () => true,
-  assistantDelay = 2500,
-  label = platform,
-}) {
-  const processedAssistants = new WeakSet();
-  const processedTurnKeys = new Set();
-  const userFirstSeenAt = new WeakMap();
-  const pendingAssistantByTurnKey = new Map();
-  const timers = new WeakMap();
-  const pendingSignatures = new WeakMap();
-  const stampedTurnCache = new Map();
-  let lastScanLog = '';
-  let currentConversationId = null;
-  let armed = false;
-  let armTimer = null;
-  let armedAt = 0;
-  let lastComposerActivityAt = 0;
-  let lastSubmitAt = 0;
-  let lastSubmitConversationId = null;
-  let pendingPromptText = '';
-  let lastNonEmptyComposerText = '';
-  const submittedPrompts = new Map();
-
-  function rememberSubmittedPrompt(text) {
-    const prompt = normalizeText(text).trim();
-    lastSubmitAt = Date.now();
-    lastSubmitConversationId = currentConversationId ?? conversationId();
-    if (prompt) {
-      submittedPrompts.set(prompt, lastSubmitAt);
-      pendingPromptText = prompt;
-    }
-  }
-
-  function hasRecentSubmit() {
-    return lastSubmitAt > 0 && Date.now() - lastSubmitAt < 120000;
-  }
-
-  function submitBelongsTo(convoId) {
-    if (!hasRecentSubmit()) return false;
-    return lastSubmitConversationId === convoId || lastSubmitConversationId === 'unknown';
-  }
-
-  function hasSubmittedPrompt(prompt) {
-    const submittedAt = submittedPrompts.get(prompt);
-    if (!submittedAt) return false;
-    if (Date.now() - submittedAt > 10 * 60 * 1000) {
-      submittedPrompts.delete(prompt);
-      return false;
-    }
-    return true;
-  }
-
-  function consumeSubmittedPrompt(prompt) {
-    submittedPrompts.delete(prompt);
-    if (pendingPromptText === prompt) pendingPromptText = '';
-  }
-
-  function noteComposerActivity(event) {
-    const target = event.target;
-    if (!(target instanceof HTMLElement)) return;
-    const editor = target.closest('textarea,input,[contenteditable="true"],[role="textbox"]');
-    if (editor) {
-      lastComposerActivityAt = Date.now();
-      pendingPromptText = sigillText(editor);
-      if (pendingPromptText) lastNonEmptyComposerText = pendingPromptText;
-    }
-  }
-
-  document.addEventListener('input', noteComposerActivity, true);
-  document.addEventListener('beforeinput', noteComposerActivity, true);
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Enter') {
-      noteComposerActivity(event);
-      rememberSubmittedPrompt(pendingPromptText || lastNonEmptyComposerText);
-    }
-  }, true);
-
-  document.addEventListener('click', event => {
-    const target = event.target;
-    if (!(target instanceof HTMLElement)) return;
-    const button = target.closest('button,[role="button"]');
-    if (!button) return;
-    const labelText = `${button.getAttribute('aria-label') ?? ''} ${button.textContent ?? ''}`.toLowerCase();
-    if (/\b(send|submit)\b/.test(labelText)) {
-      rememberSubmittedPrompt(pendingPromptText || lastNonEmptyComposerText);
-    }
-  }, true);
-
-  function turnKeyFor(convoId, pair) {
-    return `${convoId}\n\0\n${pair.index ?? 0}\n\0\n${pair.prompt}`;
-  }
-
-  function contentKeyFor(prompt, output) {
-    return `${prompt}\n\0\n${output}`;
-  }
-
-  async function loadStampedTurns(convoId) {
-    const res = await sigillGetStampedTurns(platform, convoId);
-    const turns = new Map();
-    for (const turn of res?.turns ?? []) {
-      turns.set(contentKeyFor(turn.prompt, turn.output ?? ''), turn);
-    }
-    stampedTurnCache.set(convoId, turns);
-    return turns;
-  }
-
-  function restoreBadge(pair, convoId) {
-    const turns = stampedTurnCache.get(convoId);
-    if (!turns) return false;
-    const output = pair.output || sigillNormalizedText(pair.assistantEl, normalizeText, getText, 'assistant');
-    const existing = turns.get(contentKeyFor(pair.prompt, output));
-    if (!existing) return false;
-    processedAssistants.add(pair.assistantEl);
-    sigillInjectBadge(pair.assistantEl, existing);
-    return true;
-  }
-
-  function markExisting(pairs, convoId) {
-    for (const pair of pairs) {
-      if (hasSubmittedPrompt(pair.prompt)) continue;
-      restoreBadge(pair, convoId);
-      processedAssistants.add(pair.assistantEl);
-    }
-  }
-
-  function restoreExistingBadges(pairs, convoId) {
-    pairs.forEach(pair => restoreBadge(pair, convoId));
-  }
-
-  function schedule(pair) {
-    const { userEl, assistantEl, prompt } = pair;
-    if (processedAssistants.has(assistantEl)) return;
-    const wasSubmitted = hasSubmittedPrompt(prompt);
-    const firstSeenAt = userEl ? userFirstSeenAt.get(userEl) : 0;
-    const appearedAfterArm = firstSeenAt && firstSeenAt >= armedAt;
-    const recentSubmit = submitBelongsTo(conversationId());
-    if (!userEl || (!wasSubmitted && !appearedAfterArm && !recentSubmit)) return;
-    if (isBusy() || !isComplete(pair)) {
-      clearTimeout(timers.get(assistantEl));
-      return;
-    }
-
-    const output = sigillNormalizedText(assistantEl, normalizeText, getText, 'assistant');
-    if (!prompt || !output) return;
-
-    const turnKey = turnKeyFor(conversationId(), pair);
-    if (processedTurnKeys.has(turnKey)) return;
-
-    const previousAssistantEl = pendingAssistantByTurnKey.get(turnKey);
-    if (previousAssistantEl && previousAssistantEl !== assistantEl) {
-      clearTimeout(timers.get(previousAssistantEl));
-      timers.delete(previousAssistantEl);
-      pendingSignatures.delete(previousAssistantEl);
-    }
-    pendingAssistantByTurnKey.set(turnKey, assistantEl);
-
-    const signature = `${turnKey}\n\0\n${output}`;
-    if (pendingSignatures.get(assistantEl) === signature && timers.has(assistantEl)) return;
-    pendingSignatures.set(assistantEl, signature);
-
-    clearTimeout(timers.get(assistantEl));
-    timers.set(assistantEl, setTimeout(async () => {
-      if (processedAssistants.has(assistantEl)) return;
-      if (isBusy() || !isComplete(pair)) return;
-      const finalOutput = sigillNormalizedText(assistantEl, normalizeText, getText, 'assistant');
-      if (!finalOutput || pendingSignatures.get(assistantEl) !== `${turnKey}\n\0\n${finalOutput}`) return;
-      if (processedTurnKeys.has(turnKey)) return;
-
-      processedAssistants.add(assistantEl);
-      processedTurnKeys.add(turnKey);
-      pendingAssistantByTurnKey.delete(turnKey);
-      const res = await sigillStampTurn(platform, conversationId(), prompt, finalOutput);
-      if (res?.ok) {
-        consumeSubmittedPrompt(prompt);
-        const convoId = conversationId();
-        if (!stampedTurnCache.has(convoId)) stampedTurnCache.set(convoId, new Map());
-        stampedTurnCache.get(convoId).set(contentKeyFor(prompt, finalOutput), { ...res, prompt, output: finalOutput });
-        sigillInjectBadge(assistantEl, res);
-      }
-    }, assistantDelay));
-  }
-
-  function scan() {
-    const users = getUsers();
-    const assistants = getAssistants(users);
-    const nextConversationId = conversationId();
-    const pairs = makePairs(users, assistants, normalizeText, getText);
-    if (nextConversationId !== currentConversationId) {
-      const previousConversationId = currentConversationId;
-      const preserveSubmit = hasRecentSubmit() && (
-        lastSubmitConversationId === nextConversationId ||
-        lastSubmitConversationId === 'unknown' ||
-        lastSubmitConversationId === previousConversationId
-      );
-      if (!preserveSubmit) {
-        lastSubmitAt = 0;
-        lastSubmitConversationId = null;
-        submittedPrompts.clear();
-        pendingPromptText = '';
-      } else if (lastSubmitConversationId === 'unknown' && nextConversationId !== 'unknown') {
-        lastSubmitConversationId = nextConversationId;
-      }
-      currentConversationId = nextConversationId;
-      armed = false;
-      armedAt = 0;
-      lastScanLog = '';
-      pendingAssistantByTurnKey.clear();
-      clearTimeout(armTimer);
-      assistants.forEach(el => clearTimeout(timers.get(el)));
-      loadStampedTurns(nextConversationId).then(() => {
-        restoreExistingBadges(makePairs(getUsers(), getAssistants(getUsers()), normalizeText, getText), nextConversationId);
-      });
-    }
-
-    const summary = `${users.length} user, ${assistants.length} assistant, ${pairs.length} pairs`;
-    if (summary !== lastScanLog) {
-      console.log(`[Sigill] ${label} scan: ${summary}`);
-      lastScanLog = summary;
-    }
-    const now = Date.now();
-    for (const user of users) {
-      if (!userFirstSeenAt.has(user)) userFirstSeenAt.set(user, now);
-    }
-    pairs.forEach(pair => restoreBadge(pair, nextConversationId));
-    if (!armed) {
-      const recentSubmit = submitBelongsTo(nextConversationId);
-      const newestPair = recentSubmit ? pairs.at(-1) : null;
-      const historicalPairs = pairs.filter(pair => pair !== newestPair && !hasSubmittedPrompt(pair.prompt));
-      markExisting(historicalPairs, nextConversationId);
-      pairs.filter(pair => pair === newestPair || hasSubmittedPrompt(pair.prompt)).forEach(schedule);
-      clearTimeout(armTimer);
-      armTimer = setTimeout(() => {
-        armed = true;
-        armedAt = Date.now();
-      }, pairs.length ? 2500 : 800);
-      return;
-    }
-    pairs.forEach(schedule);
-  }
-
-  console.log(`[Sigill] ${label} adapter active`);
-  new MutationObserver(scan).observe(document.body, {
-    childList: true,
-    subtree: true,
-    characterData: true,
-    attributes: true,
-    attributeFilter: ['data-is-streaming', 'aria-busy', 'aria-expanded', 'data-state'],
-  });
-  scan();
-}
+// --- badge + tooltip rendering ----------------------------------------------
 
 let sigillTooltip = null;
 
@@ -345,8 +185,9 @@ function sigillGetTooltip() {
 }
 
 function sigillInjectBadge(el, evidence) {
-  if (el.dataset.sigillDone) return;
-  el.dataset.sigillDone = '1';
+  // Idempotent by live DOM state, not by flag — the platform may re-render
+  // and strip the wrapper while the element (and any dataset) survives.
+  if (el.querySelector(':scope .sigill-stamp-host')) return;
 
   const a = document.createElement('a');
   a.href = 'https://sigill.ai/evidence';

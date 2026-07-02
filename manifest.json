@@ -1,9 +1,11 @@
 {
   "manifest_version": 3,
   "name": "Sigill — AI Conversation Timestamper",
-  "version": "0.1.0",
+  "version": "0.5.0",
+  "version_name": "0.5.0-dev",
+  "minimum_chrome_version": "111",
   "description": "Cryptographically timestamps every AI conversation turn using RFC 3161 via Sigill.",
-  "permissions": ["storage", "unlimitedStorage"],
+  "permissions": ["storage", "unlimitedStorage", "alarms", "downloads"],
   "host_permissions": [
     "https://api.sigill.ai/*",
     "https://sigill.ai/*",
@@ -36,18 +38,31 @@
       "run_at": "document_idle"
     },
     {
-      "matches": ["https://claude.ai/*"],
-      "js": ["content/shared.js", "content/claude.js"],
-      "run_at": "document_idle"
+      "matches": [
+        "https://claude.ai/*",
+        "https://chatgpt.com/*",
+        "https://gemini.google.com/*"
+      ],
+      "js": ["content/interceptor.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
     },
     {
-      "matches": ["https://chatgpt.com/*"],
-      "js": ["content/shared.js", "content/chatgpt.js"],
-      "run_at": "document_idle"
+      "matches": [
+        "https://claude.ai/*",
+        "https://chatgpt.com/*",
+        "https://gemini.google.com/*"
+      ],
+      "js": ["content/relay.js"],
+      "run_at": "document_start"
     },
     {
-      "matches": ["https://gemini.google.com/*"],
-      "js": ["content/shared.js", "content/gemini.js"],
+      "matches": [
+        "https://claude.ai/*",
+        "https://chatgpt.com/*",
+        "https://gemini.google.com/*"
+      ],
+      "js": ["content/shared.js", "content/debug-overlay.js"],
       "run_at": "document_idle"
     }
   ]

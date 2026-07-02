@@ -266,20 +266,31 @@ body {
 .seal-status-ok { color: #16a34a; }
 
 /* Footer */
-.footer-section {
+.footer-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
 }
 
-.stats { color: #94a3b8; font-size: 12px; min-width: 0; }
+.footer-row + .footer-row { margin-top: 8px; }
+
+.stats {
+  color: #94a3b8;
+  font-size: 12px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .footer-actions {
   display: flex;
   gap: 6px;
   flex-shrink: 0;
 }
+
+.btn-block { width: 100%; text-align: center; }
 
 .btn {
   padding: 7px 10px;

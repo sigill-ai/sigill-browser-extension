@@ -3,14 +3,23 @@ const PLATFORMS = ['claude', 'chatgpt', 'gemini'];
 let pendingClearCount = 0;
 let currentLogCount = 0;
 
-async function load() {
-  const keys = ['apiKey', 'actorId', 'actorTenantId', 'actorTenantName', 'sigillConnected', 'sealCertificateId', ...PLATFORMS.map(p => `${p}Enabled`)];
-  const data = await chrome.storage.sync.get(keys);
+let isDev = false;
 
-  $('apiKey').value = data.apiKey ?? '';
+async function load() {
+  const keys = ['actorId', 'actorTenantId', 'actorTenantName', 'sigillConnected', 'sealCertificateId', 'fixtureCapture', ...PLATFORMS.map(p => `${p}Enabled`)];
+  const data = await chrome.storage.sync.get(keys);
+  const { apiKey } = await chrome.runtime.sendMessage({ type: 'GET_API_KEY' }).catch(() => ({}));
+  isDev = (await chrome.runtime.sendMessage({ type: 'IS_DEV' }).catch(() => ({})))?.dev === true;
+
+  $('apiKey').value = apiKey ?? '';
   PLATFORMS.forEach(p => {
     $(`${p}Enabled`).checked = data[`${p}Enabled`] !== false;
   });
+  $('devSection').hidden = !isDev;
+  if (isDev) {
+    $('fixtureCapture').checked = data.fixtureCapture !== false;
+    await loadFixtureStats();
+  }
 
   if (data.sigillConnected && data.actorId) {
     $('connectedState').style.display = 'block';
@@ -25,8 +34,9 @@ async function load() {
   const stats = await chrome.runtime.sendMessage({ type: 'GET_STATS' }).catch(() => ({ count: 0 }));
   const count = stats?.count ?? 0;
   currentLogCount = count;
-  const noKey = !data.apiKey;
-  $('stats').textContent = noKey ? 'Add your API key above to start' : `${count} turns stamped`;
+  const noKey = !apiKey;
+  const anchorNote = stats?.anchorCount ? ` · ${stats.anchorCount} anchor${stats.anchorCount === 1 ? '' : 's'}` : '';
+  $('stats').textContent = noKey ? 'Add your API key above to start' : `${count} turns stamped${anchorNote}`;
   $('stats').style.color = noKey ? '#f59e0b' : '#94a3b8';
   $('exportBtn').disabled = count === 0;
   $('clearBtn').disabled = count === 0;
@@ -35,7 +45,8 @@ async function load() {
 }
 
 async function save() {
-  const data = { apiKey: $('apiKey').value.trim() };
+  await chrome.runtime.sendMessage({ type: 'SET_API_KEY', apiKey: $('apiKey').value.trim() });
+  const data = {};
   PLATFORMS.forEach(p => { data[`${p}Enabled`] = $(`${p}Enabled`).checked; });
   await chrome.storage.sync.set(data);
 }
@@ -64,10 +75,9 @@ $('infoBtn').addEventListener('click', () => {
 });
 
 $('exportBtn').addEventListener('click', async () => {
-  const { log } = await chrome.runtime.sendMessage({ type: 'EXPORT' });
-  if (!log?.length) return;
-  const jsonl = log.map(e => JSON.stringify(e)).join('\n');
-  downloadText(`sigill-log-${Date.now()}.jsonl`, jsonl, 'application/x-ndjson');
+  const { bundle } = await chrome.runtime.sendMessage({ type: 'EXPORT' });
+  if (!bundle?.ledger?.length) return;
+  downloadText(`sigill-evidence-bundle-${Date.now()}.json`, JSON.stringify(bundle, null, 2), 'application/json');
 });
 
 $('refreshCertsBtn').addEventListener('click', loadSealCertificates);
@@ -90,13 +100,44 @@ $('sealBtn').addEventListener('click', async () => {
     return;
   }
 
-  downloadText(res.filename, res.jsonl, 'application/x-ndjson');
+  downloadText(res.filename, res.text, 'application/json');
   const signatureName = res.format === 'pades'
-    ? res.filename.replace(/\.jsonl$/, '_sealed.pdf')
-    : res.filename.replace(/\.jsonl$/, '.p7s');
+    ? res.filename.replace(/\.json$/, '_sealed.pdf')
+    : res.filename.replace(/\.json$/, '.p7s');
   downloadBase64(signatureName, res.signatureBase64, res.format === 'pades' ? 'application/pdf' : 'application/pkcs7-signature');
   setSealStatus(`Sealed as ${res.format.toUpperCase()}${res.timestampedBy ? `, timestamped by ${res.timestampedBy}` : ''}.`, 'seal-status-ok');
   $('sealBtn').disabled = currentLogCount === 0 || !$('certificateSelect').value;
+});
+
+async function loadFixtureStats() {
+  const stats = await chrome.runtime.sendMessage({ type: 'GET_FIXTURE_STATS' }).catch(() => ({ count: 0, bytes: 0 }));
+  const count = stats?.count ?? 0;
+  const kb = Math.round((stats?.bytes ?? 0) / 1024);
+  $('fixtureStats').textContent = count === 0 ? 'No fixtures yet' : `${count} fixture${count === 1 ? '' : 's'} · ${kb} KB`;
+  $('exportFixturesBtn').disabled = count === 0;
+  $('clearFixturesBtn').disabled = count === 0;
+}
+
+$('fixtureCapture').addEventListener('change', () => {
+  chrome.storage.sync.set({ fixtureCapture: $('fixtureCapture').checked });
+});
+
+$('exportFixturesBtn').addEventListener('click', async () => {
+  const { fixtures } = await chrome.runtime.sendMessage({ type: 'EXPORT_FIXTURES' });
+  if (!fixtures?.length) return;
+  downloadText(`sigill-fixtures-${Date.now()}.json`, JSON.stringify(fixtures, null, 2), 'application/json');
+});
+
+$('clearFixturesBtn').addEventListener('click', async () => {
+  await chrome.runtime.sendMessage({ type: 'CLEAR_FIXTURES' });
+  await loadFixtureStats();
+});
+
+$('debugBtn').addEventListener('click', async () => {
+  const { log } = await chrome.runtime.sendMessage({ type: 'GET_DEBUG_LOG' });
+  if (!log?.length) { alert('No debug entries yet — trigger a response first.'); return; }
+  downloadText(`sigill-debug-${Date.now()}.json`, JSON.stringify(log, null, 2), 'application/json');
+  await chrome.runtime.sendMessage({ type: 'CLEAR_DEBUG_LOG' });
 });
 
 $('clearBtn').addEventListener('click', async () => {
