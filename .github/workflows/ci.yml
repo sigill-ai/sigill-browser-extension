@@ -1,0 +1,30 @@
+name: tests
+
+# Feature branches and PRs run the full suite; main itself is covered by the
+# PR that lands on it and by the release build, which refuses to pack on red.
+on:
+  push:
+    branches-ignore: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Adapter suite
+        run: node test/adapters.test.js
+      - name: Envelope suite
+        run: node test/envelope.test.js
+      - name: Ledger suite
+        run: node test/ledger.test.js
+      - name: Fixtures are sanitized
+        # The scrubber is idempotent — a diff means someone committed an
+        # unscrubbed fixture (which may contain personal data).
+        run: |
+          python3 tools/scrub-fixtures.py
+          git diff --exit-code test/fixtures

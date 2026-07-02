@@ -1,0 +1,40 @@
+name: release
+
+# Builds the distribution zip when a GitHub release is published (attached to
+# the release) or on manual dispatch (uploaded as a workflow artifact).
+# tools/pack.sh runs the test suites first and refuses to pack on failure,
+# and strips the -dev version_name so the artifact is a production build.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build distribution zip
+        run: tools/pack.sh
+      - name: Name artifact by manifest version
+        id: meta
+        run: |
+          VERSION=$(python3 -c "import json;print(json.load(open('manifest.json'))['version'])")
+          cp dist/sigill-browser-extension.zip "dist/sigill-browser-extension-v${VERSION}.zip"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sigill-browser-extension-v${{ steps.meta.outputs.version }}
+          path: dist/sigill-browser-extension-v${{ steps.meta.outputs.version }}.zip
+      - name: Attach to release
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" "dist/sigill-browser-extension-v${{ steps.meta.outputs.version }}.zip" --clobber

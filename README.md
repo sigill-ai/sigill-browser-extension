@@ -1,5 +1,7 @@
 # Sigill Browser Extension
 
+[![tests](https://github.com/sigill-ai/sigill-browser-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/sigill-ai/sigill-browser-extension/actions/workflows/ci.yml)
+
 Tamper-evident, cryptographically timestamped records of your AI conversations
 on **claude.ai**, **chatgpt.com**, and **gemini.google.com**. Only hashes leave
 your browser.
@@ -25,6 +27,12 @@ Authority via [api.sigill.ai](https://sigill.ai).
 - **Offline verification** — the exported evidence bundle is validated by
   [`tools/verify-bundle.js`](tools/verify-bundle.js) with no Sigill dependency,
   down to `openssl ts` on the raw timestamp tokens.
+- **Sealing (CAdES)** — one click signs the whole evidence bundle with a
+  detached CAdES signature under your Sigill certificate (qualified
+  certificates supported). The bundle is hashed locally and only the hash is
+  signed — sealing never uploads conversation content. The result is a
+  portable bundle + `.p7s` pair that any standard signature validator accepts,
+  turning "my local log" into a signed document attributable to you.
 
 ## What it proves — and what it doesn't
 
