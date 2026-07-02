@@ -1,0 +1,407 @@
+[
+ {
+  "bytes": 0,
+  "captureId": "mr2kgay6-4-62m4l1",
+  "chunks": [],
+  "durationMs": 267,
+  "endedAt": "2026-07-01T21:06:59.054Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "POST",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": "{\"action\":\"next\",\"parent_message_id\":\"client-created-root\",\"model\":\"gpt-5-5-thinking\",\"client_prepare_state\":\"none\",\"client_prepare_dispatch\":\"debounced\",\"client_prepare_source\":\"composer_editor_state\",\"timezone_offset_min\":-120,\"timezone\":\"Europe/Oslo\",\"conversation_mode\":{\"kind\":\"primary_assistant\"},\"system_hints\":[],\"partial_query\":{\"id\":\"c5e8d3b6-ca31-4bf0-bf36-5112c6f36d01\",\"author\":{\"role\":\"user\"},\"content\":{\"content_type\":\"text\",\"parts\":[\"h\"]}},\"supports_buffering\":true,\"supported_encodings\":[\"v1\"],\"client_contextual_info\":{\"app_name\":\"chatgpt.com\",\"has_web_push_capabilities\":true,\"web_push_notification_permission\":\"default\"},\"thinking_effort\":\"standard\"}",
+  "requestContentType": "application/json",
+  "responseContentType": "application/json",
+  "resumedWithoutStart": true,
+  "startedAt": "2026-07-01T21:06:59.054Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/f/conversation/prepare"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr2kgawn-1-yeljd8",
+  "chunks": [],
+  "durationMs": 495,
+  "endedAt": "2026-07-01T21:06:59.054Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "POST",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": "{\"requested_default_model\":null,\"conversation_id\":null,\"timezone_offset_min\":-120,\"conversation_origin\":null}",
+  "requestContentType": "application/json",
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-01T21:06:59.054Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/conversation/init"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr2kgawr-3-q25coe",
+  "chunks": [],
+  "durationMs": 584,
+  "endedAt": "2026-07-01T21:06:59.390Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "GET",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": null,
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-01T21:06:59.054Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/gizmos/snorlax/sidebar?owned_only=true&conversations_per_gizmo=5&limit=20"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr2kgawp-2-durxmu",
+  "chunks": [],
+  "durationMs": 1058,
+  "endedAt": "2026-07-01T21:06:59.796Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "GET",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": null,
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-01T21:06:59.054Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/conversations?offset=0&limit=28&order=updated&is_archived=false&is_starred=false"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr2kgbfh-5-yamgl0",
+  "chunks": [],
+  "durationMs": 512,
+  "endedAt": "2026-07-01T21:06:59.796Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "GET",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": null,
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-01T21:06:59.390Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/gizmos/snorlax/sidebar?conversations_per_gizmo=0&owned_only=true&limit=20"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr2kgbvq-6-0jquyu",
+  "chunks": [],
+  "durationMs": 766,
+  "endedAt": "2026-07-01T21:07:00.719Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "POST",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": "{\"input_text\":\"hello\",\"num_completions\":3,\"in_search_mode\":false,\"history_and_training_disabled\":false,\"is_follow_up_turn\":false,\"prefetch_only\":false}",
+  "requestContentType": "application/json",
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-01T21:07:00.127Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/conversation/experimental/generate_autocompletions"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr2kgd8f-7-9l8rhk",
+  "chunks": [],
+  "durationMs": 571,
+  "endedAt": "2026-07-01T21:07:02.281Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "POST",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": "{\"input_text\":\"hello, give me a t\",\"num_completions\":3,\"in_search_mode\":false,\"history_and_training_disabled\":false,\"is_follow_up_turn\":false,\"prefetch_only\":false}",
+  "requestContentType": "application/json",
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-01T21:07:01.857Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/conversation/experimental/generate_autocompletions"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr2kgdm0-8-5wp4f4",
+  "chunks": [],
+  "durationMs": 388,
+  "endedAt": "2026-07-01T21:07:02.602Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "POST",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": "{\"input_text\":\"hello, give me a time\",\"num_completions\":3,\"in_search_mode\":false,\"history_and_training_disabled\":false,\"is_follow_up_turn\":false,\"prefetch_only\":false}",
+  "requestContentType": "application/json",
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-01T21:07:02.281Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/conversation/experimental/generate_autocompletions"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr2kgf7m-12-uhof1z",
+  "chunks": [],
+  "durationMs": 160,
+  "endedAt": "2026-07-01T21:07:04.470Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "GET",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": null,
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-01T21:07:04.178Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/beacons/home?conversation_id=6a458172-d3f4-83ed-9710-110eb1417821"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr2kgf2q-10-ihppbo",
+  "chunks": [],
+  "durationMs": 393,
+  "endedAt": "2026-07-01T21:07:04.470Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "GET",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": null,
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-01T21:07:04.178Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/conversation/6a458172-d3f4-83ed-9710-110eb1417821/stream_status"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr2kgf2s-11-6umqr4",
+  "chunks": [],
+  "durationMs": 948,
+  "endedAt": "2026-07-01T21:07:04.948Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "GET",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": null,
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-01T21:07:04.178Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/conversations?offset=0&limit=28&order=updated&is_archived=false&is_starred=false"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr2kgi84-13-t1xaoe",
+  "chunks": [],
+  "durationMs": 565,
+  "endedAt": "2026-07-01T21:07:08.740Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "GET",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": null,
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-01T21:07:08.294Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/conversation/6a458172-d3f4-83ed-9710-110eb1417821/textdocs"
+ },
+ {
+  "bytes": 74817,
+  "captureId": "mr2kgefd-9-2jvu3g",
+  "chunks": [
+   {
+    "t": 488,
+    "text": "event: delta_encoding\ndata: \"v1\"\n\n"
+   },
+   {
+    "t": 496,
+    "text": "data: {\"type\": \"resume_conversation_token\", \"kind\": \"topic\", \"token\": \"REDACTED.JWT.REDACTED\", \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\"}\n\n"
+   },
+   {
+    "t": 764,
+    "text": "event: delta\ndata: {\"p\": \"\", \"o\": \"add\", \"v\": {\"message\": {\"id\": \"8a1dcf9b-2745-4ba2-aa78-fc53da90130f\", \"author\": {\"role\": \"system\", \"name\": null, \"metadata\": {}}, \"create_time\": null, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"finished_successfully\", \"end_turn\": true, \"weight\": 0.0, \"metadata\": {\"model_switcher_deny\": [], \"is_visually_hidden_from_conversation\": true}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"error\": null, \"error_code\": null}, \"c\": 0} \n\n"
+   },
+   {
+    "t": 848,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"38de814b-04b0-4efb-882b-77917a33c23e\", \"author\": {\"role\": \"system\", \"name\": null, \"metadata\": {}}, \"create_time\": null, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"finished_successfully\", \"end_turn\": true, \"weight\": 0.0, \"metadata\": {\"rebase_developer_message\": true, \"model_switcher_deny\": [], \"is_visually_hidden_from_conversation\": true}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"error\": null, \"error_code\": null}, \"c\": 1}    \n\nevent: delta\ndata: {\"v\": {\"message\": {\"id\": \"87eb5716-5f83-4aa7-8169-2befd2597c46\", \"author\": {\"role\": \"system\", \"name\": null, \"metadata\": {}}, \"create_time\": null, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"finished_successfully\", \"end_turn\": false, \"weight\": 0.0, \"metadata\": {\"model_switcher_deny\": [], \"is_visually_hidden_from_conversation\": true}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"error\": null, \"error_code\": null}, \"c\": 2}     \n\n"
+   },
+   {
+    "t": 879,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"9334cdd7-aacc-48d1-8dc9-602cbb299a78\", \"author\": {\"role\": \"user\", \"name\": null, \"metadata\": {}}, \"create_time\": null, \"update_time\": null, \"content\": {\"content_type\": \"user_editable_context\", \"user_profile\": \"REDACTED\", \"user_instructions\": \"REDACTED\"}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"is_visually_hidden_from_conversation\": true, \"user_context_message_data\": {\"about_user_message\": \"REDACTED\", \"about_model_message\": \"I prefer to the point answers. I want you to inform me when you are being subjective instead of neutral. You can have opinions, do not let me force opinions without informing me that you are answering with content just to please me as a receiver. Never respond to me with emojis.  Also do not offer conclusions or summaries that are celebration-like. Avoid weird formatting such as bold, cursive etc, at-least keep it to a minimum. And I don't like too many bullets, especially in emails. Also I'm in Norway so avoid too much american etiquette.\\n\\nIf I ask you to create a jira task, then use the following format:\\njira issue create -a\\\"redacted@example.com\\\" -s\\\"<subject>\\\" -b\\\"<body>\\\"\\n\\nAnd please, avoid several rounds of nitpicking. I'll often ask you to QA my changes. You may do a round of suggesting minor fixes. But I'll freak out if you do it over and over.\"}, \"is_user_system_message\": true, \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"error\": null, \"error_code\": null}, \"c\": 3}     \n\n"
+   },
+   {
+    "t": 934,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"6bb80de5-ec9c-4086-a260-f26d7566f50d\", \"author\": {\"role\": \"system\", \"name\": null, \"metadata\": {}}, \"create_time\": null, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"is_contextual_answers_system_message\": true, \"contextual_answers_message_type\": \"identity_prompt\", \"is_visually_hidden_from_conversation\": true, \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"error\": null, \"error_code\": null}, \"c\": 4}  \n\n"
+   },
+   {
+    "t": 1067,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"12f136a0-016b-4d2a-8988-2b4e11418580\", \"author\": {\"role\": \"user\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782940023.016, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"hello, give me a timestamp.\"]}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"selected_sources\": [], \"serialization_metadata\": {\"custom_symbol_offsets\": []}, \"request_id\": \"db1ae5ed-5893-406f-9d0e-8ab6174b1b93\", \"message_source\": null, \"turn_exchange_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"working_turn_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"resolved_model_slug\": \"gpt-5-5-thinking\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"error\": null, \"error_code\": null}, \"c\": 5}\n\n"
+   },
+   {
+    "t": 1235,
+    "text": "data: {\"type\": \"input_message\", \"input_message\": {\"id\": \"12f136a0-016b-4d2a-8988-2b4e11418580\", \"author\": {\"role\": \"user\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782940023.016, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"hello, give me a timestamp.\"]}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"selected_sources\": [], \"serialization_metadata\": {\"custom_symbol_offsets\": []}, \"request_id\": \"db1ae5ed-5893-406f-9d0e-8ab6174b1b93\", \"otrace_id\": \"6a45817700000000eb6dfb12f3d8c19b\", \"message_source\": null, \"turn_exchange_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"working_turn_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"turn_trace_id\": \"512a4621-4b9b-4758-a87a-29c36596607f\", \"useragent\": {\"client_type\": \"web\", \"is_mobile\": false, \"is_mobile_app\": false, \"is_desktop_app\": false, \"is_native_app\": false, \"is_native_app_apple\": false, \"is_mobile_app_ios\": false, \"is_desktop_app_macos\": false, \"is_aura_app_macos\": false, \"is_aura_web\": false, \"is_sora_ios\": false, \"is_agora_ios\": false, \"is_agora_android\": false, \"is_desktop_app_windows\": false, \"is_electron_app\": false, \"is_mobile_app_android\": false, \"is_mobile_web\": false, \"is_mobile_web_ios\": false, \"is_mobile_web_android\": false, \"is_ios\": false, \"is_android\": false, \"is_macos\": false, \"is_windows\": false, \"is_linux\": true, \"is_chatgpt_client\": false, \"is_moshi_client\": false, \"is_sora_client\": false, \"is_agora_client\": false, \"is_browserbased_app\": true, \"is_chatgpt_api\": false, \"is_slack\": false, \"is_chatkit_web\": false, \"is_chatkit_synthetic\": false, \"is_kakao_talk\": false, \"is_codex_desktop\": false, \"is_offline_caching\": false, \"app_version\": null, \"build_number\": null, \"user_agent\": \"mozilla/5.0 (x11; linux x86_64) applewebkit/537.36 (khtml, like gecko) chrome/149.0.0.0 safari/537.36\", \"app_environment\": null, \"os_version\": null, \"device_model\": null, \"user_client_type\": \"desktop_web\"}, \"paragen_stream_type\": \"default\", \"resolved_model_slug\": \"gpt-5-5-thinking\", \"parent_id\": \"6bb80de5-ec9c-4086-a260-f26d7566f50d\"}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\"}\n\n"
+   },
+   {
+    "t": 1306,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"0e3867c0-f463-4681-abf6-0abe7f345514\", \"author\": {\"role\": \"system\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782940023.4105935, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"is_contextual_answers_system_message\": true, \"is_visually_hidden_from_conversation\": true, \"command\": \"prompt\", \"contextual_answers_message_type\": \"sources_and_filters_prompt\", \"chime_version\": 1, \"request_id\": \"db1ae5ed-5893-406f-9d0e-8ab6174b1b93\", \"message_type\": \"next\", \"turn_exchange_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"working_turn_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"parent_id\": \"12f136a0-016b-4d2a-8988-2b4e11418580\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"error\": null, \"error_code\": null}, \"c\": 6}   \n\n"
+   },
+   {
+    "t": 1376,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"52a87165-5e4d-4390-b7cf-dcf083800c41\", \"author\": {\"role\": \"assistant\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782940023.5032682, \"update_time\": null, \"content\": {\"content_type\": \"model_editable_context\", \"model_set_context\": \"\", \"repository\": null, \"repo_summary\": null, \"structured_context\": null}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"search_result_groups\": [], \"chime_version\": 1, \"request_id\": \"db1ae5ed-5893-406f-9d0e-8ab6174b1b93\", \"message_type\": \"next\", \"turn_exchange_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"working_turn_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"can_save\": false, \"parent_id\": \"0e3867c0-f463-4681-abf6-0abe7f345514\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"error\": null, \"error_code\": null}, \"c\": 7} \n\n"
+   },
+   {
+    "t": 1502,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"7cff54ca-24c1-452d-b0a1-fff6cd918bd0\", \"author\": {\"role\": \"assistant\", \"name\": null, \"metadata\": {}}, \"create_time\": null, \"update_time\": null, \"content\": {\"content_type\": \"thoughts\", \"thoughts\": [], \"source_analysis_msg_id\": \"ffcde27e-8520-4cc9-91a4-7b9f188f4a5c\"}, \"status\": \"in_progress\", \"end_turn\": false, \"weight\": 1.0, \"metadata\": {\"reasoning_status\": \"is_reasoning\", \"citations\": [], \"content_references\": [], \"resolved_model_slug\": \"gpt-5-5-thinking\", \"hide_inline_actions\": true, \"disable_turn_actions\": true, \"chime_version\": 1, \"request_id\": \"db1ae5ed-5893-406f-9d0e-8ab6174b1b93\", \"message_type\": \"next\", \"turn_exchange_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"working_turn_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"parent_id\": \"52a87165-5e4d-4390-b7cf-dcf083800c41\", \"classifier_response\": \"default\", \"reasoning_start_time\": 1782940023.429137, \"skip_reasoning_title\": \"Skip\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"error\": null, \"error_code\": null}, \"c\": 8}\n\n"
+   },
+   {
+    "t": 1849,
+    "text": "data: {\"type\": \"title_generation\", \"title\": \"Timestamp Request\", \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\"}\n\nevent: delta\ndata: {\"v\": {\"message\": {\"id\": \"c90741f0-0926-4b41-9b6e-bf98be21436a\", \"author\": {\"role\": \"assistant\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782940023.452759, \"update_time\": null, \"content\": {\"content_type\": \"code\", \"language\": \"json\", \"response_format_name\": null, \"text\": \"\"}, \"status\": \"in_progress\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"citations\": [], \"content_references\": [], \"resolved_model_slug\": \"gpt-5-5-thinking\", \"chime_version\": 1, \"request_id\": \"db1ae5ed-5893-406f-9d0e-8ab6174b1b93\", \"message_type\": \"next\", \"turn_exchange_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"working_turn_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"parent_id\": \"7cff54ca-24c1-452d-b0a1-fff6cd918bd0\", \"model_switcher_deny\": []}, \"recipient\": \"genui.search\", \"channel\": \"commentary\"}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"error\": null, \"error_code\": null}, \"c\": 9}       \n\n"
+   },
+   {
+    "t": 1889,
+    "text": "event: delta\ndata: {\"p\": \"/message/content/text\", \"o\": \"append\", \"v\": \"{\\\"query\"}  \n\n"
+   },
+   {
+    "t": 2090,
+    "text": "event: delta\ndata: {\"p\": \"\", \"o\": \"patch\", \"v\": [{\"p\": \"/message/content/text\", \"o\": \"append\", \"v\": \"\\\":\\\"current time timestamp\\\"}\"}, {\"p\": \"/message/status\", \"o\": \"replace\", \"v\": \"finished_successfully\"}, {\"p\": \"/message/end_turn\", \"o\": \"replace\", \"v\": false}, {\"p\": \"/message/metadata\", \"o\": \"append\", \"v\": {\"finish_details\": {\"type\": \"stop\", \"stop_tokens\": [200012]}, \"is_complete\": true}}]}\n\n"
+   },
+   {
+    "t": 2136,
+    "text": "event: delta\ndata: {\"o\": \"add\", \"v\": {\"message\": {\"id\": \"188a092a-0ec2-4b84-a494-fb839449c1db\", \"author\": {\"role\": \"tool\", \"name\": \"genui.search\", \"metadata\": {}}, \"create_time\": 1782940025.079482, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"Here are some search results from `genui.search` tool:\\n<genui_search_tool_results>\\n  <uuid_mode>\\n    <uuid_mode_strategy>\\n      To use UUID Mode widgets:\\n      1. Call the `genui.run` tool.\\n      2. Insert the returned widget reference using a `genui` content reference. This MUST be of the form: \\ue200genui\\ue202<4 char UUID>\\ue201\\n      NEVER insert one of these widgets directly using Direct Mode syntax like \\ue200genui\\ue202{\\\"<widget name>\\\": {<args>}}\\ue201\\n    </uuid_mode_strategy>\\n    <uuid_mode_tools>\\n      <tool name=\\\"clock_widget\\\">\\n      // ### Description:\\n      // A card that displays a functioning clock with live current time relative to a specific location/time zone. If the user doesn't specify a location, use their current location (Oslo, Oslo, NO). NEVER USE clock widget for event/fixed times (e.g. \\\"when does <X> occur\\\"), time calculations (e.g. time differences), or roleplay/script/fiction prompts where time phrases only appear in quoted dialogue and the user is not asking for the real-life time. ONLY use clock widget for the user's own current time requests or current time in a specific location. \\n      //\\n      // Example requests that should ALWAYS trigger: \\\"time now\\\", \\\"time in paris\\\", \\\"clock\\\", \\\"show me current time in berlin\\\". \\n      //\\n      // Example requests that should NEVER trigger: \\\"what time is the game tonight\\\", \\\"what's 3 hours after 4pm today\\n      // ### Supported mode: UUID Mode only.\\n      // ### Invocation:\\n      // uuid_mode only\\n      // 1. Call:\\n      genui_run|clock_widget|{...} -> \\\"<4 char UUID>\\\"\\n      // 2. Then insert: \\ue200genui\\ue202<4 char UUID>\\ue201\\n      // NEVER do this directly, even if other widgets in this prompt support Direct Mode: \\ue200genui\\ue202{\\\"clock_widget\\\": {...}}\\ue201\\n      // ### Args schema:\\n      type clock_widget = // ClockWidgetData\\n      {\\n      // Location\\n      //\\n      // This MUST ALWAYS BE the 'city, state/country' time zone location of the clock (e.g. New York, NY).\\n      location: string,\\n      // Tz Name\\n      //\\n      // This MUST ALWAYS BE the IANA time zone name for the given location (e.g. America/New_York)\\n      tz_name: string,\\n      // Tz Alias\\n      //\\n      // Optional readable time zone alias, e.g. 'EST'. Set this only if there's a short (5 characters or fewer) and commonly-used alias for the time zone, otherwise do not set. Prefer specific UTC-offset aliases (e.g. EST, EDT) over generic zone labels (e.g. ET).\\n      tz_alias?: string | null, // default: null\\n      // Time Format\\n      //\\n      // Display format for the clock. You MUST set this based on user preference/request when available, otherwise based on what you know about the user's location. Use '12h' for users who prefer AM/PM-style time and '24h' for users who prefer 24-hour time. Do NOT set this simply because the requested location uses a particular system; this should be based on the USER and their preferences.\\n      time_format: \\\"12h\\\" | \\\"24h\\\",\\n      // Fixed Timestamp\\n      //\\n      // Optional ISO-8601 datetime WITH a timezone offset (e.g. 2024-08-20T15:00:00-04:00). Represents the FROM time supplied by the user; the widget converts that instant into the target location/time zone. When omitted, the clock shows the live current time.\\n      fixed_timestamp?: string | null, // default: null\\n      // Sets a locale overriding the locale from the user's default locale: en-US. You MUST set this if the language in which you will respond to the user's query doesn't match en-US.\\n      locale_override?: string,\\n      }\\n      </tool>\\n    </uuid_mode_tools>\\n    <important_requirements>\\n      If one of the above UUID Mode widgets would meaningfully improve your response, either as the main answer or as supporting visual/interactive context, call `genui.run` tool, then insert the returned widget reference using `\\ue200genui\\ue202<4 char UUID>\\ue201`.\\n    </important_requirements>\\n  </uuid_mode>\\n  <direct_mode>\\n    <direct_mode_strategy>\\n      For the following Direct Mode widgets, you MUST NOT use the `genui.run` tool. Instead run directly in the final response at the location you want to insert the widget. Run using a `genui` content reference. This MUST be of the form: \\ue200genui\\ue202{\\\"<widget name>\\\": {<args>}}\\ue201\\n    </direct_mode_strategy>\\n    <direct_mode_tools>\\n      <tool name=\\\"physics_electricity_magnetism_learning_block_staging\\\">\\n      // ### Description:\\n      // Use for electricity, circuits, electric and magnetic fields, induction, and electromagnetism. learning concept visualization widget. Use this widget only when a listed equation, formula, or explorable concept is central to the user's request and the widget adds more value than plain text or inline math. Prefer it for explicit solve, graph, derive, analyze, compare, explain, or visualize requests about the listed concepts. Placement rule: place the widget inline exactly where that concept is being worked, not at the top by default. If the response covers multiple distinct listed concepts and each one is central to the answer, insert multiple learning block widgets with one inline placement per concept/type. Do not use this widget for broad conceptual overviews, notes, reports, planning, image/document interpretation, or advice/strategy unless the user is explicitly asking to solve, graph, derive, analyze, compare, explain, or visualize that exact listed concept. If confidence is low that the request maps cleanly to a single useful learning block, do not use this widget. NEVER use this widget for pure arithmetic calculator expressions, unit/currency/time conversions, or programming-language execution requests. Typed group rule: this grouped widget requires a `type_id`; set `type_id` to exactly one type id from this subject group's listed type ids. Do not invent, paraphrase, or use a type id from another subject group. Type rule: if the selected type lists a canonical equation or formula, place the widget where that equation/formula would otherwise appear and avoid repeating that same equation/formula in the mainline response unless needed for clarity.\\n      // ### Available learning block type IDs (15 total):\\n      // - \\\"BAR_MAGNET_FIELD_STRENGTH\\\": Shows the bar-magnet field relationship: magnetic field B is tangent to field lines directed from the north pole to the south pole outside the magnet, and its qualitative strength increases near the poles. probeX and probeY set the draggable compass position where direction and strength are displayed.\\n      // - \\\"COULOMBS_LAW\\\": Explains electrostatic force between two point charges. Canonical formula: `F = k\\\\frac{q_1q_2}{r^2}`.\\n      // - \\\"CURRENT_TO_MAGNETIC_FIELD\\\": Shows the straight-wire field relation B = mu0 I/(2 pi r), where B is magnetic-field magnitude, I is currentStrengthAmperes, and r is distance from the wire. currentDirection selects upward or downward conventional current and therefore the circular field direction by the right-hand rule. Canonical formula: `B = \\\\frac{\\\\mu_0 I}{2\\\\pi r}`.\\n      // - \\\"DC_CIRCUIT_POWER\\\": Shows an adjustable DC source powering one resistor. Changing voltage or resistance updates current, load power, moving conventional-current markers, and the resistor's glow; use for power in a simple DC resistive circuit, not AC or multi-branch analysis. Canonical formula: `P = VI`.\\n      // - \\\"ELECTRICAL_RESISTANCE_FACTORS\\\": Shows a uniform wire whose material resistivity, length, and cross-sectional area can be changed. The computed resistance and wire geometry update together to isolate these factors; do not use for voltage, current, temperature, or circuit-network analysis. Canonical formula: `R=\\\\frac{\\\\rho L}{A}`.\\n      // - \\\"ELECTRIC_CURRENT_CHARGE_FLOW\\\": Shows positive charge packets moving through a wire and crossing a marked cross-section, where packet count and packet charge determine coulombs per second. Increasing either control increases the current, with one ampere equal to one coulomb per second. Canonical formula: `I = \\\\frac{Q}{t}`.\\n      // - \\\"ELECTRIC_FIELD\\\": Shows the point-charge relation E = k|q|/r^2, where E is electric-field magnitude, q is the source charge, and r is the draggable probe's distance from it. polarity selects positive or negative q and therefore whether the field points away from or toward the charge. Canonical formula: `E\\\\propto\\\\frac{1}{r^2}`.\\n      // - \\\"ELECTRIC_FIELD_MULTIPLE_CHARGES\\\": Shows electric-field vectors from two point charges at a shared probe and adds them to form the net field. Learners change either signed charge or move the probe to see both contribution arrows and their vector sum update. Canonical formula: `\\\\vec E_{\\\\mathrm{net}} = \\\\vec E_1 + \\\\vec E_2`.\\n      // - \\\"ELECTRIC_FLUX_FLAT_SURFACE\\\": Shows uniform electric-field arrows crossing a tiltable flat surface, with the angle measured from the field to the surface normal. Learners adjust field strength, area, and angle to see the field-facing area and electric flux change together. Canonical formula: `\\\\Phi_E = EA\\\\cos(\\\\theta)`.\\n      // - \\\"GAUSSIAN_SURFACE_SYMMETRY\\\": Compares symmetry-matched and mismatched Gaussian surfaces for point, line, and plane charge sources. Learners switch the source to see why spheres, coaxial cylinders, and pillboxes simplify Gauss's law only when the surface shares the electric-field symmetry. Canonical formula: `\\\\oint \\\\vec E \\\\cdot d\\\\vec A = \\\\frac{Q_{\\\\mathrm{enc}}}{\\\\varepsilon_0}`.\\n      // - \\\"IDEAL_TRANSFORMER\\\": Shows an ideal transformer with fixed 120 V RMS primary voltage and controls for secondary-to-primary turns ratio and resistive load. It demonstrates how turns set secondary voltage, how load sets current, and how a lossless transformer keeps input and output power equal. Canonical formula: `\\\\frac{V_s}{V_p}=\\\\frac{N_s}{N_p}`.\\n      // - \\\"MAGNET_INDUCED_CURRENT\\\": Shows Faraday's law epsilon = -d(Phi_B)/dt and Lenz's law: changing magnetic flux Phi_B through the loop induces emf epsilon and a current that opposes the change. magnetPosition locates the magnet, and motionMode selects manual dragging or automatic playback.\\n      // - \\\"OHMS_LAW\\\": Explains voltage, current, and resistance in Ohms law. Canonical formula: `I = \\\\frac{V}{R}`.\\n      // - \\\"RESISTORS_IN_PARALLEL_EQUIVALENT\\\": Shows equivalent resistance for resistors connected in parallel. Canonical formula: `\\\\frac{1}{R_T} = \\\\frac{1}{R_1} + \\\\frac{1}{R_2} + \\\\frac{1}{R_3}`.\\n      // - \\\"RESISTORS_IN_SERIES_EQUIVALENT\\\": Shows equivalent resistance for resistors connected in series. Canonical formula: `R_{\\\\text{total}} = R_1 + R_2 + \\\\dots`.\\n      // ### Supported mode: Direct Mode only.\\n      // ### Invocation:\\n      // Insert directly:\\n      \\ue200genui\\ue202{\\\"physics_electricity_magnetism_learning_block_staging\\\": {...}}\\ue201\\n      // This widget is not eligible for UUID Mode.\\n      // ### Args schema:\\n      type physics_electricity_magnetism_learning_block_staging = // MathBlockTypeIdWidgetParameters\\n      {\\n      // Type Id\\n      //\\n      // Single best published learning block `type_id` from the list in the widget description above. Use an exact listed value; do not invent, paraphrase, broaden, or generalize one.\\n      type_id: string,\\n      // Sets a locale overriding the locale from the user's default locale: en-US. You MUST set this if the language in which you will respond to the user's query doesn't match en-US.\\n      locale_override?: string,\\n      }\\n      </tool>\\n    </direct_mode_tools>\\n  </direct_mode>\\n  <important_requirements>\\n    You MUST obey each widget's invocation strategy from the results sections above.\\n    You MUST use a widget if one is relevant.\\n  </important_requirements>\\n</genui_search_tool_results>\"]}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"is_visually_hidden_from_conversation\": true, \"chime_version\": 1, \"request_id\": \"db1ae5ed-5893-406f-9d0e-8ab6174b1b93\", \"message_type\": \"next\", \"turn_exchange_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"working_turn_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"parent_id\": \"c90741f0-0926-4b41-9b6e-bf98be21436a\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": \"commentary\"}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"error\": null, \"error_code\": null}, \"c\": 10}     \n\n"
+   },
+   {
+    "t": 3084,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"ca0c7342-2779-4cbf-bfa2-2f014c608727\", \"author\": {\"role\": \"assistant\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782940025.024431, \"update_time\": null, \"content\": {\"content_type\": \"code\", \"language\": \"json\", \"response_format_name\": null, \"text\": \"\"}, \"status\": \"in_progress\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"citations\": [], \"content_references\": [], \"resolved_model_slug\": \"gpt-5-5-thinking\", \"chime_version\": 1, \"request_id\": \"db1ae5ed-5893-406f-9d0e-8ab6174b1b93\", \"message_type\": \"next\", \"turn_exchange_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"working_turn_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"parent_id\": \"188a092a-0ec2-4b84-a494-fb839449c1db\", \"model_switcher_deny\": []}, \"recipient\": \"genui.run\", \"channel\": \"commentary\"}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"error\": null, \"error_code\": null}, \"c\": 11} \n\n"
+   },
+   {
+    "t": 3119,
+    "text": "event: delta\ndata: {\"p\": \"/message/content/text\", \"o\": \"append\", \"v\": \"{\\\"clock_widget\\\":{\\\"location\\\":\\\"Oslo, Norway\\\",\\\"tz_name\\\":\\\"Europe\"}\n\n"
+   },
+   {
+    "t": 3165,
+    "text": "event: delta\ndata: {\"v\": \"/Oslo\\\",\\\"tz_alias\\\":\\\"CE\"}      \n\n"
+   },
+   {
+    "t": 3403,
+    "text": "event: delta\ndata: {\"v\": \"ST\\\",\\\"time_format\\\":\\\"24h\\\",\\\"locale_override\\\":\\\"en-\"} \n\n"
+   },
+   {
+    "t": 3468,
+    "text": "event: delta\ndata: {\"p\": \"\", \"o\": \"patch\", \"v\": [{\"p\": \"/message/content/text\", \"o\": \"append\", \"v\": \"GB\\\"}}\"}, {\"p\": \"/message/status\", \"o\": \"replace\", \"v\": \"finished_successfully\"}, {\"p\": \"/message/end_turn\", \"o\": \"replace\", \"v\": false}, {\"p\": \"/message/metadata\", \"o\": \"append\", \"v\": {\"finish_details\": {\"type\": \"stop\", \"stop_tokens\": [200012]}, \"is_complete\": true}}]}\n\n"
+   },
+   {
+    "t": 3490,
+    "text": "event: delta\ndata: {\"o\": \"add\", \"v\": {\"message\": {\"id\": \"4a7f9345-d779-482b-8c81-247d41a03246\", \"author\": {\"role\": \"tool\", \"name\": \"genui.run\", \"metadata\": {}}, \"create_time\": 1782940026.4664893, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"genui_run result of \\ue200genui\\ue202{\\\"clock_widget\\\":{\\\"location\\\":\\\"Oslo, Norway\\\",\\\"tz_name\\\":\\\"Europe/Oslo\\\",\\\"tz_alias\\\":\\\"CEST\\\",\\\"time_format\\\":\\\"24h\\\",\\\"locale_override\\\":\\\"en-GB\\\"}}\\ue201:\\n\\n\", \"The widget is represented as follows:\\n\\n```\\n+--------------------------+\\n| 23:07                    |\\n| Oslo, Norway (CEST) |\\n| Today, +0hrs             |\\n+--------------------------+\\n```\\n\\nTo display this widget to the user, you must output \\ue200genui\\ue202KOJv\\ue201. You may display\\nthis widget only once.\\n\\nDo not reference the concept of a \\\"widget\\\" to the user. The term \\\"widget\\\" is not\\nunderstood by the user.\\n\\nMake sure to include a text response. Your text response must complement what's shown\\nin the widget. Assume the user reads the widget content and don't duplicate the\\ncontent. However, it's okay to synthesize or highlight key takeaways if it elevates\\nthe answer.\"]}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"pineapple_ref_data\": {\"uri\": \"genui://data/KOJv\", \"name\": \"clock_widget\", \"is_consequential\": false, \"capability_labels\": [], \"publish_status\": \"published\", \"keywords\": [], \"hint\": \"\", \"is_discoverable\": true, \"visibility\": \"public\", \"templates\": [], \"unlinked\": false, \"contains_mcp_source\": false, \"requires_online_moderation\": true, \"requires_safe_url_check\": false, \"requires_relevance_check\": true, \"data\": {\"type\": \"Card\", \"$size\": \"isMobile() ? \\\"full\\\" : \\\"sm\\\"\", \"padding\": {\"left\": 6, \"right\": 4, \"y\": 5}, \"background\": {\"light\": \"#1c1c1c\", \"dark\": \"#1c1c1c\"}, \"theme\": \"dark\", \"initialState\": {\"location\": \"Oslo, Norway (CEST)\", \"time_format\": \"24h\", \"tz_offset_minutes\": 120, \"relative_offset_label\": \"Today, +0hrs\", \"fixed_tick\": null, \"time_label\": \"23:07\", \"hour_angle\": 333.5, \"minute_angle\": 42.6, \"second_angle\": 36, \"hour_transform\": \"rotate(333.5deg)\", \"minute_transform\": \"rotate(42.6deg)\", \"second_transform\": \"rotate(36deg)\"}, \"children\": [{\"type\": \"Show\", \"$when\": \"state.time_format == '12h'\", \"children\": [{\"type\": \"RunInterval\", \"interval\": 1000, \"leadingTick\": true, \"$maxTicks\": \"state.fixed_tick == null ? null : 1\", \"$onTickAction\": \"{\\n        \\\"patchState\\\": [\\n          set(\\\"time_label\\\", slice(\\\"\\\" + (((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 3600000) % 24 + 11) % 12) + 1), -2) + \\\":\\\" + slice(\\\"0\\\" + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60), -2) + \\\" \\\" + ((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 3600000) % 24) >= 12 ? \\\"PM\\\" : \\\"AM\\\")),\\n          set(\\\"second_angle\\\", (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 6),\\n          set(\\\"minute_angle\\\", (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 6 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 0.1),\\n          set(\\\"hour_angle\\\", (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 3600000) % 12) * 30 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 0.5),\\n          set(\\\"second_transform\\\", \\\"rotate(\\\" + ((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 6) + \\\"deg)\\\"),\\n          set(\\\"minute_transform\\\", \\\"rotate(\\\" + ((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 6 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 0.1) + \\\"deg)\\\"),\\n          set(\\\"hour_transform\\\", \\\"rotate(\\\" + ((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 3600000) % 12) * 30 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 0.5) + \\\"deg)\\\")\\n        ]\\n      }\"}]}, {\"type\": \"Show\", \"$when\": \"state.time_format == '24h'\", \"children\": [{\"type\": \"RunInterval\", \"interval\": 1000, \"leadingTick\": true, \"$maxTicks\": \"state.fixed_tick == null ? null : 1\", \"$onTickAction\": \"{\\n        \\\"patchState\\\": [\\n          set(\\\"time_label\\\", slice(\\\"0\\\" + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 3600000) % 24), -2) + \\\":\\\" + slice(\\\"0\\\" + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60), -2)),\\n          set(\\\"second_angle\\\", (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 6),\\n          set(\\\"minute_angle\\\", (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 6 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 0.1),\\n          set(\\\"hour_angle\\\", (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 3600000) % 12) * 30 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 0.5),\\n          set(\\\"second_transform\\\", \\\"rotate(\\\" + ((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 6) + \\\"deg)\\\"),\\n          set(\\\"minute_transform\\\", \\\"rotate(\\\" + ((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 6 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 0.1) + \\\"deg)\\\"),\\n          set(\\\"hour_transform\\\", \\\"rotate(\\\" + ((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 3600000) % 12) * 30 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 0.5) + \\\"deg)\\\")\\n        ]\\n      }\"}]}, {\"type\": \"Row\", \"align\": \"center\", \"justify\": \"between\", \"gap\": 3, \"children\": [{\"type\": \"Col\", \"gap\": 1.5, \"children\": [{\"type\": \"Title\", \"$value\": \"state.time_label\", \"size\": \"xl\", \"weight\": \"semibold\"}, {\"type\": \"Col\", \"gap\": 0, \"children\": [{\"type\": \"Text\", \"$value\": \"state.location\", \"color\": \"secondary\", \"size\": \"sm\"}, {\"type\": \"Show\", \"$when\": \"state.fixed_tick == null\", \"children\": [{\"type\": \"Text\", \"$value\": \"state.relative_offset_label\", \"color\": \"secondary\", \"size\": \"sm\"}]}]}]}, {\"type\": \"Box\", \"width\": 95, \"height\": 95, \"radius\": \"full\", \"background\": \"transparent\", \"style\": {\"position\": \"relative\", \"flexShrink\": 0}, \"children\": [{\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"8%\\\", \\\"left\\\": \\\"50%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"12\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"6%\\\", \\\"left\\\": \\\"71%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"1\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"21%\\\", \\\"left\\\": \\\"86%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"2\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"42%\\\", \\\"left\\\": \\\"92%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"3\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"63%\\\", \\\"left\\\": \\\"86%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"4\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"78%\\\", \\\"left\\\": \\\"71%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"5\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"84%\\\", \\\"left\\\": \\\"50%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"6\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"78%\\\", \\\"left\\\": \\\"29%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"7\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"63%\\\", \\\"left\\\": \\\"14%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"8\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"42%\\\", \\\"left\\\": \\\"8%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"9\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"21%\\\", \\\"left\\\": \\\"14%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"10\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"6%\\\", \\\"left\\\": \\\"29%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"11\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"width\": \"2px\", \"height\": \"8px\", \"background\": \"#f5f5f5\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"42%\\\", \\\"left\\\": \\\"50%\\\", \\\"transformOrigin\\\": \\\"50% 100%\\\", \\\"zIndex\\\": 4, \\\"transform\\\": \\\"translate(-50%, -100%) \\\" + state.hour_transform }\"}, {\"type\": \"Box\", \"width\": \"4px\", \"height\": \"24px\", \"background\": \"#f5f5f5\", \"radius\": \"full\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"42%\\\", \\\"left\\\": \\\"50%\\\", \\\"transformOrigin\\\": \\\"50% 100%\\\", \\\"zIndex\\\": 4, \\\"transform\\\": \\\"translate(-50%, -100%) \\\" + state.hour_transform + \\\"translateY(-5px)\\\" }\"}, {\"type\": \"Box\", \"width\": \"2px\", \"height\": \"8px\", \"background\": \"#f5f5f5\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"42%\\\", \\\"left\\\": \\\"50%\\\", \\\"transformOrigin\\\": \\\"50% 100%\\\", \\\"zIndex\\\": 4, \\\"transform\\\": \\\"translate(-50%, -100%) \\\" + state.minute_transform }\"}, {\"type\": \"Box\", \"width\": \"4px\", \"height\": \"36px\", \"background\": \"#f5f5f5\", \"radius\": \"full\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"42%\\\", \\\"left\\\": \\\"50%\\\", \\\"transformOrigin\\\": \\\"50% 100%\\\", \\\"zIndex\\\": 4, \\\"transform\\\": \\\"translate(-50%, -100%) \\\" + state.minute_transform + \\\"translateY(-5px)\\\" }\"}, {\"type\": \"Show\", \"$when\": \"state.fixed_tick == null\", \"children\": [{\"type\": \"Box\", \"width\": \"2px\", \"height\": \"50px\", \"background\": \"red-300\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"42%\\\", \\\"left\\\": \\\"50%\\\", \\\"transformOrigin\\\": \\\"50% 100%\\\", \\\"zIndex\\\": 5, \\\"transform\\\": \\\"translate(-50%, -100%) \\\" + state.second_transform + \\\"translateY(6px)\\\" }\"}]}, {\"type\": \"Box\", \"width\": \"6px\", \"height\": \"6px\", \"background\": \"white\", \"radius\": \"full\", \"style\": {\"position\": \"absolute\", \"top\": \"42%\", \"left\": \"50%\", \"transform\": \"translate(-50%, -50%)\", \"zIndex\": 4}}, {\"type\": \"Box\", \"width\": \"4px\", \"height\": \"4px\", \"background\": \"orange-300\", \"radius\": \"full\", \"style\": {\"position\": \"absolute\", \"top\": \"42%\", \"left\": \"50%\", \"transform\": \"translate(-50%, -50%)\", \"zIndex\": 6}}, {\"type\": \"Box\", \"width\": \"2px\", \"height\": \"2px\", \"background\": \"white\", \"radius\": \"full\", \"style\": {\"position\": \"absolute\", \"top\": \"42%\", \"left\": \"50%\", \"transform\": \"translate(-50%, -50%)\", \"zIndex\": 6}}]}]}]}, \"data_type\": \"dil/json/2.0\", \"dependent_messages\": [], \"model_message\": \"+--------------------------+\\n| 23:07                    |\\n| Oslo, Norway (CEST) |\\n| Today, +0hrs             |\\n+--------------------------+\", \"suppress_refid_message\": true, \"view_state\": {\"location\": \"Oslo, Norway (CEST)\", \"time_format\": \"24h\", \"tz_offset_minutes\": 120, \"relative_offset_label\": \"Today, +0hrs\", \"fixed_tick\": null, \"time_label\": \"23:07\", \"hour_angle\": 333.5, \"minute_angle\": 42.6, \"second_angle\": 36, \"hour_transform\": \"rotate(333.5deg)\", \"minute_transform\": \"rotate(42.6deg)\", \"second_transform\": \"rotate(36deg)\"}, \"estimated_heights\": {\"sm\": 120, \"md\": 120, \"lg\": 120}, \"schema_hash\": \"db9aa7b77ae9268adae545ce1bbde3977353af071cda32c38b7623f56b4d953a\", \"shareable\": true, \"is_pineapple_data_resource_object\": true, \"is_invokable\": false}, \"pineapple_ref_uri\": \"genui://data/KOJv\", \"genui_run_model_message\": true, \"chatgpt_sdk\": {\"shareable\": true}, \"is_visually_hidden_from_conversation\": true, \"chime_version\": 1, \"request_id\": \"db1ae5ed-5893-406f-9d0e-8ab6174b1b93\", \"message_type\": \"next\", \"turn_exchange_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"working_turn_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"parent_id\": \"ca0c7342-2779-4cbf-bfa2-2f014c608727\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": \"commentary\"}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"error\": null, \"error_code\": null}, \"c\": 12} \n\n"
+   },
+   {
+    "t": 4447,
+    "text": "data: {\"type\": \"message_marker\", \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"message_id\": \"3bdb19bf-cda7-4232-8543-5a8d25084afa\", \"marker\": \"cot_token\", \"event\": \"first\"}\n\nevent: delta\ndata: {\"v\": {\"message\": {\"id\": \"3bdb19bf-cda7-4232-8543-5a8d25084afa\", \"author\": {\"role\": \"assistant\", \"name\": null, \"metadata\": {}}, \"create_time\": null, \"update_time\": null, \"content\": {\"content_type\": \"reasoning_recap\", \"content\": \"Thought for a few seconds\"}, \"status\": \"finished_successfully\", \"end_turn\": false, \"weight\": 1.0, \"metadata\": {\"reasoning_status\": \"reasoning_ended\", \"finished_duration_sec\": 3, \"reasoning_start_time\": 1782940023.429137, \"reasoning_end_time\": 1782940027.4166386, \"request_id\": \"db1ae5ed-5893-406f-9d0e-8ab6174b1b93\", \"message_type\": \"next\", \"turn_exchange_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"working_turn_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"can_save\": false, \"parent_id\": \"4a7f9345-d779-482b-8c81-247d41a03246\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"error\": null, \"error_code\": null}, \"c\": 13}   \n\nevent: delta\ndata: {\"v\": {\"message\": {\"id\": \"17cd8dfa-ef42-494c-bc08-215f923c22cc\", \"author\": {\"role\": \"assistant\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782940026.446534, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"in_progress\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"citations\": [], \"content_references\": [], \"story_events\": [], \"resolved_model_slug\": \"gpt-5-5-thinking\", \"request_id\": \"db1ae5ed-5893-406f-9d0e-8ab6174b1b93\", \"message_type\": \"next\", \"turn_exchange_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"working_turn_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"parent_id\": \"3bdb19bf-cda7-4232-8543-5a8d25084afa\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": \"final\"}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"error\": null, \"error_code\": null}, \"c\": 14}   \n\ndata: {\"type\": \"message_marker\", \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"message_id\": \"17cd8dfa-ef42-494c-bc08-215f923c22cc\", \"marker\": \"user_visible_token\", \"event\": \"first\"}\n\ndata: {\"type\": \"message_marker\", \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"message_id\": \"17cd8dfa-ef42-494c-bc08-215f923c22cc\", \"marker\": \"final_channel_token\", \"event\": \"first\"}\n\nevent: delta\ndata: {\"p\": \"/message/content/parts/0\", \"o\": \"append\", \"v\": \"2026-07-01T\"}    \n\n"
+   },
+   {
+    "t": 4535,
+    "text": "event: delta\ndata: {\"p\": \"\", \"o\": \"patch\", \"v\": [{\"p\": \"/message/content/parts/0\", \"o\": \"append\", \"v\": \"23:07:00+02:00\\n\\n\\ue200genui\"}, {\"p\": \"/message/metadata/content_references\", \"o\": \"append\", \"v\": [{\"matched_text\": \"\\ue200genui\", \"prefix\": null, \"start_idx\": 27, \"end_idx\": 33, \"safe_urls\": [], \"refs\": [], \"alt\": null, \"prompt_text\": null, \"type\": \"hidden\", \"invalid\": true}]}]}  \n\n"
+   },
+   {
+    "t": 4877,
+    "text": "event: delta\ndata: {\"v\": [{\"p\": \"/message/content/parts/0\", \"o\": \"append\", \"v\": \"\\ue202KOJv\\ue201\"}, {\"p\": \"/message/status\", \"o\": \"replace\", \"v\": \"finished_successfully\"}, {\"p\": \"/message/end_turn\", \"o\": \"replace\", \"v\": true}, {\"p\": \"/message/metadata/content_references/0/matched_text\", \"o\": \"append\", \"v\": \"\\ue202KOJv\\ue201\"}, {\"p\": \"/message/metadata/content_references/0/prefix\", \"o\": \"replace\", \"v\": \"genui\"}, {\"p\": \"/message/metadata/content_references/0/end_idx\", \"o\": \"replace\", \"v\": 39}, {\"p\": \"/message/metadata/content_references/0/safe_urls\", \"o\": \"replace\", \"v\": null}, {\"p\": \"/message/metadata/content_references/0/type\", \"o\": \"replace\", \"v\": \"dil\"}, {\"p\": \"/message/metadata/content_references/0/invalid\", \"o\": \"remove\"}, {\"p\": \"/message/metadata/content_references/0\", \"o\": \"append\", \"v\": {\"placement_type\": \"inline_reference\", \"dil\": {\"type\": \"Card\", \"$size\": \"isMobile() ? \\\"full\\\" : \\\"sm\\\"\", \"padding\": {\"left\": 6, \"right\": 4, \"y\": 5}, \"background\": {\"light\": \"#1c1c1c\", \"dark\": \"#1c1c1c\"}, \"theme\": \"dark\", \"initialState\": {\"location\": \"Oslo, Norway (CEST)\", \"time_format\": \"24h\", \"tz_offset_minutes\": 120, \"relative_offset_label\": \"Today, +0hrs\", \"fixed_tick\": null, \"time_label\": \"23:07\", \"hour_angle\": 333.5, \"minute_angle\": 42.6, \"second_angle\": 36, \"hour_transform\": \"rotate(333.5deg)\", \"minute_transform\": \"rotate(42.6deg)\", \"second_transform\": \"rotate(36deg)\"}, \"children\": [{\"type\": \"Show\", \"$when\": \"state.time_format == '12h'\", \"children\": [{\"type\": \"RunInterval\", \"interval\": 1000, \"leadingTick\": true, \"$maxTicks\": \"state.fixed_tick == null ? null : 1\", \"$onTickAction\": \"{\\n        \\\"patchState\\\": [\\n          set(\\\"time_label\\\", slice(\\\"\\\" + (((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 3600000) % 24 + 11) % 12) + 1), -2) + \\\":\\\" + slice(\\\"0\\\" + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60), -2) + \\\" \\\" + ((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 3600000) % 24) >= 12 ? \\\"PM\\\" : \\\"AM\\\")),\\n          set(\\\"second_angle\\\", (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 6),\\n          set(\\\"minute_angle\\\", (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 6 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 0.1),\\n          set(\\\"hour_angle\\\", (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 3600000) % 12) * 30 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 0.5),\\n          set(\\\"second_transform\\\", \\\"rotate(\\\" + ((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 6) + \\\"deg)\\\"),\\n          set(\\\"minute_transform\\\", \\\"rotate(\\\" + ((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 6 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 0.1) + \\\"deg)\\\"),\\n          set(\\\"hour_transform\\\", \\\"rotate(\\\" + ((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 3600000) % 12) * 30 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 0.5) + \\\"deg)\\\")\\n        ]\\n      }\"}]}, {\"type\": \"Show\", \"$when\": \"state.time_format == '24h'\", \"children\": [{\"type\": \"RunInterval\", \"interval\": 1000, \"leadingTick\": true, \"$maxTicks\": \"state.fixed_tick == null ? null : 1\", \"$onTickAction\": \"{\\n        \\\"patchState\\\": [\\n          set(\\\"time_label\\\", slice(\\\"0\\\" + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 3600000) % 24), -2) + \\\":\\\" + slice(\\\"0\\\" + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60), -2)),\\n          set(\\\"second_angle\\\", (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 6),\\n          set(\\\"minute_angle\\\", (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 6 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 0.1),\\n          set(\\\"hour_angle\\\", (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 3600000) % 12) * 30 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 0.5),\\n          set(\\\"second_transform\\\", \\\"rotate(\\\" + ((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 6) + \\\"deg)\\\"),\\n          set(\\\"minute_transform\\\", \\\"rotate(\\\" + ((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 6 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 1000) % 60) * 0.1) + \\\"deg)\\\"),\\n          set(\\\"hour_transform\\\", \\\"rotate(\\\" + ((int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 3600000) % 12) * 30 + (int(((state.fixed_tick != null ? state.fixed_tick : tick.now) + state.tz_offset_minutes * 60000) / 60000) % 60) * 0.5) + \\\"deg)\\\")\\n        ]\\n      }\"}]}, {\"type\": \"Row\", \"align\": \"center\", \"justify\": \"between\", \"gap\": 3, \"children\": [{\"type\": \"Col\", \"gap\": 1.5, \"children\": [{\"type\": \"Title\", \"$value\": \"state.time_label\", \"size\": \"xl\", \"weight\": \"semibold\"}, {\"type\": \"Col\", \"gap\": 0, \"children\": [{\"type\": \"Text\", \"$value\": \"state.location\", \"color\": \"secondary\", \"size\": \"sm\"}, {\"type\": \"Show\", \"$when\": \"state.fixed_tick == null\", \"children\": [{\"type\": \"Text\", \"$value\": \"state.relative_offset_label\", \"color\": \"secondary\", \"size\": \"sm\"}]}]}]}, {\"type\": \"Box\", \"width\": 95, \"height\": 95, \"radius\": \"full\", \"background\": \"transparent\", \"style\": {\"position\": \"relative\", \"flexShrink\": 0}, \"children\": [{\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"8%\\\", \\\"left\\\": \\\"50%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"12\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"6%\\\", \\\"left\\\": \\\"71%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"1\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"21%\\\", \\\"left\\\": \\\"86%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"2\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"42%\\\", \\\"left\\\": \\\"92%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"3\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"63%\\\", \\\"left\\\": \\\"86%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"4\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"78%\\\", \\\"left\\\": \\\"71%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"5\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"84%\\\", \\\"left\\\": \\\"50%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"6\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"78%\\\", \\\"left\\\": \\\"29%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"7\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"63%\\\", \\\"left\\\": \\\"14%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"8\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"42%\\\", \\\"left\\\": \\\"8%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"9\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"21%\\\", \\\"left\\\": \\\"14%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"10\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"6%\\\", \\\"left\\\": \\\"29%\\\", \\\"transform\\\": \\\"translate(-50%, -50%)\\\" }\", \"children\": [{\"type\": \"Text\", \"$value\": \"11\", \"weight\": \"semibold\", \"size\": \"xs\"}]}, {\"type\": \"Box\", \"width\": \"2px\", \"height\": \"8px\", \"background\": \"#f5f5f5\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"42%\\\", \\\"left\\\": \\\"50%\\\", \\\"transformOrigin\\\": \\\"50% 100%\\\", \\\"zIndex\\\": 4, \\\"transform\\\": \\\"translate(-50%, -100%) \\\" + state.hour_transform }\"}, {\"type\": \"Box\", \"width\": \"4px\", \"height\": \"24px\", \"background\": \"#f5f5f5\", \"radius\": \"full\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"42%\\\", \\\"left\\\": \\\"50%\\\", \\\"transformOrigin\\\": \\\"50% 100%\\\", \\\"zIndex\\\": 4, \\\"transform\\\": \\\"translate(-50%, -100%) \\\" + state.hour_transform + \\\"translateY(-5px)\\\" }\"}, {\"type\": \"Box\", \"width\": \"2px\", \"height\": \"8px\", \"background\": \"#f5f5f5\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"42%\\\", \\\"left\\\": \\\"50%\\\", \\\"transformOrigin\\\": \\\"50% 100%\\\", \\\"zIndex\\\": 4, \\\"transform\\\": \\\"translate(-50%, -100%) \\\" + state.minute_transform }\"}, {\"type\": \"Box\", \"width\": \"4px\", \"height\": \"36px\", \"background\": \"#f5f5f5\", \"radius\": \"full\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"42%\\\", \\\"left\\\": \\\"50%\\\", \\\"transformOrigin\\\": \\\"50% 100%\\\", \\\"zIndex\\\": 4, \\\"transform\\\": \\\"translate(-50%, -100%) \\\" + state.minute_transform + \\\"translateY(-5px)\\\" }\"}, {\"type\": \"Show\", \"$when\": \"state.fixed_tick == null\", \"children\": [{\"type\": \"Box\", \"width\": \"2px\", \"height\": \"50px\", \"background\": \"red-300\", \"$style\": \"{ \\\"position\\\": \\\"absolute\\\", \\\"top\\\": \\\"42%\\\", \\\"left\\\": \\\"50%\\\", \\\"transformOrigin\\\": \\\"50% 100%\\\", \\\"zIndex\\\": 5, \\\"transform\\\": \\\"translate(-50%, -100%) \\\" + state.second_transform + \\\"translateY(6px)\\\" }\"}]}, {\"type\": \"Box\", \"width\": \"6px\", \"height\": \"6px\", \"background\": \"white\", \"radius\": \"full\", \"style\": {\"position\": \"absolute\", \"top\": \"42%\", \"left\": \"50%\", \"transform\": \"translate(-50%, -50%)\", \"zIndex\": 4}}, {\"type\": \"Box\", \"width\": \"4px\", \"height\": \"4px\", \"background\": \"orange-300\", \"radius\": \"full\", \"style\": {\"position\": \"absolute\", \"top\": \"42%\", \"left\": \"50%\", \"transform\": \"translate(-50%, -50%)\", \"zIndex\": 6}}, {\"type\": \"Box\", \"width\": \"2px\", \"height\": \"2px\", \"background\": \"white\", \"radius\": \"full\", \"style\": {\"position\": \"absolute\", \"top\": \"42%\", \"left\": \"50%\", \"transform\": \"translate(-50%, -50%)\", \"zIndex\": 6}}]}]}]}, \"dil_version\": \"2.0\", \"name\": \"clock_widget\", \"estimated_heights\": {\"sm\": 120, \"md\": 120, \"lg\": 120}, \"dil_url\": \"https://cdn.platform.openai.com/deployments/widgets/index.html#REDACTED\", \"hide_widget_feedback\": false, \"schema_hash\": \"db9aa7b77ae9268adae545ce1bbde3977353af071cda32c38b7623f56b4d953a\"}}, {\"p\": \"/message/metadata\", \"o\": \"append\", \"v\": {\"view_state\": {\"widgets\": {\"17cd8dfa-ef42-494c-bc08-215f923c22cc:0\": {\"location\": \"Oslo, Norway (CEST)\", \"time_format\": \"24h\", \"tz_offset_minutes\": 120, \"relative_offset_label\": \"Today, +0hrs\", \"fixed_tick\": null, \"time_label\": \"23:07\", \"hour_angle\": 333.5, \"minute_angle\": 42.6, \"second_angle\": 36, \"hour_transform\": \"rotate(333.5deg)\", \"minute_transform\": \"rotate(42.6deg)\", \"second_transform\": \"rotate(36deg)\"}}}, \"search_result_groups\": [], \"is_complete\": true, \"can_save\": true, \"finish_details\": {\"type\": \"stop\", \"stop_tokens\": [200002]}}}]}    \n\ndata: {\"type\": \"message_marker\", \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\", \"message_id\": \"17cd8dfa-ef42-494c-bc08-215f923c22cc\", \"marker\": \"last_token\", \"event\": \"last\"}\n\n"
+   },
+   {
+    "t": 5981,
+    "text": "data: {\"type\": \"server_ste_metadata\", \"metadata\": {\"server_ttfvt_ms\": 4320.417104056105, \"conduit_prewarmed\": true, \"plan_type\": \"plus\", \"plan_type_bucket\": \"paid\", \"harness\": \"harmony\", \"user_agent\": \"web_desktop\", \"service\": null, \"tool_name\": \"SlimGenUIDelegateTool\", \"tool_invoked\": true, \"fast_convo\": true, \"warmup_state\": \"warm\", \"is_first_turn\": true, \"cluster_region\": \"polandcentral\", \"model_slug\": \"gpt-5-5-thinking\", \"region\": null, \"is_multimodal\": null, \"did_auto_switch_to_reasoning\": false, \"auto_switcher_race_winner\": null, \"is_autoswitcher_enabled\": false, \"is_search\": null, \"did_prompt_contain_image\": false, \"search_tool_call_count\": null, \"search_tool_query_types\": null, \"message_id\": \"9334cdd7-aacc-48d1-8dc9-602cbb299a78\", \"request_id\": \"db1ae5ed-5893-406f-9d0e-8ab6174b1b93\", \"turn_exchange_id\": \"91cd29d8-0f9c-4832-900e-17ee33f0aedd\", \"turn_trace_id\": \"512a4621-4b9b-4758-a87a-29c36596607f\", \"a32e6ebcb\": 1, \"resume_with_websockets\": true, \"low_turn_topic_ttl\": false, \"streaming_async_status\": false, \"replace_stream_status\": true, \"temporal_conversation_turn\": false, \"pro_mode_turn_topic_streaming\": true, \"turn_use_case\": \"other tools\", \"turn_mode\": \"default\"}, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\"}\n\ndata: {\"type\": \"message_stream_complete\", \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\"}\n\n"
+   },
+   {
+    "t": 6745,
+    "text": "data: {\"type\": \"conversation_detail_metadata\", \"banner_info\": null, \"blocked_features\": [], \"model_limits\": [], \"limits_progress\": [{\"feature_name\": \"deep_research\", \"remaining\": 25, \"reset_after\": \"2026-07-31T21:07:08.364363+00:00\"}, {\"feature_name\": \"odyssey\", \"remaining\": 40, \"reset_after\": \"2026-07-31T21:07:08.364385+00:00\"}, {\"feature_name\": \"file_upload\", \"remaining\": 80, \"reset_after\": \"2026-07-02T00:07:08.364395+00:00\"}, {\"feature_name\": \"paste_text_to_file\", \"remaining\": 80, \"reset_after\": \"2026-07-02T00:07:08.364401+00:00\"}, {\"feature_name\": \"image_gen\", \"remaining\": 120, \"reset_after\": \"2026-07-02T21:07:08.364407+00:00\"}], \"default_model_slug\": \"gpt-5-5-thinking\", \"atlas_mode_enabled\": null, \"conversation_id\": \"6a458172-d3f4-83ed-9710-110eb1417821\"}\n\n"
+   }
+  ],
+  "durationMs": 7022,
+  "endedAt": "2026-07-01T21:07:10.155Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "POST",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": "{\"action\":\"next\",\"messages\":[{\"id\":\"12f136a0-016b-4d2a-8988-2b4e11418580\",\"author\":{\"role\":\"user\"},\"create_time\":1782940023.016,\"content\":{\"content_type\":\"text\",\"parts\":[\"hello, give me a timestamp.\"]},\"metadata\":{\"selected_sources\":[],\"serialization_metadata\":{\"custom_symbol_offsets\":[]}}}],\"parent_message_id\":\"client-created-root\",\"model\":\"gpt-5-5-thinking\",\"client_prepare_state\":\"none\",\"timezone_offset_min\":-120,\"timezone\":\"Europe/Oslo\",\"conversation_mode\":{\"kind\":\"primary_assistant\"},\"enable_message_followups\":true,\"system_hints\":[],\"supports_buffering\":true,\"supported_encodings\":[\"v1\"],\"client_contextual_info\":{\"is_dark_mode\":true,\"time_since_loaded\":6,\"page_height\":883,\"page_width\":1648,\"pixel_ratio\":1.75,\"screen_height\":1050,\"screen_width\":1680,\"app_name\":\"chatgpt.com\",\"has_web_push_capabilities\":true,\"web_push_notification_permission\":\"default\"},\"paragen_cot_summary_display_override\":\"allow\",\"force_parallel_switch\":\"auto\",\"thinking_effort\":\"standard\"}",
+  "requestContentType": "application/json",
+  "responseContentType": "text/event-stream; charset=utf-8",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-01T21:07:03.508Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/f/conversation"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr2kgjss-14-zie8f9",
+  "chunks": [],
+  "durationMs": 289,
+  "endedAt": "2026-07-01T21:07:10.502Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "POST",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": "{\"action\":\"next\",\"conversation_id\":\"6a458172-d3f4-83ed-9710-110eb1417821\",\"parent_message_id\":\"17cd8dfa-ef42-494c-bc08-215f923c22cc\",\"model\":\"gpt-5-5-thinking\",\"client_prepare_state\":\"none\",\"client_prepare_dispatch\":\"immediate\",\"client_prepare_source\":\"context_change\",\"timezone_offset_min\":-120,\"timezone\":\"Europe/Oslo\",\"conversation_mode\":{\"kind\":\"primary_assistant\"},\"system_hints\":[],\"supports_buffering\":true,\"supported_encodings\":[\"v1\"],\"client_contextual_info\":{\"app_name\":\"chatgpt.com\",\"has_web_push_capabilities\":true,\"web_push_notification_permission\":\"default\"},\"thinking_effort\":\"standard\"}",
+  "requestContentType": "application/json",
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-01T21:07:10.155Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/f/conversation/prepare"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr2kgjzw-15-avzide",
+  "chunks": [],
+  "durationMs": 918,
+  "endedAt": "2026-07-01T21:07:11.391Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "GET",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": null,
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-01T21:07:10.502Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/conversations?offset=0&limit=28&order=updated&is_archived=false&is_starred=false"
+ }
+]

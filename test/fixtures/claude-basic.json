@@ -1,0 +1,109 @@
+[
+ {
+  "bytes": 21,
+  "captureId": "mr30aklj-2-eovj9f",
+  "chunks": [
+   {
+    "t": 950,
+    "text": "{\"title\":\"Greeting\"}\n"
+   }
+  ],
+  "durationMs": 951,
+  "endedAt": "2026-07-02T04:30:26.143Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "POST",
+  "mode": "full",
+  "platform": "claude",
+  "requestBody": "{\"message_content\":\"hello\",\"recent_titles\":[]}",
+  "requestContentType": "application/json",
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:30:25.292Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://claude.ai/api/organizations/cccccccc-0000-4000-8000-cccccccccccc/chat_conversations/ae8fb219-396b-447f-8e12-e9d87ebb2538/title"
+ },
+ {
+  "bytes": 4189,
+  "captureId": "mr30ajhp-1-6bv083",
+  "chunks": [
+   {
+    "t": 1361,
+    "text": "event: conversation_ready\ndata: {\"type\":\"conversation_ready\"            }\n\nevent: message_start\ndata: {\"type\":\"message_start\",\"message\":{\"id\":\"msg_01Cs7w3UcHKdmFDLQqxESJAr\",\"type\":\"message\",\"role\":\"assistant\",\"model\":\"claude-haiku-4-5-20251001\",\"parent_uuid\":\"019f2117-9d25-7650-822a-31a0dee8a68e\",\"uuid\":\"019f2117-9d25-7cfc-b02e-96779aa72019\",\"content\":[],\"stop_reason\":null,\"stop_sequence\":null,\"stop_details\":null,\"trace_id\":\"REDACTED\",\"request_id\":\"req_REDACTED\"},\"discarded_parent_message_uuid\":null     }\n\nevent: content_block_start\ndata: {\"type\":\"content_block_start\",\"index\":0,\"content_block\":{\"type\":\"thinking\",\"thinking\":\"\",\"summaries\":[],\"cut_off\":false,\"truncated\":false,\"start_timestamp\":\"2026-07-02T04:30:24.792117584Z\",\"stop_timestamp\":null,\"flags\":null}}\n\nevent: content_block_delta\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"thinking_summary_delta\",\"summary\":{\"summary\":\"Thinking about responding to a greeting.\"}}  }\n\nevent: content_block_delta\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"thinking_delta\",\"thinking\":\"The user has just gre\"}              }\n\n"
+   },
+   {
+    "t": 1527,
+    "text": "event: content_block_delta\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"thinking_delta\",\"thinking\":\"eted me with a simple \\\"hello\\\". This is a casual greeting. Based on my instructions, I should be friendly and welcoming. I can reference\"}   }\n\n"
+   },
+   {
+    "t": 2470,
+    "text": "event: content_block_delta\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"thinking_delta\",\"thinking\":\" the user's name from the memories to make this more personal.\\n\\nFrom\"}         }\n\n"
+   },
+   {
+    "t": 2478,
+    "text": "event: content_block_delta\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"thinking_delta\",\"thinking\":\" the memories, I can see this is Raymond, who works as Head of Technology at House\"}           }\n\n"
+   },
+   {
+    "t": 2518,
+    "text": "event: content_block_delta\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"thinking_delta\",\"thinking\":\" of Control in Oslo, Norway, and is also a co\"}               }\n\n"
+   },
+   {
+    "t": 2527,
+    "text": "event: content_block_delta\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"thinking_delta\",\"thinking\":\"-founder of Sigill AS. He prefers English in all\"}               }\n\n"
+   },
+   {
+    "t": 2579,
+    "text": "event: content_block_delta\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"thinking_delta\",\"thinking\":\" conversations with Claude.\\n\\nI should give a warm greeting without being overly formal, and offer to help with whatever he\"}               }\n\n"
+   },
+   {
+    "t": 2884,
+    "text": "event: content_block_delta\ndata: {\"type\":\"content_block_delta\",\"index\":0,\"delta\":{\"type\":\"thinking_delta\",\"thinking\":\" needs.\"}            }\n\nevent: content_block_stop\ndata: {\"type\":\"content_block_stop\",\"index\":0,\"stop_timestamp\":\"2026-07-02T04:30:26.297276166Z\"  }\n\nevent: content_block_start\ndata: {\"type\":\"content_block_start\",\"index\":1,\"content_block\":{\"type\":\"text\",\"text\":\"\",\"citations\":[],\"start_timestamp\":\"2026-07-02T04:30:26.298647343Z\",\"stop_timestamp\":null,\"flags\":null}  }\n\nevent: content_block_delta\ndata: {\"type\":\"content_block_delta\",\"index\":1,\"delta\":{\"type\":\"text_delta\",\"text\":\"Hey Raymond! Good to see you. How can I help you today?\"}       }\n\nevent: content_block_stop\ndata: {\"type\":\"content_block_stop\",\"index\":1,\"stop_timestamp\":\"2026-07-02T04:30:26.330457532Z\"         }\n\nevent: message_delta\ndata: {\"type\":\"message_delta\",\"delta\":{\"stop_reason\":\"end_turn\",\"stop_sequence\":null,\"stop_details\":null}     }\n\nevent: message_limit\ndata: {\"type\":\"message_limit\",\"message_limit\":{\"type\":\"within_limit\",\"resetsAt\":null,\"remaining\":null,\"perModelLimit\":null,\"representativeClaim\":\"five_hour\",\"overageStatus\":\"within_limit\",\"overageResetsAt\":1782966600,\"overageInUse\":false,\"windows\":{\"5h\":{\"status\":\"within_limit\",\"resets_at\":1782984000,\"utilization\":0.0},\"7d\":{\"status\":\"within_limit\",\"resets_at\":1783249200,\"utilization\":0.0},\"overage\":{\"status\":\"within_limit\",\"resets_at\":1782966600,\"utilization\":0.0}},\"resolved\":{\"status\":\"ok\",\"limit\":{\"kind\":\"session\",\"group\":\"session\",\"percent\":0,\"severity\":\"normal\",\"resets_at\":\"2026-07-02T09:20:00+00:00\",\"scope\":null,\"is_active\":true},\"spend\":null,\"disabled_reason\":null,\"notice\":null}}      }\n\n"
+   },
+   {
+    "t": 3496,
+    "text": "event: message_stop\ndata: {\"type\":\"message_stop\"            }\n\n"
+   }
+  ],
+  "durationMs": 3553,
+  "endedAt": "2026-07-02T04:30:27.299Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "POST",
+  "mode": "full",
+  "platform": "claude",
+  "requestBody": "{\"prompt\":\"hello\",\"timezone\":\"Europe/Oslo\",\"locale\":\"en-US\",\"model\":\"claude-haiku-4-5-20251001\",\"thinking_mode\":\"extended\",\"tools\":[{\"name\":\"show_widget\",\"description\":\"Show visual content \u2014 SVG graphics, diagrams, charts, or interactive HTML widgets \u2014 that renders inline alongside your text response.\\nUse for flowcharts, architecture diagrams, dashboards, forms, calculators, data tables, games, illustrations, or any visual content.\\nThe code is auto-detected: starts with <svg = SVG mode, otherwise HTML mode.\\nA global sendPrompt(text) function is available \u2014 it sends a message to chat as if the user typed it.\\nIMPORTANT: Call read_me before your first show_widget call. Do NOT narrate or mention the read_me call to the user \u2014 call it silently, then respond as if you went straight to building the visualization.\",\"input_schema\":{\"type\":\"object\",\"properties\":{\"loading_messages\":{\"type\":\"array\",\"items\":{\"type\":\"string\"},\"minItems\":1,\"maxItems\":4,\"description\":\"1\u20134 loading messages shown to the user while the visual renders, each roughly 5 words long. Write them in the same language the user is using. Use 1 for simple visuals, more for complex ones. If the topic is serious \u2014 illness, disease, pandemics, death, grief, war, conflict, poverty, disaster, trauma, abuse, addiction, medical decisions, politically charged subjects, or anything where the reader might be personally affected \u2014 keep these BORING: describe what the code is doing in the dullest generic way, no jargon-as-drama, no evocative terms. Pandemic growth model \u2014 NOT ['Simulating patient zero', 'Modeling the curve'] (documentary-narrator voice), YES ['Setting up the model', 'Running the calculation']. Cancer timeline \u2014 NOT ['Charting the battle ahead'], YES ['Laying out the stages']. If you have to ask whether it's serious, it is. Otherwise, have fun \u2014 reach for alliteration, puns, personification, wordplay, whatever lands in that language. Playful examples \u2014 revenue chart: ['Bribing bars to stand taller', 'Asking Q4 where it went']; kanban: ['Herding cards into columns', 'Dragging, dropping, not stopping'].\"},\"title\":{\"type\":\"string\",\"description\":\"Short snake_case identifier for this visual. Must be specific and disambiguating \u2014 if the conversation has multiple visuals, this title alone should tell you which one is being referenced (e.g. 'q4_revenue_by_product_line' not 'chart', 'oauth_login_flow' not 'diagram'). Also used as the download filename, so no spaces or special characters.\"},\"widget_code\":{\"type\":\"string\",\"description\":\"SVG or HTML code to render. For SVG: raw SVG code starting with <svg> tag, must use CSS variables for colors. Example: <svg viewBox=\\\"0 0 700 400\\\" xmlns=\\\"http://www.w3.org/2000/svg\\\">...</svg>. For HTML: raw HTML content to render, do NOT include DOCTYPE, <html>, <head>, or <body> tags. Use CSS variables for theming. Keep background transparent and avoid top-level padding. Scripts are supported but execute after streaming completes.\"}},\"required\":[\"loading_messages\",\"title\",\"widget_code\"]},\"integration_name\":\"visualize\",\"is_mcp_app\":true},{\"name\":\"read_me\",\"description\":\"Returns required context for show_widget (CSS variables, colors, typography, layout rules, examples). Call before your first show_widget call. Call again later if you need a different module. Do NOT mention or narrate this call to the user \u2014 it is an internal setup step. Call it silently and proceed directly to the visualization in your response.\",\"input_schema\":{\"type\":\"object\",\"properties\":{\"modules\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"enum\":[\"diagram\",\"mockup\",\"interactive\",\"data_viz\",\"art\",\"chart\",\"elicitation\"]},\"description\":\"Which module(s) to load. Pick all that fit.\"},\"platform\":{\"type\":\"string\",\"enum\":[\"mobile\",\"desktop\",\"unknown\"],\"description\":\"The client platform the widget will render on. Pass 'mobile' when your system prompt indicates a mobile client (narrow ~380px viewport) so SVG viewBox and layout guidance are sized accordingly; otherwise pass 'desktop'. Defaults to 'unknown' (desktop sizing).\"}}},\"integration_name\":\"visualize\",\"is_mcp_app\":false},{\"type\":\"web_search_v0\",\"name\":\"web_search\"},{\"type\":\"artifacts_v0\",\"name\":\"artifacts\"},{\"type\":\"repl_v0\",\"name\":\"repl\"},{\"type\":\"widget\",\"name\":\"weather_fetch\"},{\"type\":\"widget\",\"name\":\"recipe_display_v0\"},{\"type\":\"widget\",\"name\":\"places_map_display_v0\"},{\"type\":\"widget\",\"name\":\"message_compose_v1\"},{\"type\":\"widget\",\"name\":\"ask_user_input_v0\"},{\"type\":\"widget\",\"name\":\"recommend_claude_apps\"},{\"type\":\"widget\",\"name\":\"schedule_cowork_task_v0\"},{\"type\":\"widget\",\"name\":\"places_search\"},{\"type\":\"widget\",\"name\":\"fetch_sports_data\"}],\"turn_message_uuids\":{\"human_message_uuid\":\"019f2117-9d25-7650-822a-31a0dee8a68e\",\"assistant_message_uuid\":\"019f2117-9d25-7cfc-b02e-96779aa72019\"},\"attachments\":[],\"files\":[],\"sync_sources\":[],\"rendering_mode\":\"messages\",\"create_conversation_params\":{\"name\":\"\",\"model\":\"claude-haiku-4-5-20251001\",\"include_conversation_preferences\":true,\"paprika_mode\":null,\"compass_mode\":null,\"tool_search_mode\":\"auto\",\"is_temporary\":false,\"enabled_imagine\":true}}",
+  "requestContentType": "application/json",
+  "responseContentType": "text/event-stream",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:30:24.094Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://claude.ai/api/organizations/cccccccc-0000-4000-8000-cccccccccccc/chat_conversations/ae8fb219-396b-447f-8e12-e9d87ebb2538/completion"
+ },
+ {
+  "bytes": 2385,
+  "captureId": "mr30amsr-3-u4osjj",
+  "chunks": [
+   {
+    "t": 338,
+    "text": "{\"uuid\":\"ae8fb219-396b-447f-8e12-e9d87ebb2538\",\"name\":\"Greeting\",\"summary\":\"\",\"model\":\"claude-haiku-4-5-20251001\",\"created_at\":\"2026-07-02T04:30:23.728434Z\",\"updated_at\":\"2026-07-02T04:30:26.959977Z\",\"settings\":{\"enabled_web_search\":true,\"enabled_monkeys_in_a_barrel\":true,\"enabled_saffron\":true,\"tool_search_mode\":\"auto\",\"preview_feature_uses_artifacts\":true,\"enabled_turmeric\":true,\"thinking_mode\":\"extended\"},\"is_starred\":false,\"is_temporary\":false,\"platform\":\"CLAUDE_AI\",\"is_wiggle_enabled\":true,\"effective_thinking_mode\":\"extended\",\"current_leaf_message_uuid\":\"019f2117-9d25-7cfc-b02e-96779aa72019\",\"chat_messages\":[{\"uuid\":\"019f2117-9d25-7650-822a-31a0dee8a68e\",\"text\":\"\",\"content\":[{\"start_timestamp\":\"2026-07-02T04:30:24.794400Z\",\"stop_timestamp\":\"2026-07-02T04:30:24.794400Z\",\"type\":\"text\",\"text\":\"hello\",\"citations\":[]}],\"sender\":\"human\",\"index\":0,\"created_at\":\"2026-07-02T04:30:24.794629Z\",\"updated_at\":\"2026-07-02T04:30:24.794629Z\",\"truncated\":false,\"attachments\":[],\"files\":[],\"sync_sources\":[],\"parent_message_uuid\":\"00000000-0000-4000-8000-000000000000\"},{\"uuid\":\"019f2117-9d25-7cfc-b02e-96779aa72019\",\"text\":\"\",\"content\":[{\"start_timestamp\":\"2026-07-02T04:30:24.792117Z\",\"stop_timestamp\":\"2026-07-02T04:30:26.297276Z\",\"type\":\"thinking\",\"thinking\":\"The user has just greeted me with a simple \\\"hello\\\". This is a casual greeting. Based on my instructions, I should be friendly and welcoming. I can reference the user's name from the memories to make this more personal.\\n\\nFrom the memories, I can see this is Raymond, who works as Head of Technology at House of Control in Oslo, Norway, and is also a co-founder of Sigill AS. He prefers English in all conversations with Claude.\\n\\nI should give a warm greeting without being overly formal, and offer to help with whatever he needs.\",\"summaries\":[{\"summary\":\"Thinking about responding to a greeting.\"}],\"cut_off\":false,\"truncated\":false,\"hidden\":false},{\"start_timestamp\":\"2026-07-02T04:30:26.298647Z\",\"stop_timestamp\":\"2026-07-02T04:30:26.330457Z\",\"type\":\"text\",\"text\":\"Hey Raymond! Good to see you. How can I help you today?\",\"citations\":[]}],\"sender\":\"assistant\",\"index\":1,\"created_at\":\"2026-07-02T04:30:26.959977Z\",\"updated_at\":\"2026-07-02T04:30:26.959977Z\",\"truncated\":false,\"stop_reason\":\"end_turn\",\"attachments\":[],\"files\":[],\"sync_sources\":[],\"parent_message_uuid\":\"019f2117-9d25-7650-822a-31a0dee8a68e\"}]}"
+   }
+  ],
+  "durationMs": 339,
+  "endedAt": "2026-07-02T04:30:28.258Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "GET",
+  "mode": "full",
+  "platform": "claude",
+  "requestBody": null,
+  "requestContentType": "application/json",
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:30:28.258Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://claude.ai/api/organizations/cccccccc-0000-4000-8000-cccccccccccc/chat_conversations/ae8fb219-396b-447f-8e12-e9d87ebb2538?tree=True&rendering_mode=messages&render_all_tools=true&consistency=eventual"
+ }
+]

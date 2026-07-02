@@ -1,0 +1,411 @@
+[
+ {
+  "bytes": 17445,
+  "captureId": "mr30rw1j-4-kfcx9r",
+  "chunks": [
+   {
+    "t": 375,
+    "text": "event: delta_encoding\ndata: \"v1\"\n\ndata: {\"type\": \"resume_conversation_token\", \"kind\": \"topic\", \"token\": \"REDACTED.JWT.REDACTED\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\n"
+   },
+   {
+    "t": 446,
+    "text": "event: delta\ndata: {\"p\": \"\", \"o\": \"add\", \"v\": {\"message\": {\"id\": \"8977e746-8f48-4942-ab2c-1728d64b3c41\", \"author\": {\"role\": \"system\", \"name\": null, \"metadata\": {}}, \"create_time\": null, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"finished_successfully\", \"end_turn\": true, \"weight\": 0.0, \"metadata\": {\"model_switcher_deny\": [], \"is_visually_hidden_from_conversation\": true}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"error\": null, \"error_code\": null}, \"c\": 0} \n\n"
+   },
+   {
+    "t": 525,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"343d16e2-b2b5-4c7e-a6b9-e3e124e45f5d\", \"author\": {\"role\": \"system\", \"name\": null, \"metadata\": {}}, \"create_time\": null, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"finished_successfully\", \"end_turn\": true, \"weight\": 0.0, \"metadata\": {\"rebase_developer_message\": true, \"model_switcher_deny\": [], \"is_visually_hidden_from_conversation\": true}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"error\": null, \"error_code\": null}, \"c\": 1}    \n\n"
+   },
+   {
+    "t": 554,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"a2130721-5e9f-427c-9216-f104f199dadb\", \"author\": {\"role\": \"system\", \"name\": null, \"metadata\": {}}, \"create_time\": null, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"finished_successfully\", \"end_turn\": false, \"weight\": 0.0, \"metadata\": {\"model_switcher_deny\": [], \"is_visually_hidden_from_conversation\": true}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"error\": null, \"error_code\": null}, \"c\": 2}     \n\n"
+   },
+   {
+    "t": 586,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"fc0e951f-e1a9-4aa9-975e-a7619f9b8bb3\", \"author\": {\"role\": \"user\", \"name\": null, \"metadata\": {}}, \"create_time\": null, \"update_time\": null, \"content\": {\"content_type\": \"user_editable_context\", \"user_profile\": \"REDACTED\", \"user_instructions\": \"REDACTED\"}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"is_visually_hidden_from_conversation\": true, \"user_context_message_data\": {\"about_user_message\": \"REDACTED\", \"about_model_message\": \"I prefer to the point answers. I want you to inform me when you are being subjective instead of neutral. You can have opinions, do not let me force opinions without informing me that you are answering with content just to please me as a receiver. Never respond to me with emojis.  Also do not offer conclusions or summaries that are celebration-like. Avoid weird formatting such as bold, cursive etc, at-least keep it to a minimum. And I don't like too many bullets, especially in emails. Also I'm in Norway so avoid too much american etiquette.\\n\\nIf I ask you to create a jira task, then use the following format:\\njira issue create -a\\\"redacted@example.com\\\" -s\\\"<subject>\\\" -b\\\"<body>\\\"\\n\\nAnd please, avoid several rounds of nitpicking. I'll often ask you to QA my changes. You may do a round of suggesting minor fixes. But I'll freak out if you do it over and over.\"}, \"is_user_system_message\": true, \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"error\": null, \"error_code\": null}, \"c\": 3}     \n\n"
+   },
+   {
+    "t": 604,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"8addff68-aa0f-4802-a53a-e003b32846da\", \"author\": {\"role\": \"system\", \"name\": null, \"metadata\": {}}, \"create_time\": null, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"is_contextual_answers_system_message\": true, \"contextual_answers_message_type\": \"identity_prompt\", \"is_visually_hidden_from_conversation\": true, \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"error\": null, \"error_code\": null}, \"c\": 4}  \n\nevent: delta\ndata: {\"v\": {\"message\": {\"id\": \"6d4ff4ba-d194-4d64-bcd2-76ca4af80289\", \"author\": {\"role\": \"user\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782967432.912, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"name three colors\"]}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"selected_sources\": [], \"serialization_metadata\": {\"custom_symbol_offsets\": []}, \"request_id\": \"cc77692c-9509-467d-9755-0c27523b90e3\", \"message_source\": null, \"turn_exchange_id\": \"7f298b69-17bb-4d73-9f30-e3d0a1322248\", \"working_turn_id\": \"7f298b69-17bb-4d73-9f30-e3d0a1322248\", \"resolved_model_slug\": \"gpt-5-5-thinking\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"error\": null, \"error_code\": null}, \"c\": 5}  \n\n"
+   },
+   {
+    "t": 634,
+    "text": "data: {\"type\": \"input_message\", \"input_message\": {\"id\": \"6d4ff4ba-d194-4d64-bcd2-76ca4af80289\", \"author\": {\"role\": \"user\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782967432.912, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"name three colors\"]}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"selected_sources\": [], \"serialization_metadata\": {\"custom_symbol_offsets\": []}, \"request_id\": \"cc77692c-9509-467d-9755-0c27523b90e3\", \"otrace_id\": \"6a45ec88000000009e8d2cc65f8f7dad\", \"message_source\": null, \"turn_exchange_id\": \"7f298b69-17bb-4d73-9f30-e3d0a1322248\", \"working_turn_id\": \"7f298b69-17bb-4d73-9f30-e3d0a1322248\", \"turn_trace_id\": \"243b87e8-94f7-4c49-a248-b2f2eed36061\", \"useragent\": {\"client_type\": \"web\", \"is_mobile\": false, \"is_mobile_app\": false, \"is_desktop_app\": false, \"is_native_app\": false, \"is_native_app_apple\": false, \"is_mobile_app_ios\": false, \"is_desktop_app_macos\": false, \"is_aura_app_macos\": false, \"is_aura_web\": false, \"is_sora_ios\": false, \"is_agora_ios\": false, \"is_agora_android\": false, \"is_desktop_app_windows\": false, \"is_electron_app\": false, \"is_mobile_app_android\": false, \"is_mobile_web\": false, \"is_mobile_web_ios\": false, \"is_mobile_web_android\": false, \"is_ios\": false, \"is_android\": false, \"is_macos\": false, \"is_windows\": false, \"is_linux\": true, \"is_chatgpt_client\": false, \"is_moshi_client\": false, \"is_sora_client\": false, \"is_agora_client\": false, \"is_browserbased_app\": true, \"is_chatgpt_api\": false, \"is_slack\": false, \"is_chatkit_web\": false, \"is_chatkit_synthetic\": false, \"is_kakao_talk\": false, \"is_codex_desktop\": false, \"is_offline_caching\": false, \"app_version\": null, \"build_number\": null, \"user_agent\": \"mozilla/5.0 (x11; linux x86_64) applewebkit/537.36 (khtml, like gecko) chrome/149.0.0.0 safari/537.36\", \"app_environment\": null, \"os_version\": null, \"device_model\": null, \"user_client_type\": \"desktop_web\"}, \"paragen_stream_type\": \"default\", \"resolved_model_slug\": \"gpt-5-5-thinking\", \"parent_id\": \"8addff68-aa0f-4802-a53a-e003b32846da\"}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\nevent: delta\ndata: {\"v\": {\"message\": {\"id\": \"96e393e6-d13d-49f6-acf8-75a6088b7618\", \"author\": {\"role\": \"system\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782967433.1620352, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"is_contextual_answers_system_message\": true, \"is_visually_hidden_from_conversation\": true, \"command\": \"prompt\", \"contextual_answers_message_type\": \"sources_and_filters_prompt\", \"chime_version\": 1, \"request_id\": \"cc77692c-9509-467d-9755-0c27523b90e3\", \"message_type\": \"next\", \"turn_exchange_id\": \"7f298b69-17bb-4d73-9f30-e3d0a1322248\", \"working_turn_id\": \"7f298b69-17bb-4d73-9f30-e3d0a1322248\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"parent_id\": \"6d4ff4ba-d194-4d64-bcd2-76ca4af80289\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"error\": null, \"error_code\": null}, \"c\": 6}   \n\n"
+   },
+   {
+    "t": 681,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"a1c4e632-f512-453d-8fba-c25d4b12c035\", \"author\": {\"role\": \"assistant\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782967433.2322223, \"update_time\": null, \"content\": {\"content_type\": \"model_editable_context\", \"model_set_context\": \"\", \"repository\": null, \"repo_summary\": null, \"structured_context\": null}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"search_result_groups\": [], \"chime_version\": 1, \"request_id\": \"cc77692c-9509-467d-9755-0c27523b90e3\", \"message_type\": \"next\", \"turn_exchange_id\": \"7f298b69-17bb-4d73-9f30-e3d0a1322248\", \"working_turn_id\": \"7f298b69-17bb-4d73-9f30-e3d0a1322248\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"can_save\": false, \"parent_id\": \"96e393e6-d13d-49f6-acf8-75a6088b7618\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"error\": null, \"error_code\": null}, \"c\": 7} \n\n"
+   },
+   {
+    "t": 1105,
+    "text": "data: {\"type\": \"title_generation\", \"title\": \"Name three colors\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\nevent: delta\ndata: {\"v\": {\"message\": {\"id\": \"b313cfee-63b1-49be-9fb4-d0e8865ea228\", \"author\": {\"role\": \"assistant\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782967433.194906, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"in_progress\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"citations\": [], \"content_references\": [], \"story_events\": [], \"resolved_model_slug\": \"gpt-5-5-thinking\", \"request_id\": \"cc77692c-9509-467d-9755-0c27523b90e3\", \"message_type\": \"next\", \"turn_exchange_id\": \"7f298b69-17bb-4d73-9f30-e3d0a1322248\", \"working_turn_id\": \"7f298b69-17bb-4d73-9f30-e3d0a1322248\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"parent_id\": \"a1c4e632-f512-453d-8fba-c25d4b12c035\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": \"final\"}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"error\": null, \"error_code\": null}, \"c\": 8}    \n\ndata: {\"type\": \"message_marker\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"message_id\": \"b313cfee-63b1-49be-9fb4-d0e8865ea228\", \"marker\": \"user_visible_token\", \"event\": \"first\"}\n\ndata: {\"type\": \"message_marker\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"message_id\": \"b313cfee-63b1-49be-9fb4-d0e8865ea228\", \"marker\": \"final_channel_token\", \"event\": \"first\"}\n\nevent: delta\ndata: {\"p\": \"/message/content/parts/0\", \"o\": \"append\", \"v\": \"Red, blue, green.\"}      \n\nevent: delta\ndata: {\"p\": \"\", \"o\": \"patch\", \"v\": [{\"p\": \"/message/status\", \"o\": \"replace\", \"v\": \"finished_successfully\"}, {\"p\": \"/message/end_turn\", \"o\": \"replace\", \"v\": true}, {\"p\": \"/message/metadata\", \"o\": \"append\", \"v\": {\"is_complete\": true, \"finish_details\": {\"type\": \"stop\", \"stop_tokens\": [200002]}, \"can_save\": true, \"search_result_groups\": []}}]} \n\ndata: {\"type\": \"message_marker\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"message_id\": \"b313cfee-63b1-49be-9fb4-d0e8865ea228\", \"marker\": \"last_token\", \"event\": \"last\"}\n\n"
+   },
+   {
+    "t": 2717,
+    "text": "data: {\"type\": \"server_ste_metadata\", \"metadata\": {\"server_ttfvt_ms\": 961.6274420404807, \"conduit_prewarmed\": true, \"plan_type\": \"plus\", \"plan_type_bucket\": \"paid\", \"harness\": \"harmony\", \"user_agent\": \"web_desktop\", \"service\": null, \"tool_name\": null, \"tool_invoked\": false, \"fast_convo\": true, \"warmup_state\": \"warm\", \"is_first_turn\": true, \"cluster_region\": \"polandcentral\", \"model_slug\": \"gpt-5-5-thinking\", \"region\": null, \"is_multimodal\": null, \"did_auto_switch_to_reasoning\": false, \"auto_switcher_race_winner\": null, \"is_autoswitcher_enabled\": false, \"is_search\": null, \"did_prompt_contain_image\": false, \"search_tool_call_count\": null, \"search_tool_query_types\": null, \"message_id\": \"fc0e951f-e1a9-4aa9-975e-a7619f9b8bb3\", \"request_id\": \"cc77692c-9509-467d-9755-0c27523b90e3\", \"turn_exchange_id\": \"7f298b69-17bb-4d73-9f30-e3d0a1322248\", \"turn_trace_id\": \"243b87e8-94f7-4c49-a248-b2f2eed36061\", \"a32e6ebcb\": 1, \"resume_with_websockets\": true, \"low_turn_topic_ttl\": false, \"streaming_async_status\": false, \"replace_stream_status\": true, \"temporal_conversation_turn\": false, \"pro_mode_turn_topic_streaming\": true, \"turn_use_case\": \"text\", \"turn_mode\": \"default\"}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\n"
+   },
+   {
+    "t": 2730,
+    "text": "data: {\"type\": \"message_stream_complete\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\n"
+   },
+   {
+    "t": 3037,
+    "text": "data: {\"type\": \"conversation_detail_metadata\", \"banner_info\": null, \"blocked_features\": [], \"model_limits\": [], \"limits_progress\": [{\"feature_name\": \"deep_research\", \"remaining\": 25, \"reset_after\": \"2026-08-01T04:43:54.904257+00:00\"}, {\"feature_name\": \"odyssey\", \"remaining\": 40, \"reset_after\": \"2026-08-01T04:43:54.904270+00:00\"}, {\"feature_name\": \"file_upload\", \"remaining\": 80, \"reset_after\": \"2026-07-02T07:43:54.904277+00:00\"}, {\"feature_name\": \"paste_text_to_file\", \"remaining\": 80, \"reset_after\": \"2026-07-02T07:43:54.904283+00:00\"}, {\"feature_name\": \"image_gen\", \"remaining\": 120, \"reset_after\": \"2026-07-03T04:43:54.904287+00:00\"}], \"default_model_slug\": \"gpt-5-5-thinking\", \"atlas_mode_enabled\": null, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\n"
+   },
+   {
+    "t": 3063,
+    "text": "data: [DONE]\n\n"
+   }
+  ],
+  "durationMs": 3093,
+  "endedAt": "2026-07-02T04:43:56.249Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "POST",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": "{\"action\":\"next\",\"messages\":[{\"id\":\"6d4ff4ba-d194-4d64-bcd2-76ca4af80289\",\"author\":{\"role\":\"user\"},\"create_time\":1782967432.912,\"content\":{\"content_type\":\"text\",\"parts\":[\"name three colors\"]},\"metadata\":{\"selected_sources\":[],\"serialization_metadata\":{\"custom_symbol_offsets\":[]}}}],\"parent_message_id\":\"client-created-root\",\"model\":\"gpt-5-5-thinking\",\"client_prepare_state\":\"none\",\"timezone_offset_min\":-120,\"timezone\":\"Europe/Oslo\",\"conversation_mode\":{\"kind\":\"primary_assistant\"},\"enable_message_followups\":true,\"system_hints\":[],\"supports_buffering\":true,\"supported_encodings\":[\"v1\"],\"client_contextual_info\":{\"is_dark_mode\":true,\"time_since_loaded\":8,\"page_height\":883,\"page_width\":1648,\"pixel_ratio\":1.75,\"screen_height\":1050,\"screen_width\":1680,\"app_name\":\"chatgpt.com\",\"has_web_push_capabilities\":true,\"web_push_notification_permission\":\"default\"},\"paragen_cot_summary_display_override\":\"allow\",\"force_parallel_switch\":\"auto\",\"thinking_effort\":\"standard\"}",
+  "requestContentType": "application/json",
+  "responseContentType": "text/event-stream; charset=utf-8",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:43:53.396Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/f/conversation"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr30tn0c-11-lpghbi",
+  "chunks": [],
+  "durationMs": 508,
+  "endedAt": "2026-07-02T04:45:15.277Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": true,
+  "method": "POST",
+  "mode": "meta",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": "application/json",
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:45:14.908Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/conversation/experimental/generate_autocompletions"
+ },
+ {
+  "bytes": 6998,
+  "captureId": "mr30tnbr-12-rajmu1",
+  "chunks": [
+   {
+    "t": 919,
+    "text": "event: delta_encoding\ndata: \"v1\"\n\ndata: {\"type\": \"resume_conversation_token\", \"kind\": \"topic\", \"token\": \"REDACTED.JWT.REDACTED\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\ndata: {\"type\": \"input_message\", \"input_message\": {\"id\": \"3e22e567-0665-41bf-839c-bc688b8caeb4\", \"author\": {\"role\": \"user\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782967514.943, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"now three animals\"]}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"selected_sources\": [], \"serialization_metadata\": {\"custom_symbol_offsets\": []}, \"request_id\": \"7644cf40-8f4d-4e74-a752-12b3c15f8f74\", \"otrace_id\": \"6a45ecdb00000000db8d2ce7956c4221\", \"message_source\": null, \"turn_exchange_id\": \"3c7dabda-d6e2-400c-a5e8-b4cb3a02f7af\", \"working_turn_id\": \"3c7dabda-d6e2-400c-a5e8-b4cb3a02f7af\", \"turn_trace_id\": \"64160a14-a95c-4ef6-a833-9d35f2654685\", \"useragent\": {\"client_type\": \"web\", \"is_mobile\": false, \"is_mobile_app\": false, \"is_desktop_app\": false, \"is_native_app\": false, \"is_native_app_apple\": false, \"is_mobile_app_ios\": false, \"is_desktop_app_macos\": false, \"is_aura_app_macos\": false, \"is_aura_web\": false, \"is_sora_ios\": false, \"is_agora_ios\": false, \"is_agora_android\": false, \"is_desktop_app_windows\": false, \"is_electron_app\": false, \"is_mobile_app_android\": false, \"is_mobile_web\": false, \"is_mobile_web_ios\": false, \"is_mobile_web_android\": false, \"is_ios\": false, \"is_android\": false, \"is_macos\": false, \"is_windows\": false, \"is_linux\": true, \"is_chatgpt_client\": false, \"is_moshi_client\": false, \"is_sora_client\": false, \"is_agora_client\": false, \"is_browserbased_app\": true, \"is_chatgpt_api\": false, \"is_slack\": false, \"is_chatkit_web\": false, \"is_chatkit_synthetic\": false, \"is_kakao_talk\": false, \"is_codex_desktop\": false, \"is_offline_caching\": false, \"app_version\": null, \"build_number\": null, \"user_agent\": \"mozilla/5.0 (x11; linux x86_64) applewebkit/537.36 (khtml, like gecko) chrome/149.0.0.0 safari/537.36\", \"app_environment\": null, \"os_version\": null, \"device_model\": null, \"user_client_type\": \"desktop_web\"}, \"paragen_stream_type\": \"default\", \"resolved_model_slug\": \"gpt-5-5-thinking\", \"parent_id\": \"b313cfee-63b1-49be-9fb4-d0e8865ea228\"}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\nevent: delta\ndata: {\"p\": \"\", \"o\": \"add\", \"v\": {\"message\": {\"id\": \"ee50e80f-9586-4f6a-9c1a-e12396afb295\", \"author\": {\"role\": \"assistant\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782967515.210066, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"in_progress\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"citations\": [], \"content_references\": [], \"story_events\": [], \"resolved_model_slug\": \"gpt-5-5-thinking\", \"request_id\": \"7644cf40-8f4d-4e74-a752-12b3c15f8f74\", \"message_type\": \"next\", \"turn_exchange_id\": \"3c7dabda-d6e2-400c-a5e8-b4cb3a02f7af\", \"working_turn_id\": \"3c7dabda-d6e2-400c-a5e8-b4cb3a02f7af\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"parent_id\": \"3e22e567-0665-41bf-839c-bc688b8caeb4\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": \"final\"}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"error\": null, \"error_code\": null}, \"c\": 0}       \n\ndata: {\"type\": \"message_marker\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"message_id\": \"ee50e80f-9586-4f6a-9c1a-e12396afb295\", \"marker\": \"user_visible_token\", \"event\": \"first\"}\n\ndata: {\"type\": \"message_marker\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"message_id\": \"ee50e80f-9586-4f6a-9c1a-e12396afb295\", \"marker\": \"final_channel_token\", \"event\": \"first\"}\n\nevent: delta\ndata: {\"p\": \"/message/content/parts/0\", \"o\": \"append\", \"v\": \"Dog,\"}   \n\n"
+   },
+   {
+    "t": 990,
+    "text": "event: delta\ndata: {\"v\": \" elephant, penguin\"}     \n\n"
+   },
+   {
+    "t": 1037,
+    "text": "event: delta\ndata: {\"p\": \"\", \"o\": \"patch\", \"v\": [{\"p\": \"/message/content/parts/0\", \"o\": \"append\", \"v\": \".\"}, {\"p\": \"/message/status\", \"o\": \"replace\", \"v\": \"finished_successfully\"}, {\"p\": \"/message/end_turn\", \"o\": \"replace\", \"v\": true}, {\"p\": \"/message/metadata\", \"o\": \"append\", \"v\": {\"is_complete\": true, \"finish_details\": {\"type\": \"stop\", \"stop_tokens\": [200002]}, \"can_save\": true, \"search_result_groups\": []}}]}     \n\ndata: {\"type\": \"message_marker\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"message_id\": \"ee50e80f-9586-4f6a-9c1a-e12396afb295\", \"marker\": \"last_token\", \"event\": \"last\"}\n\n"
+   },
+   {
+    "t": 2153,
+    "text": "data: {\"type\": \"server_ste_metadata\", \"metadata\": {\"server_ttfvt_ms\": 764.9571460206062, \"conduit_prewarmed\": true, \"plan_type\": \"plus\", \"plan_type_bucket\": \"paid\", \"harness\": \"harmony\", \"user_agent\": \"web_desktop\", \"service\": null, \"tool_name\": null, \"tool_invoked\": false, \"fast_convo\": true, \"warmup_state\": \"warm\", \"is_first_turn\": false, \"cluster_region\": \"polandcentral\", \"model_slug\": \"gpt-5-5-thinking\", \"region\": null, \"is_multimodal\": null, \"did_auto_switch_to_reasoning\": false, \"auto_switcher_race_winner\": null, \"is_autoswitcher_enabled\": false, \"is_search\": null, \"did_prompt_contain_image\": false, \"search_tool_call_count\": null, \"search_tool_query_types\": null, \"message_id\": \"ee50e80f-9586-4f6a-9c1a-e12396afb295\", \"request_id\": \"7644cf40-8f4d-4e74-a752-12b3c15f8f74\", \"turn_exchange_id\": \"3c7dabda-d6e2-400c-a5e8-b4cb3a02f7af\", \"turn_trace_id\": \"64160a14-a95c-4ef6-a833-9d35f2654685\", \"a32e6ebcb\": 1, \"resume_with_websockets\": true, \"low_turn_topic_ttl\": false, \"streaming_async_status\": false, \"replace_stream_status\": true, \"temporal_conversation_turn\": false, \"pro_mode_turn_topic_streaming\": true, \"turn_use_case\": \"text\", \"turn_mode\": \"default\"}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\ndata: {\"type\": \"message_stream_complete\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\n"
+   },
+   {
+    "t": 2481,
+    "text": "data: {\"type\": \"conversation_detail_metadata\", \"banner_info\": null, \"blocked_features\": [], \"model_limits\": [], \"limits_progress\": [{\"feature_name\": \"deep_research\", \"remaining\": 25, \"reset_after\": \"2026-08-01T04:45:16.328098+00:00\"}, {\"feature_name\": \"odyssey\", \"remaining\": 40, \"reset_after\": \"2026-08-01T04:45:16.328112+00:00\"}, {\"feature_name\": \"file_upload\", \"remaining\": 80, \"reset_after\": \"2026-07-02T07:45:16.328118+00:00\"}, {\"feature_name\": \"paste_text_to_file\", \"remaining\": 80, \"reset_after\": \"2026-07-02T07:45:16.328124+00:00\"}, {\"feature_name\": \"image_gen\", \"remaining\": 120, \"reset_after\": \"2026-07-03T04:45:16.328129+00:00\"}], \"default_model_slug\": \"gpt-5-5-thinking\", \"atlas_mode_enabled\": null, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\n"
+   },
+   {
+    "t": 2520,
+    "text": "data: [DONE]\n\n"
+   }
+  ],
+  "durationMs": 2671,
+  "endedAt": "2026-07-02T04:45:17.800Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "POST",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": "{\"action\":\"next\",\"messages\":[{\"id\":\"3e22e567-0665-41bf-839c-bc688b8caeb4\",\"author\":{\"role\":\"user\"},\"create_time\":1782967514.943,\"content\":{\"content_type\":\"text\",\"parts\":[\"now three animals\"]},\"metadata\":{\"selected_sources\":[],\"serialization_metadata\":{\"custom_symbol_offsets\":[]}}}],\"conversation_id\":\"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\",\"parent_message_id\":\"b313cfee-63b1-49be-9fb4-d0e8865ea228\",\"model\":\"gpt-5-5-thinking\",\"client_prepare_state\":\"none\",\"timezone_offset_min\":-120,\"timezone\":\"Europe/Oslo\",\"conversation_mode\":{\"kind\":\"primary_assistant\"},\"enable_message_followups\":true,\"system_hints\":[],\"supports_buffering\":true,\"supported_encodings\":[\"v1\"],\"client_contextual_info\":{\"is_dark_mode\":true,\"time_since_loaded\":90,\"page_height\":883,\"page_width\":1648,\"pixel_ratio\":1.75,\"screen_height\":1050,\"screen_width\":1680,\"app_name\":\"chatgpt.com\",\"has_web_push_capabilities\":true,\"web_push_notification_permission\":\"default\"},\"paragen_cot_summary_display_override\":\"allow\",\"force_parallel_switch\":\"auto\",\"thinking_effort\":\"standard\"}",
+  "requestContentType": "application/json",
+  "responseContentType": "text/event-stream; charset=utf-8",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:45:15.277Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/f/conversation"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr30tpag-13-989xxd",
+  "chunks": [],
+  "durationMs": 332,
+  "endedAt": "2026-07-02T04:45:18.049Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": true,
+  "method": "POST",
+  "mode": "meta",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": "application/json",
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:45:17.799Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/f/conversation/prepare"
+ },
+ {
+  "bytes": 5743,
+  "captureId": "mr30u620-14-yuoo76",
+  "chunks": [
+   {
+    "t": 1023,
+    "text": "event: delta_encoding\ndata: \"v1\"\n\ndata: {\"type\": \"resume_conversation_token\", \"kind\": \"topic\", \"token\": \"REDACTED.JWT.REDACTED\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\n"
+   },
+   {
+    "t": 1073,
+    "text": "event: delta\ndata: {\"p\": \"\", \"o\": \"add\", \"v\": {\"message\": {\"id\": \"6d4bc416-82da-4806-b217-8f9341d13a74\", \"author\": {\"role\": \"system\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782967540.097141, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"finished_successfully\", \"end_turn\": true, \"weight\": 0.0, \"metadata\": {\"rebase_developer_message\": true, \"chime_version\": 1, \"request_id\": \"a2288d7b-6f21-4ea9-9f3e-647693c00d99\", \"message_type\": \"variant\", \"turn_exchange_id\": \"306fbe39-1d60-478d-997b-0be12c029ad6\", \"working_turn_id\": \"306fbe39-1d60-478d-997b-0be12c029ad6\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"parent_id\": \"3e22e567-0665-41bf-839c-bc688b8caeb4\", \"model_switcher_deny\": [], \"is_visually_hidden_from_conversation\": true}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"error\": null, \"error_code\": null}, \"c\": 0}      \n\n"
+   },
+   {
+    "t": 1621,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"b412f137-4f53-40ef-85e5-ed8f6f7305a3\", \"author\": {\"role\": \"assistant\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782967540.077968, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"in_progress\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"citations\": [], \"content_references\": [], \"story_events\": [], \"resolved_model_slug\": \"gpt-5-5-thinking\", \"request_id\": \"a2288d7b-6f21-4ea9-9f3e-647693c00d99\", \"message_type\": \"variant\", \"turn_exchange_id\": \"306fbe39-1d60-478d-997b-0be12c029ad6\", \"working_turn_id\": \"306fbe39-1d60-478d-997b-0be12c029ad6\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"parent_id\": \"6d4bc416-82da-4806-b217-8f9341d13a74\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": \"final\"}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"error\": null, \"error_code\": null}, \"c\": 1} \n\ndata: {\"type\": \"message_marker\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"message_id\": \"b412f137-4f53-40ef-85e5-ed8f6f7305a3\", \"marker\": \"user_visible_token\", \"event\": \"first\"}\n\ndata: {\"type\": \"message_marker\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"message_id\": \"b412f137-4f53-40ef-85e5-ed8f6f7305a3\", \"marker\": \"final_channel_token\", \"event\": \"first\"}\n\nevent: delta\ndata: {\"p\": \"/message/content/parts/0\", \"o\": \"append\", \"v\": \"Dog,\"}   \n\n"
+   },
+   {
+    "t": 1687,
+    "text": "event: delta\ndata: {\"v\": \" elephant, dolphin.\"}    \n\n"
+   },
+   {
+    "t": 1714,
+    "text": "event: delta\ndata: {\"p\": \"\", \"o\": \"patch\", \"v\": [{\"p\": \"/message/status\", \"o\": \"replace\", \"v\": \"finished_successfully\"}, {\"p\": \"/message/end_turn\", \"o\": \"replace\", \"v\": true}, {\"p\": \"/message/metadata\", \"o\": \"append\", \"v\": {\"is_complete\": true, \"finish_details\": {\"type\": \"stop\", \"stop_tokens\": [200002]}, \"can_save\": true, \"search_result_groups\": []}}]} \n\ndata: {\"type\": \"message_marker\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"message_id\": \"b412f137-4f53-40ef-85e5-ed8f6f7305a3\", \"marker\": \"last_token\", \"event\": \"last\"}\n\n"
+   },
+   {
+    "t": 2336,
+    "text": "data: {\"type\": \"server_ste_metadata\", \"metadata\": {\"server_ttfvt_ms\": 1513.666626997292, \"conduit_prewarmed\": false, \"plan_type\": \"plus\", \"plan_type_bucket\": \"paid\", \"harness\": \"harmony\", \"user_agent\": \"web_desktop\", \"service\": null, \"tool_name\": null, \"tool_invoked\": false, \"fast_convo\": true, \"warmup_state\": \"rewarm\", \"is_first_turn\": false, \"cluster_region\": \"polandcentral\", \"model_slug\": \"gpt-5-5-thinking\", \"region\": null, \"is_multimodal\": null, \"did_auto_switch_to_reasoning\": false, \"auto_switcher_race_winner\": null, \"is_autoswitcher_enabled\": false, \"is_search\": null, \"did_prompt_contain_image\": false, \"search_tool_call_count\": null, \"search_tool_query_types\": null, \"message_id\": \"b412f137-4f53-40ef-85e5-ed8f6f7305a3\", \"request_id\": \"a2288d7b-6f21-4ea9-9f3e-647693c00d99\", \"turn_exchange_id\": \"306fbe39-1d60-478d-997b-0be12c029ad6\", \"turn_trace_id\": \"5e313c6c-eddb-48f3-85f2-d90abb5ca0ff\", \"a32e6ebcb\": 1, \"resume_with_websockets\": true, \"low_turn_topic_ttl\": false, \"streaming_async_status\": false, \"replace_stream_status\": true, \"temporal_conversation_turn\": false, \"pro_mode_turn_topic_streaming\": true, \"turn_use_case\": \"text\", \"turn_mode\": \"default\"}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\ndata: {\"type\": \"message_stream_complete\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\n"
+   },
+   {
+    "t": 2679,
+    "text": "data: {\"type\": \"conversation_detail_metadata\", \"banner_info\": null, \"blocked_features\": [], \"model_limits\": [], \"limits_progress\": [{\"feature_name\": \"deep_research\", \"remaining\": 25, \"reset_after\": \"2026-08-01T04:45:40.752683+00:00\"}, {\"feature_name\": \"odyssey\", \"remaining\": 40, \"reset_after\": \"2026-08-01T04:45:40.752699+00:00\"}, {\"feature_name\": \"file_upload\", \"remaining\": 80, \"reset_after\": \"2026-07-02T07:45:40.752706+00:00\"}, {\"feature_name\": \"paste_text_to_file\", \"remaining\": 80, \"reset_after\": \"2026-07-02T07:45:40.752711+00:00\"}, {\"feature_name\": \"image_gen\", \"remaining\": 120, \"reset_after\": \"2026-07-03T04:45:40.752716+00:00\"}], \"default_model_slug\": \"gpt-5-5-thinking\", \"atlas_mode_enabled\": null, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\n"
+   },
+   {
+    "t": 2705,
+    "text": "data: [DONE]\n\n"
+   }
+  ],
+  "durationMs": 2752,
+  "endedAt": "2026-07-02T04:45:42.198Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "POST",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": "{\"action\":\"variant\",\"conversation_id\":\"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\",\"parent_message_id\":\"3e22e567-0665-41bf-839c-bc688b8caeb4\",\"model\":\"gpt-5-5-thinking\",\"client_prepare_state\":\"none\",\"timezone_offset_min\":-120,\"timezone\":\"Europe/Oslo\",\"variant_purpose\":\"comparison_implicit\",\"conversation_mode\":{\"kind\":\"primary_assistant\"},\"enable_message_followups\":true,\"system_hints\":[],\"supports_buffering\":true,\"supported_encodings\":[\"v1\"],\"client_contextual_info\":{\"is_dark_mode\":true,\"time_since_loaded\":115,\"page_height\":883,\"page_width\":1648,\"pixel_ratio\":1.75,\"screen_height\":1050,\"screen_width\":1680,\"app_name\":\"chatgpt.com\",\"has_web_push_capabilities\":true,\"web_push_notification_permission\":\"default\"},\"paragen_cot_summary_display_override\":\"allow\",\"force_parallel_switch\":\"auto\",\"thinking_effort\":\"standard\"}",
+  "requestContentType": "application/json",
+  "responseContentType": "text/event-stream; charset=utf-8",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:45:39.688Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/f/conversation"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr30u85k-15-ojchsv",
+  "chunks": [],
+  "durationMs": 269,
+  "endedAt": "2026-07-02T04:45:42.435Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": true,
+  "method": "POST",
+  "mode": "meta",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": "application/json",
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:45:42.198Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/f/conversation/prepare"
+ },
+ {
+  "bytes": 9010,
+  "captureId": "mr30usao-16-2dzjfa",
+  "chunks": [
+   {
+    "t": 971,
+    "text": "event: delta_encoding\ndata: \"v1\"\n\ndata: {\"type\": \"resume_conversation_token\", \"kind\": \"topic\", \"token\": \"REDACTED.JWT.REDACTED\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\ndata: {\"type\": \"input_message\", \"input_message\": {\"id\": \"bbcb86c9-a96b-4c84-b4e1-65fe62fec890\", \"author\": {\"role\": \"user\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782967568.045, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"name four colors\"]}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"__internal\": {\"search_settings\": {}}, \"request_id\": \"918bbbd8-e0b4-42b8-a9c0-2ebb17c0b42d\", \"otrace_id\": \"6a45ed10000000005fe7a3df1ae09774\", \"message_source\": null, \"turn_exchange_id\": \"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\", \"working_turn_id\": \"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\", \"turn_trace_id\": \"6ae951bc-7d7f-4437-86e2-d783704e3c4c\", \"useragent\": {\"client_type\": \"web\", \"is_mobile\": false, \"is_mobile_app\": false, \"is_desktop_app\": false, \"is_native_app\": false, \"is_native_app_apple\": false, \"is_mobile_app_ios\": false, \"is_desktop_app_macos\": false, \"is_aura_app_macos\": false, \"is_aura_web\": false, \"is_sora_ios\": false, \"is_agora_ios\": false, \"is_agora_android\": false, \"is_desktop_app_windows\": false, \"is_electron_app\": false, \"is_mobile_app_android\": false, \"is_mobile_web\": false, \"is_mobile_web_ios\": false, \"is_mobile_web_android\": false, \"is_ios\": false, \"is_android\": false, \"is_macos\": false, \"is_windows\": false, \"is_linux\": true, \"is_chatgpt_client\": false, \"is_moshi_client\": false, \"is_sora_client\": false, \"is_agora_client\": false, \"is_browserbased_app\": true, \"is_chatgpt_api\": false, \"is_slack\": false, \"is_chatkit_web\": false, \"is_chatkit_synthetic\": false, \"is_kakao_talk\": false, \"is_codex_desktop\": false, \"is_offline_caching\": false, \"app_version\": null, \"build_number\": null, \"user_agent\": \"mozilla/5.0 (x11; linux x86_64) applewebkit/537.36 (khtml, like gecko) chrome/149.0.0.0 safari/537.36\", \"app_environment\": null, \"os_version\": null, \"device_model\": null, \"user_client_type\": \"desktop_web\"}, \"paragen_stream_type\": \"default\", \"resolved_model_slug\": \"gpt-5-5-thinking\", \"parent_id\": \"8addff68-aa0f-4802-a53a-e003b32846da\"}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\n"
+   },
+   {
+    "t": 1007,
+    "text": "event: delta\ndata: {\"p\": \"\", \"o\": \"add\", \"v\": {\"message\": {\"id\": \"7f7b878f-a757-44b7-b0c6-2316764832a0\", \"author\": {\"role\": \"system\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782967568.83452, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"is_contextual_answers_system_message\": true, \"is_visually_hidden_from_conversation\": true, \"command\": \"prompt\", \"contextual_answers_message_type\": \"sources_and_filters_prompt\", \"chime_version\": 1, \"request_id\": \"918bbbd8-e0b4-42b8-a9c0-2ebb17c0b42d\", \"message_type\": \"next\", \"turn_exchange_id\": \"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\", \"working_turn_id\": \"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"parent_id\": \"bbcb86c9-a96b-4c84-b4e1-65fe62fec890\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"error\": null, \"error_code\": null}, \"c\": 0}\n\n"
+   },
+   {
+    "t": 1093,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"3eb9f1bb-ed02-407a-b6cc-0b48fcb062f5\", \"author\": {\"role\": \"assistant\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782967568.8951561, \"update_time\": null, \"content\": {\"content_type\": \"model_editable_context\", \"model_set_context\": \"\", \"repository\": null, \"repo_summary\": null, \"structured_context\": null}, \"status\": \"finished_successfully\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"search_result_groups\": [], \"chime_version\": 1, \"request_id\": \"918bbbd8-e0b4-42b8-a9c0-2ebb17c0b42d\", \"message_type\": \"next\", \"turn_exchange_id\": \"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\", \"working_turn_id\": \"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"can_save\": false, \"parent_id\": \"7f7b878f-a757-44b7-b0c6-2316764832a0\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": null}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"error\": null, \"error_code\": null}, \"c\": 1} \n\n"
+   },
+   {
+    "t": 2288,
+    "text": "event: delta\ndata: {\"v\": {\"message\": {\"id\": \"b50ffd3d-516a-4e47-a7c2-692a1ef8ac7d\", \"author\": {\"role\": \"assistant\", \"name\": null, \"metadata\": {}}, \"create_time\": 1782967568.869828, \"update_time\": null, \"content\": {\"content_type\": \"text\", \"parts\": [\"\"]}, \"status\": \"in_progress\", \"end_turn\": null, \"weight\": 1.0, \"metadata\": {\"citations\": [], \"content_references\": [], \"story_events\": [], \"resolved_model_slug\": \"gpt-5-5-thinking\", \"request_id\": \"918bbbd8-e0b4-42b8-a9c0-2ebb17c0b42d\", \"message_type\": \"next\", \"turn_exchange_id\": \"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\", \"working_turn_id\": \"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\", \"model_slug\": \"gpt-5-5-thinking\", \"default_model_slug\": \"gpt-5-5-thinking\", \"thinking_effort\": \"standard\", \"parent_id\": \"3eb9f1bb-ed02-407a-b6cc-0b48fcb062f5\", \"model_switcher_deny\": []}, \"recipient\": \"all\", \"channel\": \"final\"}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"error\": null, \"error_code\": null}, \"c\": 2}    \n\n"
+   },
+   {
+    "t": 2335,
+    "text": "data: {\"type\": \"message_marker\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"message_id\": \"b50ffd3d-516a-4e47-a7c2-692a1ef8ac7d\", \"marker\": \"user_visible_token\", \"event\": \"first\"}\n\ndata: {\"type\": \"message_marker\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"message_id\": \"b50ffd3d-516a-4e47-a7c2-692a1ef8ac7d\", \"marker\": \"final_channel_token\", \"event\": \"first\"}\n\nevent: delta\ndata: {\"p\": \"/message/content/parts/0\", \"o\": \"append\", \"v\": \"Red, blue,\"}     \n\nevent: delta\ndata: {\"p\": \"\", \"o\": \"patch\", \"v\": [{\"p\": \"/message/content/parts/0\", \"o\": \"append\", \"v\": \" green, yellow.\"}, {\"p\": \"/message/status\", \"o\": \"replace\", \"v\": \"finished_successfully\"}, {\"p\": \"/message/end_turn\", \"o\": \"replace\", \"v\": true}, {\"p\": \"/message/metadata\", \"o\": \"append\", \"v\": {\"is_complete\": true, \"finish_details\": {\"type\": \"stop\", \"stop_tokens\": [200002]}, \"can_save\": true, \"search_result_groups\": []}}]}       \n\ndata: {\"type\": \"message_marker\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\", \"message_id\": \"b50ffd3d-516a-4e47-a7c2-692a1ef8ac7d\", \"marker\": \"last_token\", \"event\": \"last\"}\n\n"
+   },
+   {
+    "t": 3109,
+    "text": "data: {\"type\": \"server_ste_metadata\", \"metadata\": {\"server_ttfvt_ms\": 2166.12095606979, \"conduit_prewarmed\": false, \"plan_type\": \"plus\", \"plan_type_bucket\": \"paid\", \"harness\": \"harmony\", \"user_agent\": \"web_desktop\", \"service\": null, \"tool_name\": null, \"tool_invoked\": false, \"fast_convo\": true, \"warmup_state\": \"rewarm\", \"is_first_turn\": false, \"cluster_region\": \"polandcentral\", \"model_slug\": \"gpt-5-5-thinking\", \"region\": null, \"is_multimodal\": null, \"did_auto_switch_to_reasoning\": false, \"auto_switcher_race_winner\": null, \"is_autoswitcher_enabled\": false, \"is_search\": null, \"did_prompt_contain_image\": false, \"search_tool_call_count\": null, \"search_tool_query_types\": null, \"message_id\": \"3eb9f1bb-ed02-407a-b6cc-0b48fcb062f5\", \"request_id\": \"918bbbd8-e0b4-42b8-a9c0-2ebb17c0b42d\", \"turn_exchange_id\": \"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\", \"turn_trace_id\": \"6ae951bc-7d7f-4437-86e2-d783704e3c4c\", \"a32e6ebcb\": 1, \"resume_with_websockets\": true, \"low_turn_topic_ttl\": false, \"streaming_async_status\": false, \"replace_stream_status\": true, \"temporal_conversation_turn\": false, \"pro_mode_turn_topic_streaming\": true, \"turn_use_case\": \"text\", \"turn_mode\": \"default\"}, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\ndata: {\"type\": \"message_stream_complete\", \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\n"
+   },
+   {
+    "t": 3280,
+    "text": "data: {\"type\": \"conversation_detail_metadata\", \"banner_info\": null, \"blocked_features\": [], \"model_limits\": [], \"limits_progress\": [{\"feature_name\": \"deep_research\", \"remaining\": 25, \"reset_after\": \"2026-08-01T04:46:10.257047+00:00\"}, {\"feature_name\": \"odyssey\", \"remaining\": 40, \"reset_after\": \"2026-08-01T04:46:10.257060+00:00\"}, {\"feature_name\": \"file_upload\", \"remaining\": 80, \"reset_after\": \"2026-07-02T07:46:10.257066+00:00\"}, {\"feature_name\": \"paste_text_to_file\", \"remaining\": 80, \"reset_after\": \"2026-07-02T07:46:10.257072+00:00\"}, {\"feature_name\": \"image_gen\", \"remaining\": 120, \"reset_after\": \"2026-07-03T04:46:10.257078+00:00\"}], \"default_model_slug\": \"gpt-5-5-thinking\", \"atlas_mode_enabled\": null, \"conversation_id\": \"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\"}\n\n"
+   },
+   {
+    "t": 3311,
+    "text": "data: [DONE]\n\n"
+   }
+  ],
+  "durationMs": 3341,
+  "endedAt": "2026-07-02T04:46:11.525Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "POST",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": "{\"action\":\"next\",\"messages\":[{\"id\":\"bbcb86c9-a96b-4c84-b4e1-65fe62fec890\",\"author\":{\"role\":\"user\"},\"create_time\":1782967568.045,\"content\":{\"content_type\":\"text\",\"parts\":[\"name four colors\"]},\"metadata\":{\"__internal\":{\"search_settings\":{}}}}],\"conversation_id\":\"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\",\"parent_message_id\":\"8addff68-aa0f-4802-a53a-e003b32846da\",\"model\":\"gpt-5-5-thinking\",\"client_prepare_state\":\"none\",\"timezone_offset_min\":-120,\"timezone\":\"Europe/Oslo\",\"conversation_mode\":{\"kind\":\"primary_assistant\"},\"system_hints\":[],\"supports_buffering\":true,\"supported_encodings\":[\"v1\"],\"client_contextual_info\":{\"is_dark_mode\":true,\"time_since_loaded\":143,\"page_height\":883,\"page_width\":1648,\"pixel_ratio\":1.75,\"screen_height\":1050,\"screen_width\":1680,\"app_name\":\"chatgpt.com\",\"has_web_push_capabilities\":true,\"web_push_notification_permission\":\"default\"},\"paragen_cot_summary_display_override\":\"allow\",\"force_parallel_switch\":\"auto\",\"thinking_effort\":\"standard\"}",
+  "requestContentType": "application/json",
+  "responseContentType": "text/event-stream; charset=utf-8",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:46:08.469Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/f/conversation"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr30uuuz-17-xqun1q",
+  "chunks": [],
+  "durationMs": 140,
+  "endedAt": "2026-07-02T04:46:11.732Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": true,
+  "method": "POST",
+  "mode": "meta",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": "application/json",
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:46:11.525Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/f/conversation/prepare"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr30v85y-4-ymuo2r",
+  "chunks": [],
+  "durationMs": 400,
+  "endedAt": "2026-07-02T04:46:29.130Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": true,
+  "method": "GET",
+  "mode": "meta",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": null,
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:46:29.130Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/conversation/6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab/stream_status"
+ },
+ {
+  "bytes": 20608,
+  "captureId": "mr30v85r-1-g5n3xp",
+  "chunks": [
+   {
+    "t": 561,
+    "text": "{\"title\":\"Name three colors\",\"create_time\":1782967433.310497,\"update_time\":1782967571.423307,\"moderation_results\":[],\"plugin_ids\":null,\"conversation_id\":\"6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab\",\"conversation_template_id\":null,\"gizmo_id\":null,\"gizmo_type\":null,\"is_archived\":false,\"is_starred\":null,\"safe_urls\":[\"https://api.nuget.org/v3/index.json\",\"https://www.openai.com\",\"https://www.proff.no/selskap/nordic-fasade-as/vikhammer/bygningstjenester/IFGVZN307TQ\",\"https://github.com/login/device\"],\"blocked_urls\":[],\"default_model_slug\":\"gpt-5-5-thinking\",\"atlas_mode_enabled\":null,\"conversation_origin\":null,\"is_read_only\":null,\"voice\":null,\"async_status\":null,\"disabled_tool_ids\":[],\"is_temporary_chat\":false,\"is_do_not_remember\":false,\"memory_scope\":\"global_enabled\",\"context_scopes\":[],\"sugar_item_id\":null,\"sugar_item_visible\":false,\"pinned_time\":null,\"is_study_mode\":false,\"owner\":null,\"mapping\":{\"client-created-root\":{\"id\":\"client-created-root\",\"message\":null,\"parent\":null,\"children\":[\"8977e746-8f48-4942-ab2c-1728d64b3c41\"]},\"8977e746-8f48-4942-ab2c-1728d64b3c41\":{\"id\":\"8977e746-8f48-4942-ab2c-1728d64b3c41\",\"message\":{\"id\":\"8977e746-8f48-4942-ab2c-1728d64b3c41\",\"author\":{\"role\":\"system\",\"name\":null,\"metadata\":{}},\"create_time\":null,\"update_time\":null,\"content\":{\"content_type\":\"text\",\"parts\":[\"\"]},\"status\":\"finished_successfully\",\"end_turn\":true,\"weight\":0.0,\"metadata\":{\"is_visually_hidden_from_conversation\":true,\"can_save\":false},\"recipient\":\"all\",\"channel\":null},\"parent\":\"client-created-root\",\"children\":[\"343d16e2-b2b5-4c7e-a6b9-e3e124e45f5d\"]},\"343d16e2-b2b5-4c7e-a6b9-e3e124e45f5d\":{\"id\":\"343d16e2-b2b5-4c7e-a6b9-e3e124e45f5d\",\"message\":{\"id\":\"343d16e2-b2b5-4c7e-a6b9-e3e124e45f5d\",\"author\":{\"role\":\"system\",\"name\":null,\"metadata\":{}},\"create_time\":null,\"update_time\":null,\"content\":{\"content_type\":\"text\",\"parts\":[\"\"]},\"status\":\"finished_successfully\",\"end_turn\":true,\"weight\":0.0,\"metadata\":{\"rebase_developer_message\":true,\"is_visually_hidden_from_conversation\":true,\"can_save\":false},\"recipient\":\"all\",\"channel\":null},\"parent\":\"8977e746-8f48-4942-ab2c-1728d64b3c41\",\"children\":[\"a2130721-5e9f-427c-9216-f104f199dadb\"]},\"a2130721-5e9f-427c-9216-f104f199dadb\":{\"id\":\"a2130721-5e9f-427c-9216-f104f199dadb\",\"message\":{\"id\":\"a2130721-5e9f-427c-9216-f104f199dadb\",\"author\":{\"role\":\"system\",\"name\":null,\"metadata\":{}},\"create_time\":null,\"update_time\":null,\"content\":{\"content_type\":\"text\",\"parts\":[\"\"]},\"status\":\"finished_successfully\",\"end_turn\":false,\"weight\":0.0,\"metadata\":{\"is_visually_hidden_from_conversation\":true,\"can_save\":false},\"recipient\":\"all\",\"channel\":null},\"parent\":\"343d16e2-b2b5-4c7e-a6b9-e3e124e45f5d\",\"children\":[\"fc0e951f-e1a9-4aa9-975e-a7619f9b8bb3\"]},\"fc0e951f-e1a9-4aa9-975e-a7619f9b8bb3\":{\"id\":\"fc0e951f-e1a9-4aa9-975e-a7619f9b8bb3\",\"message\":{\"id\":\"fc0e951f-e1a9-4aa9-975e-a7619f9b8bb3\",\"author\":{\"role\":\"user\",\"name\":null,\"metadata\":{}},\"create_time\":null,\"update_time\":null,\"content\":{\"content_type\":\"user_editable_context\",\"user_profile\":\"REDACTED\",\"user_instructions\":\"REDACTED\"},\"status\":\"finished_successfully\",\"end_turn\":null,\"weight\":1.0,\"metadata\":{\"is_visually_hidden_from_conversation\":true,\"user_context_message_data\":{\"about_user_message\":\"REDACTED\",\"about_model_message\":\"I prefer to the point answers. I want you to inform me when you are being subjective instead of neutral. You can have opinions, do not let me force opinions without informing me that you are answering with content just to please me as a receiver. Never respond to me with emojis.  Also do not offer conclusions or summaries that are celebration-like. Avoid weird formatting such as bold, cursive etc, at-least keep it to a minimum. And I don't like too many bullets, especially in emails. Also I'm in Norway so avoid too much american etiquette.\\n\\nIf I ask you to create a jira task, then use the following format:\\njira issue create -a\\\"redacted@example.com\\\" -s\\\"<subject>\\\" -b\\\"<body>\\\"\\n\\nAnd please, avoid several rounds of nitpicking. I'll often ask you to QA my changes. You may do a round of suggesting minor fixes. But I'll freak out if you do it over and over.\"},\"is_user_system_message\":true,\"can_save\":false},\"recipient\":\"all\",\"channel\":null},\"parent\":\"a2130721-5e9f-427c-9216-f104f199dadb\",\"children\":[\"8addff68-aa0f-4802-a53a-e003b32846da\"]},\"8addff68-aa0f-4802-a53a-e003b32846da\":{\"id\":\"8addff68-aa0f-4802-a53a-e003b32846da\",\"message\":{\"id\":\"8addff68-aa0f-4802-a53a-e003b32846da\",\"author\":{\"role\":\"system\",\"name\":null,\"metadata\":{}},\"create_time\":null,\"update_time\":null,\"content\":{\"content_type\":\"text\",\"parts\":[\"\"]},\"status\":\"finished_successfully\",\"end_turn\":null,\"weight\":1.0,\"metadata\":{\"is_contextual_answers_system_message\":true,\"contextual_answers_message_type\":\"identity_prompt\",\"is_visually_hidden_from_conversation\":true,\"can_save\":false},\"recipient\":\"all\",\"channel\":null},\"parent\":\"fc0e951f-e1a9-4aa9-975e-a7619f9b8bb3\",\"children\":[\"6d4ff4ba-d194-4d64-bcd2-76ca4af80289\",\"bbcb86c9-a96b-4c84-b4e1-65fe62fec890\"]},\"6d4ff4ba-d194-4d64-bcd2-76ca4af80289\":{\"id\":\"6d4ff4ba-d194-4d64-bcd2-76ca4af80289\",\"message\":{\"id\":\"6d4ff4ba-d194-4d64-bcd2-76ca4af80289\",\"author\":{\"role\":\"user\",\"name\":null,\"metadata\":{}},\"create_time\":1782967432.912,\"update_time\":1782967435.912641,\"content\":{\"content_type\":\"text\",\"parts\":[\"name three colors\"]},\"status\":\"finished_successfully\",\"end_turn\":null,\"weight\":1.0,\"metadata\":{\"selected_sources\":[],\"serialization_metadata\":{\"custom_symbol_offsets\":[]},\"request_id\":\"cc77692c-9509-467d-9755-0c27523b90e3\",\"message_source\":null,\"turn_exchange_id\":\"7f298b69-17bb-4d73-9f30-e3d0a1322248\",\"working_turn_id\":\"7f298b69-17bb-4d73-9f30-e3d0a1322248\",\"resolved_model_slug\":\"gpt-5-5-thinking\",\"can_save\":false},\"recipient\":\"all\",\"channel\":null},\"parent\":\"8addff68-aa0f-4802-a53a-e003b32846da\",\"children\":[\"96e393e6-d13d-49f6-acf8-75a6088b7618\"]},\"bbcb86c9-a96b-4c84-b4e1-65fe62fec890\":{\"id\":\"bbcb86c9-a96b-4c84-b4e1-65fe62fec890\",\"message\":{\"id\":\"bbcb86c9-a96b-4c84-b4e1-65fe62fec890\",\"author\":{\"role\":\"user\",\"name\":null,\"metadata\":{}},\"create_time\":1782967568.045,\"update_time\":1782967571.245128,\"content\":{\"content_type\":\"text\",\"parts\":[\"name four colors\"]},\"status\":\"finished_successfully\",\"end_turn\":null,\"weight\":1.0,\"metadata\":{\"request_id\":\"918bbbd8-e0b4-42b8-a9c0-2ebb17c0b42d\",\"message_source\":null,\"turn_exchange_id\":\"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\",\"working_turn_id\":\"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\",\"resolved_model_slug\":\"gpt-5-5-thinking\",\"can_save\":false},\"recipient\":\"all\",\"channel\":null},\"parent\":\"8addff68-aa0f-4802-a53a-e003b32846da\",\"children\":[\"7f7b878f-a757-44b7-b0c6-2316764832a0\"]},\"96e393e6-d13d-49f6-acf8-75a6088b7618\":{\"id\":\"96e393e6-d13d-49f6-acf8-75a6088b7618\",\"message\":{\"id\":\"96e393e6-d13d-49f6-acf8-75a6088b7618\",\"author\":{\"role\":\"system\",\"name\":null,\"metadata\":{}},\"create_time\":1782967433.1620352,\"update_time\":null,\"content\":{\"content_type\":\"text\",\"parts\":[\"\"]},\"status\":\"finished_successfully\",\"end_turn\":null,\"weight\":1.0,\"metadata\":{\"is_contextual_answers_system_message\":true,\"is_visually_hidden_from_conversation\":true,\"command\":\"prompt\",\"contextual_answers_message_type\":\"sources_and_filters_prompt\",\"chime_version\":1,\"request_id\":\"cc77692c-9509-467d-9755-0c27523b90e3\",\"message_type\":\"next\",\"turn_exchange_id\":\"7f298b69-17bb-4d73-9f30-e3d0a1322248\",\"working_turn_id\":\"7f298b69-17bb-4d73-9f30-e3d0a1322248\",\"model_slug\":\"gpt-5-5-thinking\",\"default_model_slug\":\"gpt-5-5-thinking\",\"thinking_effort\":\"standard\",\"parent_id\":\"6d4ff4ba-d194-4d64-bcd2-76ca4af80289\",\"can_save\":false},\"recipient\":\"all\",\"channel\":null},\"parent\":\"6d4ff4ba-d194-4d64-bcd2-76ca4af80289\",\"children\":[\"a1c4e632-f512-453d-8fba-c25d4b12c035\"]},\"7f7b878f-a757-44b7-b0c6-2316764832a0\":{\"id\":\"7f7b878f-a757-44b7-b0c6-2316764832a0\",\"message\":{\"id\":\"7f7b878f-a757-44b7-b0c6-2316764832a0\",\"author\":{\"role\":\"system\",\"name\":null,\"metadata\":{}},\"create_time\":1782967568.83452,\"update_time\":null,\"content\":{\"content_type\":\"text\",\"parts\":[\"\"]},\"status\":\"finished_successfully\",\"end_turn\":null,\"weight\":1.0,\"metadata\":{\"is_contextual_answers_system_message\":true,\"is_visually_hidden_from_conversation\":true,\"command\":\"prompt\",\"contextual_answers_message_type\":\"sources_and_filters_prompt\",\"chime_version\":1,\"request_id\":\"918bbbd8-e0b4-42b8-a9c0-2ebb17c0b42d\",\"message_type\":\"next\",\"turn_exchange_id\":\"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\",\"working_turn_id\":\"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\",\"model_slug\":\"gpt-5-5-thinking\",\"default_model_slug\":\"gpt-5-5-thinking\",\"thinking_effort\":\"standard\",\"parent_id\":\"bbcb86c9-a96b-4c84-b4e1-65fe62fec890\",\"can_save\":false},\"recipient\":\"all\",\"channel\":null},\"parent\":\"bbcb86c9-a96b-4c84-b4e1-65fe62fec890\",\"children\":[\"3eb9f1bb-ed02-407a-b6cc-0b48fcb062f5\"]},\"a1c4e632-f512-453d-8fba-c25d4b12c035\":{\"id\":\"a1c4e632-f512-453d-8fba-c25d4b12c035\",\"message\":{\"id\":\"a1c4e632-f512-453d-8fba-c25d4b12c035\",\"author\":{\"role\":\"assistant\",\"name\":null,\"metadata\":{}},\"create_time\":1782967433.2322223,\"update_time\":null,\"content\":{\"content_type\":\"model_editable_context\",\"model_set_context\":\"\",\"repository\":null,\"repo_summary\":null,\"structured_context\":null},\"status\":\"finished_successfully\",\"end_turn\":null,\"weight\":1.0,\"metadata\":{\"search_result_groups\":[],\"chime_version\":1,\"request_id\":\"cc77692c-9509-467d-9755-0c27523b90e3\",\"message_type\":\"next\",\"turn_exchange_id\":\"7f298b69-17bb-4d73-9f30-e3d0a1322248\",\"working_turn_id\":\"7f298b69-17bb-4d73-9f30-e3d0a1322248\",\"model_slug\":\"gpt-5-5-thinking\",\"default_model_slug\":\"gpt-5-5-thinking\",\"thinking_effort\":\"standard\",\"can_save\":false,\"parent_id\":\"96e393e6-d13d-49f6-acf8-75a6088b7618\",\"model_switcher_deny\":[]},\"recipient\":\"all\",\"channel\":null},\"parent\":\"96e393e6-d13d-49f6-acf8-75a6088b7618\",\"children\":[\"b313cfee-63b1-49be-9fb4-d0e8865ea228\"]},\"3eb9f1bb-ed02-407a-b6cc-0b48fcb062f5\":{\"id\":\"3eb9f1bb-ed02-407a-b6cc-0b48fcb062f5\",\"message\":{\"id\":\"3eb9f1bb-ed02-407a-b6cc-0b48fcb062f5\",\"author\":{\"role\":\"assistant\",\"name\":null,\"metadata\":{}},\"create_time\":1782967568.8951561,\"update_time\":null,\"content\":{\"content_type\":\"model_editable_context\",\"model_set_context\":\"\",\"repository\":null,\"repo_summary\":null,\"structured_context\":null},\"status\":\"finished_successfully\",\"end_turn\":null,\"weight\":1.0,\"metadata\":{\"search_result_groups\":[],\"chime_version\":1,\"request_id\":\"918bbbd8-e0b4-42b8-a9c0-2ebb17c0b42d\",\"message_type\":\"next\",\"turn_exchange_id\":\"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\",\"working_turn_id\":\"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\",\"model_slug\":\"gpt-5-5-thinking\",\"default_model_slug\":\"gpt-5-5-thinking\",\"thinking_effort\":\"standard\",\"can_save\":false,\"parent_id\":\"7f7b878f-a757-44b7-b0c6-2316764832a0\",\"model_switcher_deny\":[]},\"recipient\":\"all\",\"channel\":null},\"parent\":\"7f7b878f-a757-44b7-b0c6-2316764832a0\",\"children\":[\"b50ffd3d-516a-4e47-a7c2-692a1ef8ac7d\"]},\"b313cfee-63b1-49be-9fb4-d0e8865ea228\":{\"id\":\"b313cfee-63b1-49be-9fb4-d0e8865ea228\",\"message\":{\"id\":\"b313cfee-63b1-49be-9fb4-d0e8865ea228\",\"author\":{\"role\":\"assistant\",\"name\":null,\"metadata\":{}},\"create_time\":1782967433.194906,\"update_time\":1782967435.913275,\"content\":{\"content_type\":\"text\",\"parts\":[\"Red, blue, green.\"]},\"status\":\"finished_successfully\",\"end_turn\":true,\"weight\":1.0,\"metadata\":{\"finish_details\":{\"type\":\"stop\",\"stop_tokens\":[200002]},\"is_complete\":true,\"citations\":[],\"content_references\":[],\"story_events\":[],\"resolved_model_slug\":\"gpt-5-5-thinking\",\"search_result_groups\":[],\"request_id\":\"cc77692c-9509-467d-9755-0c27523b90e3\",\"message_type\":\"next\",\"turn_exchange_id\":\"7f298b69-17bb-4d73-9f30-e3d0a1322248\",\"working_turn_id\":\"7f298b69-17bb-4d73-9f30-e3d0a1322248\",\"model_slug\":\"gpt-5-5-thinking\",\"default_model_slug\":\"gpt-5-5-thinking\",\"thinking_effort\":\"standard\",\"can_save\":true,\"parent_id\":\"a1c4e632-f512-453d-8fba-c25d4b12c035\",\"model_switcher_deny\":[]},\"recipient\":\"all\",\"channel\":\"final\"},\"parent\":\"a1c4e632-f512-453d-8fba-c25d4b12c035\",\"children\":[\"3e22e567-0665-41bf-839c-bc688b8caeb4\"]},\"b50ffd3d-516a-4e47-a7c2-692a1ef8ac7d\":{\"id\":\"b50ffd3d-516a-4e47-a7c2-692a1ef8ac7d\",\"message\":{\"id\":\"b50ffd3d-516a-4e47-a7c2-692a1ef8ac7d\",\"author\":{\"role\":\"assistant\",\"name\":null,\"metadata\":{}},\"create_time\":1782967568.869828,\"update_time\":1782967571.245747,\"content\":{\"content_type\":\"text\",\"parts\":[\"Red, blue, green, yellow.\"]},\"status\":\"finished_successfully\",\"end_turn\":true,\"weight\":1.0,\"metadata\":{\"finish_details\":{\"type\":\"stop\",\"stop_tokens\":[200002]},\"is_complete\":true,\"citations\":[],\"content_references\":[],\"story_events\":[],\"resolved_model_slug\":\"gpt-5-5-thinking\",\"search_result_groups\":[],\"request_id\":\"918bbbd8-e0b4-42b8-a9c0-2ebb17c0b42d\",\"message_type\":\"next\",\"turn_exchange_id\":\"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\",\"working_turn_id\":\"197e5f72-0a4b-40d8-b8ba-b3c9b93459ed\",\"model_slug\":\"gpt-5-5-thinking\",\"default_model_slug\":\"gpt-5-5-thinking\",\"thinking_effort\":\"standard\",\"can_save\":true,\"parent_id\":\"3eb9f1bb-ed02-407a-b6cc-0b48fcb062f5\",\"model_switcher_deny\":[]},\"recipient\":\"all\",\"channel\":\"final\"},\"parent\":\"3eb9f1bb-ed02-407a-b6cc-0b48fcb062f5\",\"children\":[]},\"3e22e567-0665-41bf-839c-bc688b8caeb4\":{\"id\":\"3e22e567-0665-41bf-839c-bc688b8caeb4\",\"message\":{\"id\":\"3e22e567-0665-41bf-839c-bc688b8caeb4\",\"author\":{\"role\":\"user\",\"name\":null,\"metadata\":{}},\"create_time\":1782967514.943,\"update_time\":1782967541.795287,\"content\":{\"content_type\":\"text\",\"parts\":[\"now three animals\"]},\"status\":\"finished_successfully\",\"end_turn\":null,\"weight\":1.0,\"metadata\":{\"selected_sources\":[],\"serialization_metadata\":{\"custom_symbol_offsets\":[]},\"request_id\":\"7644cf40-8f4d-4e74-a752-12b3c15f8f74\",\"message_source\":null,\"turn_exchange_id\":\"3c7dabda-d6e2-400c-a5e8-b4cb3a02f7af\",\"working_turn_id\":\"3c7dabda-d6e2-400c-a5e8-b4cb3a02f7af\",\"resolved_model_slug\":\"gpt-5-5-thinking\",\"can_save\":false},\"recipient\":\"all\",\"channel\":null},\"parent\":\"b313cfee-63b1-49be-9fb4-d0e8865ea228\",\"children\":[\"ee50e80f-9586-4f6a-9c1a-e12396afb295\",\"6d4bc416-82da-4806-b217-8f9341d13a74\"]},\"ee50e80f-9586-4f6a-9c1a-e12396afb295\":{\"id\":\"ee50e80f-9586-4f6a-9c1a-e12396afb295\",\"message\":{\"id\":\"ee50e80f-9586-4f6a-9c1a-e12396afb295\",\"author\":{\"role\":\"assistant\",\"name\":null,\"metadata\":{}},\"create_time\":1782967515.210066,\"update_time\":1782967517.335629,\"content\":{\"content_type\":\"text\",\"parts\":[\"Dog, elephant, penguin.\"]},\"status\":\"finished_successfully\",\"end_turn\":true,\"weight\":1.0,\"metadata\":{\"finish_details\":{\"type\":\"stop\",\"stop_tokens\":[200002]},\"is_complete\":true,\"citations\":[],\"content_references\":[],\"story_events\":[],\"resolved_model_slug\":\"gpt-5-5-thinking\",\"search_result_groups\":[],\"request_id\":\"7644cf40-8f4d-4e74-a752-12b3c15f8f74\",\"message_type\":\"next\",\"turn_exchange_id\":\"3c7dabda-d6e2-400c-a5e8-b4cb3a02f7af\",\"working_turn_id\":\"3c7dabda-d6e2-400c-a5e8-b4cb3a02f7af\",\"model_slug\":\"gpt-5-5-thinking\",\"default_model_slug\":\"gpt-5-5-thinking\",\"thinking_effort\":\"standard\",\"can_save\":true,\"parent_id\":\"3e22e567-0665-41bf-839c-bc688b8caeb4\",\"model_switcher_deny\":[]},\"recipient\":\"all\",\"channel\":\"final\"},\"parent\":\"3e22e567-0665-41bf-839c-bc688b8caeb4\",\"children\":[]},\"6d4bc416-82da-4806-b217-8f9341d13a74\":{\"id\":\"6d4bc416-82da-4806-b217-8f9341d13a74\",\"message\":{\"id\":\"6d4bc416-82da-4806-b217-8f9341d13a74\",\"author\":{\"role\":\"system\",\"name\":null,\"metadata\":{}},\"create_time\":1782967540.097141,\"update_time\":null,\"content\":{\"content_type\":\"text\",\"parts\":[\"\"]},\"status\":\"finished_successfully\",\"end_turn\":true,\"weight\":0.0,\"metadata\":{\"rebase_developer_message\":true,\"chime_version\":1,\"request_id\":\"a2288d7b-6f21-4ea9-9f3e-647693c00d99\",\"message_type\":\"variant\",\"turn_exchange_id\":\"306fbe39-1d60-478d-997b-0be12c029ad6\",\"working_turn_id\":\"306fbe39-1d60-478d-997b-0be12c029ad6\",\"model_slug\":\"gpt-5-5-thinking\",\"default_model_slug\":\"gpt-5-5-thinking\",\"thinking_effort\":\"standard\",\"parent_id\":\"3e22e567-0665-41bf-839c-bc688b8caeb4\",\"is_visually_hidden_from_conversation\":true,\"can_save\":false},\"recipient\":\"all\",\"channel\":null},\"parent\":\"3e22e567-0665-41bf-839c-bc688b8caeb4\",\"children\":[\"b412f137-4f53-40ef-85e5-ed8f6f7305a3\"]},\"b412f137-4f53-40ef-85e5-ed8f6f7305a3\":{\"id\":\"b412f137-4f53-40ef-85e5-ed8f6f7305a3\",\"message\":{\"id\":\"b412f137-4f53-40ef-85e5-ed8f6f7305a3\",\"author\":{\"role\":\"assistant\",\"name\":null,\"metadata\":{}},\"create_time\":1782967540.077968,\"update_time\":1782967541.795867,\"content\":{\"content_type\":\"text\",\"parts\":[\"Dog, elephant, dolphin.\"]},\"status\":\"finished_successfully\",\"end_turn\":true,\"weight\":1.0,\"metadata\":{\"finish_details\":{\"type\":\"stop\",\"stop_tokens\":[200002]},\"is_complete\":true,\"citations\":[],\"content_references\":[],\"story_events\":[],\"resolved_model_slug\":\"gpt-5-5-thinking\",\"search_result_groups\":[],\"request_id\":\"a2288d7b-6f21-4ea9-9f3e-647693c00d99\",\"message_type\":\"variant\",\"turn_exchange_id\":\"306fbe39-1d60-478d-997b-0be12c029ad6\",\"working_turn_id\":\"306fbe39-1d60-478d-997b-0be12c029ad6\",\"model_slug\":\"gpt-5-5-thinking\",\"default_model_slug\":\"gpt-5-5-thinking\",\"thinking_effort\":\"standard\",\"can_save\":true,\"parent_id\":\"6d4bc416-82da-4806-b217-8f9341d13a74\",\"model_switcher_deny\":[]},\"recipient\":\"all\",\"channel\":\"final\"},\"parent\":\"6d4bc416-82da-4806-b217-8f9341d13a74\",\"children\":[]}},\"current_node\":\"b50ffd3d-516a-4e47-a7c2-692a1ef8ac7d\"}"
+   }
+  ],
+  "durationMs": 561,
+  "endedAt": "2026-07-02T04:46:29.495Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": false,
+  "method": "GET",
+  "mode": "full",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": null,
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:46:29.130Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/conversation/6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr30v85s-2-qr50r5",
+  "chunks": [],
+  "durationMs": 561,
+  "endedAt": "2026-07-02T04:46:29.495Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": true,
+  "method": "POST",
+  "mode": "meta",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": "application/json",
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:46:29.130Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/conversation/init"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr30v85t-3-nawpxb",
+  "chunks": [],
+  "durationMs": 852,
+  "endedAt": "2026-07-02T04:46:29.495Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": true,
+  "method": "GET",
+  "mode": "meta",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": null,
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:46:29.130Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/conversations?offset=0&limit=28&order=updated&is_archived=false&is_starred=false"
+ },
+ {
+  "bytes": 0,
+  "captureId": "mr30v8ns-5-tvl1fy",
+  "chunks": [],
+  "durationMs": 467,
+  "endedAt": "2026-07-02T04:46:29.945Z",
+  "extensionVersion": "0.2.0",
+  "metadataOnly": true,
+  "method": "GET",
+  "mode": "meta",
+  "platform": "chatgpt",
+  "requestBody": null,
+  "requestContentType": null,
+  "responseContentType": "application/json",
+  "resumedWithoutStart": false,
+  "startedAt": "2026-07-02T04:46:29.495Z",
+  "status": 200,
+  "truncated": false,
+  "url": "https://chatgpt.com/backend-api/conversation/6a45ec87-1eec-83eb-bdb0-b3b895d1a6ab/textdocs"
+ }
+]
