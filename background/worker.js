@@ -1,4 +1,5 @@
-importScripts('../lib/turn-adapters.js', '../lib/evidence-envelope.js', '../lib/evidence-ledger.js');
+importScripts('../lib/turn-adapters.js', '../lib/evidence-envelope.js', '../lib/evidence-ledger.js',
+  '../lib/agent-evidence.js', '../lib/sigill-auth.js', '../lib/sigill-mcp.js', '../lib/conversation-recorder.js');
 
 const API_BASE = 'https://api.sigill.ai';
 const PROVIDER = SigillEvidence.PROVIDER;
@@ -7,20 +8,39 @@ const PROVIDER = SigillEvidence.PROVIDER;
 // distinguish — self-distributed zips are loaded unpacked, same as dev.)
 const IS_DEV = /-dev$/.test(chrome.runtime.getManifest().version_name ?? '');
 let logWriteQueue = Promise.resolve();
+const VERSION = chrome.runtime.getManifest().version;
 
-// The API key is a bearer credential — kept in storage.local (device-only),
-// never storage.sync. Older versions synced it; migrate on first read.
-async function getApiKey() {
-  const { apiKey } = await chrome.storage.local.get('apiKey');
-  if (apiKey) return apiKey;
-  const legacy = await chrome.storage.sync.get('apiKey');
-  if (legacy.apiKey) {
-    await chrome.storage.local.set({ apiKey: legacy.apiKey });
-    await chrome.storage.sync.remove('apiKey');
-    return legacy.apiKey;
-  }
-  return null;
-}
+// Sigill sign-in (OAuth + PKCE). The extension holds an MCP token for the recording
+// tools only; it never reads the sigill.ai session and holds no API key.
+const auth = SigillAuth.create({
+  storage: chrome.storage.local,
+  fetch: (...a) => fetch(...a),
+  launchWebAuthFlow: o => chrome.identity.launchWebAuthFlow(o),
+  redirectUrl: chrome.identity.getRedirectURL('callback'),
+  issuer: API_BASE,
+});
+const mcp = SigillMcp.create({ fetch: (...a) => fetch(...a), accessToken: () => auth.accessToken(), base: API_BASE, version: VERSION });
+const recorder = SigillConversationRecorder.create({
+  storage: chrome.storage.local,
+  mcp,
+  evidence: SigillAgentEvidence,
+  version: VERSION,
+  settings: async () => {
+    const s = await chrome.storage.sync.get(['claudeEnabled', 'chatgptEnabled', 'geminiEnabled']);
+    const { sealCertificateId } = await chrome.storage.local.get('sealCertificateId');
+    return {
+      sealCertificateId: sealCertificateId || null,
+      platformsEnabled: { claude: s.claudeEnabled !== false, chatgpt: s.chatgptEnabled !== false, gemini: s.geminiEnabled !== false },
+    };
+  },
+  log: line => pushDebug({ type: 'recorder', ts: new Date().toISOString(), line }),
+});
+
+// Credentials of earlier versions are removed, never used: the API key and the
+// identity scraped from a sigill.ai session (email + organisation).
+chrome.storage.local.remove('apiKey');
+chrome.storage.sync.remove(['apiKey', 'actorId', 'actorTenantId', 'actorTenantName', 'sigillConnected']);
+recorder.recover();
 
 const debugLog = [];
 const DEBUG_MAX = 300;
@@ -46,16 +66,21 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
     listSealCertificates().then(sendResponse).catch(err => sendResponse({ error: err.message }));
     return true;
   }
-  if (msg.type === 'SEAL_LOG') {
-    sealLog(msg).then(sendResponse).catch(err => sendResponse({ error: err.message }));
+  if (msg.type === 'SET_SEAL_CERTIFICATE') {
+    // Applies to runs that start from now on: one run, one signer.
+    chrome.storage.local.set({ sealCertificateId: msg.certificateId || '' }).then(() => sendResponse({ ok: true }));
     return true;
   }
-  if (msg.type === 'GET_API_KEY') {
-    getApiKey().then(apiKey => sendResponse({ apiKey }));
+  if (msg.type === 'CONNECT') {
+    auth.connect().then(r => sendResponse({ ok: true, ...r })).catch(err => sendResponse({ error: err.message }));
     return true;
   }
-  if (msg.type === 'SET_API_KEY') {
-    chrome.storage.local.set({ apiKey: msg.apiKey ?? '' }).then(() => sendResponse({ ok: true }));
+  if (msg.type === 'DISCONNECT') {
+    auth.disconnect().then(() => sendResponse({ ok: true })).catch(err => sendResponse({ error: err.message }));
+    return true;
+  }
+  if (msg.type === 'GET_CONNECTION') {
+    auth.status().then(sendResponse);
     return true;
   }
   if (msg.type === 'IS_DEV') {
@@ -97,65 +122,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
     clearFixtures().then(sendResponse);
     return true;
   }
-  if (msg.type === 'SIGILL_IDENTITY') {
-    syncSigillIdentity(msg).then(() => sendResponse({ ok: true }))
-      .catch(err => sendResponse({ error: err.message }));
-    return true;
-  }
-  if (msg.type === 'DISCONNECT_IDENTITY') {
-    chrome.storage.sync.remove(['actorId', 'actorTenantId', 'actorTenantName', 'sigillConnected'])
-      .then(() => sendResponse({ ok: true }));
-    return true;
-  }
 });
-
-// POST a digest to the Sigill TSA and return a schema-shaped rfc3161 proof.
-async function stampHash(apiKey, hashHex, label) {
-  const resp = await fetch(`${API_BASE}/tsa/stamp-hash`, {
-    method: 'POST',
-    headers: { Authorization: bearer(apiKey), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ tsaSlug: 'auto', hashHex, label }),
-  });
-  if (!resp.ok) {
-    const body = await resp.text().catch(() => '');
-    throw new Error(`Sigill ${resp.status}: ${body}`);
-  }
-  const proof = await resp.json();
-  return {
-    type: 'rfc3161',
-    tsrBase64: proof.tsrBase64,
-    tsaName: proof.tsaName,
-    genTime: proof.genTime,
-    serial: proof.serial,
-  };
-}
-
-async function syncSigillIdentity({ token, email, tenantId }) {
-  let resolvedTenantId = tenantId ?? null;
-  let resolvedTenantName = null;
-  try {
-    const me = await fetch(`${API_BASE}/auth/me`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    if (me.ok) {
-      const data = await me.json();
-      resolvedTenantId = data.tenantId ?? resolvedTenantId;
-      resolvedTenantName = data.tenantName ?? null;
-    }
-  } catch { /* use JWT tenantId fallback */ }
-
-  await chrome.storage.sync.set({
-    actorId: email,
-    actorTenantId: resolvedTenantId,   // UUID — goes into envelope
-    actorTenantName: resolvedTenantName, // display name — shown in popup
-    sigillConnected: true,
-  });
-  console.log('[Sigill] identity synced:', email, resolvedTenantId, resolvedTenantName);
-}
-
-function bearer(apiKey) {
-  return apiKey.match(/^Bearer\s+/i) ? apiKey : `Bearer ${apiKey}`;
-}
 
 // --- Chained ledger ---------------------------------------------------------
 // Envelopes are stored wrapped in chained ledger records (lib/evidence-ledger.js).
@@ -181,50 +148,29 @@ function readLedger() {
   return read;
 }
 
-async function appendLog(envelope) {
-  const write = logWriteQueue.catch(() => {}).then(async () => {
-    const ledger = await migrateLegacyLog();
-    ledger.push(await SigillLedger.makeRecord(ledger.at(-1) ?? null, envelope));
-    await chrome.storage.local.set({ ledger });
-  });
-  logWriteQueue = write.catch(() => {});
-  return write;
+// Housekeeping: close conversations idle for 30 minutes (run_end) and index sealed
+// artifacts that are not yet in the Evidence Store. The legacy ledger above is
+// read-only: it is kept for export, and nothing is added to it any more.
+async function recorderHousekeeping() {
+  if (!(await auth.status()).connected) return;
+  const closed = await recorder.closeIdle();
+  let flushed;
+  do { flushed = await recorder.flushOutbox(); } while (flushed.indexed > 0 && flushed.pending > 0);
+  pushDebug({ type: 'housekeeping', ts: new Date().toISOString(), closed, unindexed: flushed.pending });
 }
 
-// Anchor the chain head with one RFC 3161 stamp — bounds tampering of every
-// record before it. Runs hourly via chrome.alarms; skips when nothing changed.
-async function anchorLedgerHead() {
-  const run = logWriteQueue.catch(() => {}).then(async () => {
-    const ledger = await migrateLegacyLog();
-    if (!ledger.length) return { skipped: 'empty ledger' };
-    const head = ledger.at(-1);
-    const { anchors = [] } = await chrome.storage.local.get('anchors');
-    if (anchors.at(-1)?.headHash === head.recordHash) return { skipped: 'head unchanged' };
-    const apiKey = await getApiKey();
-    if (!apiKey) return { skipped: 'no api key' };
-    const proof = await stampHash(apiKey, head.recordHash, `ledger-anchor-seq${head.seq}`);
-    anchors.push({
-      seq: head.seq,
-      headHash: head.recordHash,
-      anchoredAt: new Date().toISOString(),
-      proof,
-    });
-    await chrome.storage.local.set({ anchors });
-    return { ok: true, seq: head.seq };
-  });
-  logWriteQueue = run.catch(() => {});
-  const result = await run;
-  pushDebug({ type: 'anchor', ts: new Date().toISOString(), ...result });
-  return result;
+function flushSoon() {
+  recorder.flushOutbox().catch(err => pushDebug({ type: 'index', ts: new Date().toISOString(), ok: false, error: err?.message ?? String(err) }));
 }
 
-chrome.alarms.get('sigill-ledger-anchor').then(alarm => {
-  if (!alarm) chrome.alarms.create('sigill-ledger-anchor', { periodInMinutes: 60, delayInMinutes: 2 });
+chrome.alarms.clear('sigill-ledger-anchor');
+chrome.alarms.get('sigill-recorder').then(alarm => {
+  if (!alarm) chrome.alarms.create('sigill-recorder', { periodInMinutes: 5, delayInMinutes: 1 });
 });
 chrome.alarms.onAlarm.addListener(alarm => {
-  if (alarm.name !== 'sigill-ledger-anchor') return;
-  anchorLedgerHead().catch(err => pushDebug({
-    type: 'anchor', ts: new Date().toISOString(), ok: false, error: err?.message ?? String(err),
+  if (alarm.name !== 'sigill-recorder') return;
+  recorderHousekeeping().catch(err => pushDebug({
+    type: 'housekeeping', ts: new Date().toISOString(), ok: false, error: err?.message ?? String(err),
   }));
 });
 
@@ -490,7 +436,7 @@ function maybeRecordArtifactLink(capture) {
 
 // Register the files a just-stamped turn declared, so their later downloads
 // can be matched and linked back to this exact envelope.
-function recordTurnArtifactLinks(turn, envelope, platform) {
+function recordTurnArtifactLinks(turn, platform) {
   const op = attachmentQueue.catch(() => {}).then(async () => {
     const { artifactLinks = [] } = await chrome.storage.local.get('artifactLinks');
     const cutoff = Date.now() - BLOB_TTL_MS;
@@ -500,7 +446,6 @@ function recordTurnArtifactLinks(turn, envelope, platform) {
         platform,
         conversationId: turn.conversationId ?? null,
         messageId: turn.messageId ?? null,
-        evidenceId: envelope.evidenceId,
         fileName: f.name ?? null,
         sandboxPath: f.path ?? null,
         downloadUrl: null,
@@ -575,33 +520,18 @@ async function handleCompletedDownload(item) {
   }
   if (!platform) return; // not ours — never record unrelated downloads
 
-  const settings = await chrome.storage.sync.get([`${platform}Enabled`, 'actorId', 'actorTenantId']);
-  const apiKey = await getApiKey();
-  if (!apiKey || settings[`${platform}Enabled`] === false) return;
+  const settings = await chrome.storage.sync.get(`${platform}Enabled`);
+  if (settings[`${platform}Enabled`] === false || !(await auth.status()).connected) return;
 
-  // Parent turn: by exact evidence id (stream-declared files), then by
-  // message id (interpreter/download links), then by the conversation id
-  // embedded in the download URL itself (e.g. Claude's wiggle path).
-  const ledger = await readLedger();
-  let parent = link?.evidenceId
-    ? ledger.findLast(r => r.envelope.evidenceId === link.evidenceId)
-    : null;
-  if (!parent && link?.messageId) {
-    parent = ledger.findLast(r => r.envelope.output?.metadata?.messageId === link.messageId);
-  }
+  // The conversation the file belongs to: by the turn that declared it, by the
+  // message id of an interpreter/download link, or by the id in the download URL.
   const urlConvId = (urlBase.match(/\/conversations?\/([0-9a-f-]{36})/) ?? [])[1] ?? null;
-  if (!parent && urlConvId) {
-    parent = ledger.findLast(r =>
-      r.envelope.activity?.correlationId === urlConvId &&
-      r.envelope.purpose?.category === 'chat.completion');
-  }
+  const byMessage = link?.messageId ? await recorder.turnByMessageId(link.messageId) : null;
+  const conversationId = link?.conversationId ?? byMessage?.conversationId ?? urlConvId;
 
-  const actor = { type: 'user', id: settings.actorId ?? await getDeviceId() };
-  if (settings.actorTenantId) actor.tenantId = settings.actorTenantId;
-
-  // Bytes: blob hash if the file was client-built; otherwise try an immediate
-  // re-fetch of the same signed URL (permitted platform hosts only) — weaker
-  // than blob-observed, disclosed as its own class.
+  // Bytes: blob hash if the file was client-built; otherwise an immediate re-fetch
+  // of the same signed URL (platform hosts only). Without a digest there is
+  // nothing to seal.
   let sha256 = blob?.sha256 ?? null;
   let hashSource = sha256 ? 'blob-observed' : 'none';
   let sizeBytes = item.fileSize > 0 ? item.fileSize : (blob?.sizeBytes ?? null);
@@ -613,45 +543,17 @@ async function handleCompletedDownload(item) {
       sizeBytes = sizeBytes ?? refetched.sizeBytes;
     }
   }
+  if (!sha256 || !conversationId) {
+    pushDebug({ type: 'artifact_stamped', platform, ts: new Date().toISOString(), ok: false, skipped: !sha256 ? 'no digest' : 'no conversation', filename });
+    return;
+  }
 
-  const envelope = SigillEvidence.buildArtifactEnvelope({
-    platform,
-    artifact: {
-      filename,
-      sizeBytes,
-      mediaType: item.mime || blob?.mediaType || null,
-      sha256,
-      hashSource,
-      sourceUrl: item.url?.startsWith('blob:') ? 'blob:(client-generated)' : urlBase,
-      downloadedAt: new Date().toISOString(),
-    },
-    link: {
-      conversationId: link?.conversationId ?? parent?.envelope.activity?.correlationId ?? urlConvId ?? null,
-      messageId: link?.messageId ?? parent?.envelope.output?.metadata?.messageId ?? null,
-      sandboxPath: link?.sandboxPath ?? null,
-      platformFileId: link?.fileId ?? null,
-      parentEvidenceId: parent?.envelope.evidenceId ?? null,
-    },
-    model: parent?.envelope.model ?? null,
-    actor,
-    extensionVersion: chrome.runtime.getManifest().version,
-    evidenceId: crypto.randomUUID(),
-    createdAt: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'),
+  const r = await recorder.recordGeneratedFile({
+    platform, conversationId, sha256, sizeBytes, mediaType: item.mime || blob?.mediaType || null,
   });
-  const hashHex = await SigillEvidence.envelopeHashHex(envelope);
-  envelope.integrity.envelopeHash = { alg: 'SHA-256', hex: hashHex };
-  envelope.proofs = [await stampHash(apiKey, hashHex, `${platform}-artifact-${envelope.evidenceId.slice(0, 8)}`)];
-  await appendLog(envelope);
+  flushSoon();
   pushDebug({
-    type: 'artifact_stamped',
-    platform,
-    ts: new Date().toISOString(),
-    ok: true,
-    filename,
-    hashed: Boolean(sha256),
-    hashSource,
-    parentEvidenceId: parent?.envelope.evidenceId ?? null,
-    evidenceId: envelope.evidenceId,
+    type: 'artifact_stamped', platform, ts: new Date().toISOString(), ok: true, filename, hashSource, runId: r.runId, seq: r.seq,
   });
 }
 
@@ -706,25 +608,21 @@ async function maybeStampNetworkTurn(capture) {
   });
   if (!turn.complete || !turn.outputText) return;
 
-  const settings = await chrome.storage.sync.get([
-    `${capture.platform}Enabled`, 'actorId', 'actorTenantId',
-  ]);
-  const apiKey = await getApiKey();
-  if (!apiKey || settings[`${capture.platform}Enabled`] === false) {
+  const settings = await chrome.storage.sync.get(`${capture.platform}Enabled`);
+  const connection = await auth.status();
+  if (!connection.connected || settings[`${capture.platform}Enabled`] === false) {
     pushDebug({ type: 'stamp_result', platform: capture.platform, ts: new Date().toISOString(), skipped: true, source: 'network' });
     return;
   }
 
-  // Platform message IDs are stable — never stamp the same message twice
+  // Platform message ids are stable — never record the same message twice
   // (e.g. a re-observed stream after a flaky reload).
   const ledger = await readLedger();
-  if (turn.messageId && ledger.some(r => r.envelope.output?.metadata?.messageId === turn.messageId)) {
+  if (turn.messageId && (await recorder.turnByMessageId(turn.messageId) ||
+      ledger.some(r => r.envelope.output?.metadata?.messageId === turn.messageId))) {
     pushDebug({ type: 'stamp_dedup', platform: capture.platform, ts: new Date().toISOString(), messageId: turn.messageId });
     return;
   }
-
-  const actor = { type: 'user', id: settings.actorId ?? await getDeviceId() };
-  if (settings.actorTenantId) actor.tenantId = settings.actorTenantId;
 
   const observed = await takePendingAttachments(capture.tabId, turn);
   const attachments = observed.filter(a => a.sha256);
@@ -736,22 +634,18 @@ async function maybeStampNetworkTurn(capture) {
     turn.warnings.push(`request declared ${turn.attachmentCount} attachment(s), extension observed ${attachments.length}`);
   }
 
-  const envelope = SigillEvidence.buildTurnEnvelope({
-    turn,
-    capture,
-    actor,
+  const r = await recorder.recordTurn({
+    platform: capture.platform,
+    conversationId: turn.conversationId,
+    messageId: turn.messageId,
+    model: turn.model,
+    promptText: turn.promptText,
+    outputText: turn.outputText,
     attachments,
-    extensionVersion: chrome.runtime.getManifest().version,
-    evidenceId: crypto.randomUUID(),
-    createdAt: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'),
   });
-  const hashHex = await SigillEvidence.envelopeHashHex(envelope);
-  envelope.integrity.envelopeHash = { alg: 'SHA-256', hex: hashHex };
-  const proof = await stampHash(apiKey, hashHex, `${capture.platform}-turn-${envelope.evidenceId.slice(0, 8)}`);
-  envelope.proofs = [proof];
-  await appendLog(envelope);
+  flushSoon();
   if (turn.generatedFiles?.length) {
-    await recordTurnArtifactLinks(turn, envelope, capture.platform);
+    await recordTurnArtifactLinks(turn, capture.platform);
   }
 
   pushDebug({
@@ -760,7 +654,8 @@ async function maybeStampNetworkTurn(capture) {
     ts: new Date().toISOString(),
     ok: true,
     source: 'network',
-    evidenceId: envelope.evidenceId,
+    runId: r.runId,
+    seq: r.seq,
     messageId: turn.messageId,
   });
 
@@ -770,22 +665,11 @@ async function maybeStampNetworkTurn(capture) {
       platform: capture.platform,
       conversationId: turn.conversationId,
       messageId: turn.messageId,
-      evidenceId: envelope.evidenceId,
-      genTime: proof.genTime,
-      tsaName: proof.tsaName,
-    }).catch(() => { /* tab closed — evidence is logged regardless */ });
+      evidenceId: r.evidenceId,
+      genTime: r.genTime,
+      tsaName: r.tsaName,
+    }).catch(() => { /* tab closed — evidence is recorded regardless */ });
   }
-}
-
-// Stable pseudonymous actor id for envelopes produced without a connected
-// Sigill identity — actor.id is required by the schema. Device-local by
-// design (storage.local, not sync).
-async function getDeviceId() {
-  const { deviceId } = await chrome.storage.local.get('deviceId');
-  if (deviceId) return deviceId;
-  const id = 'ext-' + crypto.randomUUID();
-  await chrome.storage.local.set({ deviceId: id });
-  return id;
 }
 
 async function getFixtureStats() {
@@ -806,12 +690,8 @@ async function clearFixtures() {
 
 async function getStats() {
   const ledger = await readLedger();
-  const { anchors = [] } = await chrome.storage.local.get('anchors');
-  return {
-    count: ledger.length,
-    anchorCount: anchors.length,
-    lastAnchoredAt: anchors.at(-1)?.anchoredAt ?? null,
-  };
+  const rec = await recorder.stats();
+  return { ...rec, legacyCount: ledger.length };
 }
 
 // Claude badge restore: the DOM exposes no message ids, but the platform's
@@ -835,25 +715,19 @@ async function maybeSendBadgePositions(capture) {
   chain.reverse();
   const assistants = chain.filter(n => n.role === 'assistant');
 
-  const ledger = await readLedger();
   const evidenceByMsg = new Map();
-  for (const r of ledger) {
+  for (const r of await readLedger()) {
     const mid = r.envelope.output?.metadata?.messageId;
-    if (mid) evidenceByMsg.set(mid, r.envelope);
+    if (mid) evidenceByMsg.set(mid, { evidenceId: r.envelope.evidenceId, genTime: r.envelope.proofs?.[0]?.genTime, tsaName: r.envelope.proofs?.[0]?.tsaName });
+  }
+  for (const t of await recorder.stampedTurns('claude', history.conversationId)) {
+    if (t.messageId) evidenceByMsg.set(t.messageId, { evidenceId: t.evidenceId, genTime: t.genTime, tsaName: t.tsaName });
   }
 
   const turns = [];
   assistants.forEach((n, index) => {
-    const env = evidenceByMsg.get(n.id);
-    if (env) {
-      turns.push({
-        index,
-        messageId: n.id,
-        evidenceId: env.evidenceId,
-        genTime: env.proofs?.[0]?.genTime,
-        tsaName: env.proofs?.[0]?.tsaName,
-      });
-    }
+    const ev = evidenceByMsg.get(n.id);
+    if (ev) turns.push({ index, messageId: n.id, ...ev });
   });
   if (!turns.length) return;
 
@@ -891,87 +765,46 @@ async function getStampedTurns({ platform, conversationId }) {
       tsaName: envelope.proofs?.[0]?.tsaName,
     });
   }
+  for (const t of await recorder.stampedTurns(platform, conversationId)) {
+    turns.push({ messageId: t.messageId, evidenceId: t.evidenceId, genTime: t.genTime, tsaName: t.tsaName });
+  }
   return { turns };
 }
 
-// The export is a self-contained evidence bundle: chained records + anchor
-// stamps. tools/verify-bundle.js validates one with no Sigill dependency.
-async function buildExportBundle() {
-  const ledger = await readLedger();
-  const { anchors = [] } = await chrome.storage.local.get('anchors');
-  return {
-    format: 'sigill-evidence-bundle',
-    formatVersion: '1',
-    exportedAt: new Date().toISOString(),
-    extensionVersion: chrome.runtime.getManifest().version,
-    ledger,
-    anchors,
-  };
-}
-
+// Export: every recorded run as an AgentRunBundle (verifiable offline and at
+// sigill.ai/verify-run), plus the read-only ledger of earlier versions when it
+// holds anything (tools/verify-bundle.js validates that one).
 async function exportLog() {
-  return { bundle: await buildExportBundle() };
+  const runs = await recorder.bundles();
+  const ledger = await readLedger();
+  let legacy = null;
+  if (ledger.length) {
+    const { anchors = [] } = await chrome.storage.local.get('anchors');
+    legacy = {
+      format: 'sigill-evidence-bundle',
+      formatVersion: '1',
+      exportedAt: new Date().toISOString(),
+      extensionVersion: VERSION,
+      ledger,
+      anchors,
+    };
+  }
+  return { runs, legacy };
 }
 
 async function clearLog() {
+  await recorder.clear();
   logWriteQueue = logWriteQueue.catch(() => {})
     .then(() => chrome.storage.local.set({ ledger: [], anchors: [] }));
   await logWriteQueue;
   return { ok: true, count: 0 };
 }
 
+// Certificates the organisation can seal agent evidence with: its own, then the
+// Sigill Platform Seal. The choice applies to runs that start afterwards.
 async function listSealCertificates() {
-  const apiKey = await getApiKey();
-  if (!apiKey) return { certificates: [] };
-
-  const resp = await fetch(`${API_BASE}/seal/certificates`, {
-    headers: { Authorization: bearer(apiKey) },
-  });
-  if (!resp.ok) {
-    const body = await resp.text().catch(() => '');
-    throw new Error(`Sigill ${resp.status}: ${body}`);
-  }
-
-  const certificates = await resp.json();
-  return { certificates: certificates.filter(c => c.status === 'active') };
-}
-
-async function sealLog({ certificateId }) {
-  const apiKey = await getApiKey();
-  if (!apiKey) return { error: 'Missing API key' };
-  if (!certificateId) return { error: 'Choose a seal certificate first' };
-
-  const bundle = await buildExportBundle();
-  if (!bundle.ledger.length) return { error: 'No stamped turns to seal' };
-
-  const text = JSON.stringify(bundle, null, 2);
-  const filename = `sigill-evidence-bundle-${Date.now()}.json`;
-
-  // Hash the bundle locally — its content never leaves the browser
-  const hashBuf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-  const hashHex = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
-
-  const resp = await fetch(`${API_BASE}/seal/sign-hash`, {
-    method: 'POST',
-    headers: { Authorization: bearer(apiKey), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ hashHex, certificateId, label: filename, qualified: false }),
-  });
-  if (!resp.ok) {
-    const body = await resp.text().catch(() => '');
-    throw new Error(`Sigill ${resp.status}: ${body}`);
-  }
-
-  const bytes = new Uint8Array(await resp.arrayBuffer());
-  const binary = Array.from(bytes, b => String.fromCharCode(b)).join('');
-  return {
-    ok: true,
-    filename,
-    text,
-    signatureBase64: btoa(binary),
-    format: resp.headers.get('X-Seal-Format') ?? 'cades',
-    operationId: resp.headers.get('X-Seal-Operation-Id'),
-    certificateId: resp.headers.get('X-Seal-Certificate-Id') ?? certificateId,
-    timestampedBy: resp.headers.get('X-Seal-Timestamped-By'),
-    qualified: resp.headers.get('X-Seal-Qualified') === 'true',
-  };
+  if (!(await auth.status()).connected) return { certificates: [], selected: null };
+  const cfg = await mcp.recordingConfig();
+  const { sealCertificateId } = await chrome.storage.local.get('sealCertificateId');
+  return { certificates: cfg.certificates ?? [], selected: sealCertificateId || null };
 }

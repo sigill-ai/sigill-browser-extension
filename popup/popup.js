@@ -4,14 +4,12 @@ let pendingClearCount = 0;
 let currentLogCount = 0;
 
 let isDev = false;
+let connected = false;
 
 async function load() {
-  const keys = ['actorId', 'actorTenantId', 'actorTenantName', 'sigillConnected', 'sealCertificateId', 'fixtureCapture', ...PLATFORMS.map(p => `${p}Enabled`)];
-  const data = await chrome.storage.sync.get(keys);
-  const { apiKey } = await chrome.runtime.sendMessage({ type: 'GET_API_KEY' }).catch(() => ({}));
+  const data = await chrome.storage.sync.get(['fixtureCapture', ...PLATFORMS.map(p => `${p}Enabled`)]);
   isDev = (await chrome.runtime.sendMessage({ type: 'IS_DEV' }).catch(() => ({})))?.dev === true;
 
-  $('apiKey').value = apiKey ?? '';
   PLATFORMS.forEach(p => {
     $(`${p}Enabled`).checked = data[`${p}Enabled`] !== false;
   });
@@ -21,49 +19,51 @@ async function load() {
     await loadFixtureStats();
   }
 
-  if (data.sigillConnected && data.actorId) {
-    $('connectedState').style.display = 'block';
-    $('signInState').style.display = 'none';
-    $('connectedEmail').textContent = data.actorId;
-    $('connectedOrg').textContent = data.actorTenantName ?? '';
-  } else {
-    $('connectedState').style.display = 'none';
-    $('signInState').style.display = 'block';
-  }
+  const conn = await chrome.runtime.sendMessage({ type: 'GET_CONNECTION' }).catch(() => ({ connected: false }));
+  connected = conn?.connected === true;
+  $('connectedState').hidden = !connected;
+  $('signInState').hidden = connected;
+  if (connected && conn.connectedAt) $('connectedSince').textContent = `since ${new Date(conn.connectedAt).toLocaleDateString()}`;
+  $('connectBtn').textContent = conn?.needsReconnect ? 'Sign in to Sigill again' : 'Sign in with Sigill';
 
-  const stats = await chrome.runtime.sendMessage({ type: 'GET_STATS' }).catch(() => ({ count: 0 }));
-  const count = stats?.count ?? 0;
-  currentLogCount = count;
-  const noKey = !apiKey;
-  const anchorNote = stats?.anchorCount ? ` · ${stats.anchorCount} anchor${stats.anchorCount === 1 ? '' : 's'}` : '';
-  $('stats').textContent = noKey ? 'Add your API key above to start' : `${count} turns stamped${anchorNote}`;
-  $('stats').style.color = noKey ? '#f59e0b' : '#94a3b8';
-  $('exportBtn').disabled = count === 0;
-  $('clearBtn').disabled = count === 0;
-  $('sealBtn').disabled = noKey || count === 0 || !$('certificateSelect').value;
-  if (count === 0 || pendingClearCount !== count) hideClearConfirm();
+  const stats = await chrome.runtime.sendMessage({ type: 'GET_STATS' }).catch(() => ({}));
+  const turns = stats?.turns ?? 0;
+  const runs = stats?.runs ?? 0;
+  currentLogCount = runs + (stats?.legacyCount ?? 0);
+  let text = runs ? `${turns} turn${turns === 1 ? '' : 's'} in ${runs} run${runs === 1 ? '' : 's'}` : 'Nothing recorded yet';
+  if (stats?.legacyCount) text += ` · ${stats.legacyCount} earlier`;
+  let color = '#94a3b8';
+  if (!connected) { text = conn?.needsReconnect ? 'Not recording — sign in again' : 'Not recording — sign in to start'; color = '#f59e0b'; }
+  else if (stats?.lastStop && stats.openRuns === 0 && /quota/i.test(stats.lastStop)) { text = 'Paused — agent evidence quota reached'; color = '#f59e0b'; }
+  $('stats').textContent = text;
+  $('stats').style.color = color;
+  $('exportBtn').disabled = currentLogCount === 0;
+  $('clearBtn').disabled = currentLogCount === 0;
+  if (currentLogCount === 0 || pendingClearCount !== currentLogCount) hideClearConfirm();
 }
 
 async function save() {
-  await chrome.runtime.sendMessage({ type: 'SET_API_KEY', apiKey: $('apiKey').value.trim() });
   const data = {};
   PLATFORMS.forEach(p => { data[`${p}Enabled`] = $(`${p}Enabled`).checked; });
   await chrome.storage.sync.set(data);
 }
 
-$('toggleKey').addEventListener('click', () => {
-  const inp = $('apiKey');
-  const showing = inp.type === 'text';
-  inp.type = showing ? 'password' : 'text';
-  $('toggleKey').textContent = showing ? 'Show' : 'Hide';
-});
-
-$('apiKey').addEventListener('change', save);
 PLATFORMS.forEach(p => $(`${p}Enabled`).addEventListener('change', save));
 
-$('disconnectBtn').addEventListener('click', async () => {
-  await chrome.runtime.sendMessage({ type: 'DISCONNECT_IDENTITY' });
+$('connectBtn').addEventListener('click', async () => {
+  $('connectBtn').disabled = true;
+  setStatus('connectStatus', 'Waiting for sign-in in the Sigill window…', '');
+  const res = await chrome.runtime.sendMessage({ type: 'CONNECT' }).catch(err => ({ error: err.message }));
+  $('connectBtn').disabled = false;
+  setStatus('connectStatus', res?.error ?? '', res?.error ? 'seal-status-error' : '');
   await load();
+  await loadSealCertificates();
+});
+
+$('disconnectBtn').addEventListener('click', async () => {
+  await chrome.runtime.sendMessage({ type: 'DISCONNECT' });
+  await load();
+  await loadSealCertificates();
 });
 
 // Info panel toggle
@@ -75,38 +75,18 @@ $('infoBtn').addEventListener('click', () => {
 });
 
 $('exportBtn').addEventListener('click', async () => {
-  const { bundle } = await chrome.runtime.sendMessage({ type: 'EXPORT' });
-  if (!bundle?.ledger?.length) return;
-  downloadText(`sigill-evidence-bundle-${Date.now()}.json`, JSON.stringify(bundle, null, 2), 'application/json');
+  const { runs, legacy } = await chrome.runtime.sendMessage({ type: 'EXPORT' });
+  for (const r of runs ?? []) {
+    downloadText(`sigill-agent-run-${r.name}.json`, JSON.stringify(r.bundle, null, 2), 'application/json');
+  }
+  if (legacy?.ledger?.length) {
+    downloadText(`sigill-evidence-bundle-${Date.now()}.json`, JSON.stringify(legacy, null, 2), 'application/json');
+  }
 });
-
-$('refreshCertsBtn').addEventListener('click', loadSealCertificates);
 
 $('certificateSelect').addEventListener('change', async () => {
-  await chrome.storage.sync.set({ sealCertificateId: $('certificateSelect').value });
-  $('sealBtn').disabled = currentLogCount === 0 || !$('certificateSelect').value;
-});
-
-$('sealBtn').addEventListener('click', async () => {
-  const certificateId = $('certificateSelect').value;
-  if (!certificateId || currentLogCount === 0) return;
-
-  setSealStatus('Sealing log...', '');
-  $('sealBtn').disabled = true;
-  const res = await chrome.runtime.sendMessage({ type: 'SEAL_LOG', certificateId }).catch(err => ({ error: err.message }));
-  if (res?.error) {
-    setSealStatus(res.error, 'seal-status-error');
-    $('sealBtn').disabled = false;
-    return;
-  }
-
-  downloadText(res.filename, res.text, 'application/json');
-  const signatureName = res.format === 'pades'
-    ? res.filename.replace(/\.json$/, '_sealed.pdf')
-    : res.filename.replace(/\.json$/, '.p7s');
-  downloadBase64(signatureName, res.signatureBase64, res.format === 'pades' ? 'application/pdf' : 'application/pkcs7-signature');
-  setSealStatus(`Sealed as ${res.format.toUpperCase()}${res.timestampedBy ? `, timestamped by ${res.timestampedBy}` : ''}.`, 'seal-status-ok');
-  $('sealBtn').disabled = currentLogCount === 0 || !$('certificateSelect').value;
+  await chrome.runtime.sendMessage({ type: 'SET_SEAL_CERTIFICATE', certificateId: $('certificateSelect').value });
+  setStatus('sealStatus', 'Applies to conversations that start from now on.', 'seal-status-ok');
 });
 
 async function loadFixtureStats() {
@@ -141,11 +121,10 @@ $('debugBtn').addEventListener('click', async () => {
 });
 
 $('clearBtn').addEventListener('click', async () => {
-  const stats = await chrome.runtime.sendMessage({ type: 'GET_STATS' }).catch(() => ({ count: 0 }));
-  const count = stats?.count ?? 0;
+  const count = currentLogCount;
   if (!count) return;
   pendingClearCount = count;
-  $('clearConfirmText').textContent = `Clear ${count} stamped turn${count === 1 ? '' : 's'} from local storage?`;
+  $('clearConfirmText').textContent = 'Clear all recorded runs from this browser? Runs already indexed stay in Sigill; export first to keep the bundles.';
   $('clearConfirm').hidden = false;
 });
 
@@ -166,50 +145,39 @@ function hideClearConfirm() {
 
 async function loadSealCertificates() {
   const select = $('certificateSelect');
-  const { sealCertificateId } = await chrome.storage.sync.get('sealCertificateId');
-  select.replaceChildren(new Option('Loading certificates...', ''));
-  $('sealBtn').disabled = true;
-  setSealStatus('', '');
-
+  setStatus('sealStatus', '', '');
+  if (!connected) {
+    select.replaceChildren(new Option('Sign in to choose', ''));
+    select.disabled = true;
+    return;
+  }
+  select.disabled = false;
+  select.replaceChildren(new Option('Loading certificates…', ''));
   const res = await chrome.runtime.sendMessage({ type: 'LIST_SEAL_CERTIFICATES' }).catch(err => ({ error: err.message }));
   if (res?.error) {
     select.replaceChildren(new Option('Could not load certificates', ''));
-    setSealStatus(res.error, 'seal-status-error');
+    setStatus('sealStatus', res.error, 'seal-status-error');
     return;
   }
-
   const certs = res?.certificates ?? [];
-  if (!certs.length) {
-    select.replaceChildren(new Option('No active seal certificates', ''));
-    setSealStatus('Add or activate a seal certificate in Sigill to enable sealing.', '');
-    return;
-  }
-
-  select.replaceChildren(...certs.map(cert => {
-    const source = cert.source ? ` (${cert.source})` : '';
-    return new Option(`${cert.label ?? cert.certSubject ?? 'Certificate'}${source}`, cert.id);
-  }));
-  if (sealCertificateId && certs.some(cert => cert.id === sealCertificateId)) {
-    select.value = sealCertificateId;
-  }
-  $('sealBtn').disabled = currentLogCount === 0 || !select.value;
+  const platform = certs.find(c => c.source === 'platform');
+  const own = certs.filter(c => c.source !== 'platform');
+  // Default (empty value): the Sigill Platform Seal. The organisation's own certificates follow.
+  select.replaceChildren(
+    new Option(platform ? 'Sigill Platform Seal' : 'Sigill Platform Seal (unavailable)', ''),
+    ...own.map(c => new Option(c.label || 'Organisation certificate', c.id)),
+  );
+  select.value = res.selected && own.some(c => c.id === res.selected) ? res.selected : '';
 }
 
-function setSealStatus(text, className) {
-  $('sealStatus').textContent = text;
-  $('sealStatus').className = `seal-status ${className}`.trim();
+function setStatus(id, text, className) {
+  $(id).textContent = text;
+  $(id).className = `seal-status ${className}`.trim();
 }
 
 function downloadText(filename, text, type) {
   const blob = new Blob([text], { type });
   downloadBlob(filename, blob);
-}
-
-function downloadBase64(filename, base64, type) {
-  const binary = atob(base64);
-  const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
-  downloadBlob(filename, new Blob([bytes], { type }));
 }
 
 function downloadBlob(filename, blob) {

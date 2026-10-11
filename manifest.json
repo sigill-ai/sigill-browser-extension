@@ -1,14 +1,20 @@
 {
   "manifest_version": 3,
   "name": "Sigill — AI Conversation Timestamper",
-  "version": "0.5.0",
-  "version_name": "0.5.0-dev",
+  "version": "0.6.0",
+  "version_name": "0.6.0-dev",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvHXW7/S8ah04/T9kmfWrxnbZBxz/Bkn+P10g2jh4f/H+eO7PDkoTC/oPDm5xdHm6oDQ+wdHJ5RzUkyCfTnqxIWM2zv3uJTz/gen0lBB8rNogxEWO0Wk06fpPge7V05cKPY1LccQElNVKSaYNgsZa0BOQioRHGigYzrqgq+xqrfCOhOpSisuWoshduIKX5RXmr8BTgqe+IhCgmtymJLTZZYU+uKcxRPwikppCmsVT8Zj9l1Hpw1yQ9GXRNvirfWZX8JM1udFmNtQy2XWr9UgHjipDeg/0m7i1X4nzSjizarr4+XoSFB+68Fau0OjBv8swwDri+cfmAnahFx62tXtA2wIDAQAB",
   "minimum_chrome_version": "111",
-  "description": "Cryptographically timestamps every AI conversation turn using RFC 3161 via Sigill.",
-  "permissions": ["storage", "unlimitedStorage", "alarms", "downloads"],
+  "description": "Records AI conversations as verifiable evidence with Sigill: sealed and timestamped turn by turn, content stays in your browser.",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "alarms",
+    "downloads",
+    "identity"
+  ],
   "host_permissions": [
     "https://api.sigill.ai/*",
-    "https://sigill.ai/*",
     "https://claude.ai/*",
     "https://chatgpt.com/*",
     "https://gemini.google.com/*"
@@ -33,17 +39,14 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://sigill.ai/*"],
-      "js": ["content/sigill-auth.js"],
-      "run_at": "document_idle"
-    },
-    {
       "matches": [
         "https://claude.ai/*",
         "https://chatgpt.com/*",
         "https://gemini.google.com/*"
       ],
-      "js": ["content/interceptor.js"],
+      "js": [
+        "content/interceptor.js"
+      ],
       "run_at": "document_start",
       "world": "MAIN"
     },
@@ -53,7 +56,9 @@
         "https://chatgpt.com/*",
         "https://gemini.google.com/*"
       ],
-      "js": ["content/relay.js"],
+      "js": [
+        "content/relay.js"
+      ],
       "run_at": "document_start"
     },
     {
@@ -62,7 +67,10 @@
         "https://chatgpt.com/*",
         "https://gemini.google.com/*"
       ],
-      "js": ["content/shared.js", "content/debug-overlay.js"],
+      "js": [
+        "content/shared.js",
+        "content/debug-overlay.js"
+      ],
       "run_at": "document_idle"
     }
   ]

@@ -22,6 +22,8 @@ jobs:
         run: node test/envelope.test.js
       - name: Ledger suite
         run: node test/ledger.test.js
+      - name: Agent evidence suite
+        run: node test/agent-evidence.test.js
       - name: Fixtures are sanitized
         # The scrubber is idempotent — a diff means someone committed an
         # unscrubbed fixture (which may contain personal data).
