@@ -15,6 +15,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -38,3 +40,51 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release upload "${{ github.event.release.tag_name }}" "dist/sigill-browser-extension-v${{ steps.meta.outputs.version }}.zip" --clobber
+
+  # Uploads the release zip to the Chrome Web Store and submits it for Google's review.
+  # Keyless: GitHub's OIDC token is exchanged (Workload Identity Federation) for a short-lived
+  # token of the publisher's service account, scoped to the Chrome Web Store API only.
+  # Repository variables (not secrets): GCP_WIF_PROVIDER, GCP_SERVICE_ACCOUNT, CWS_PUBLISHER_ID.
+  publish:
+    if: github.event_name == 'release' && vars.GCP_WIF_PROVIDER != ''
+    needs: build
+    runs-on: ubuntu-latest
+    environment: chrome-web-store
+    permissions:
+      contents: read
+      id-token: write   # GitHub OIDC → Google Workload Identity Federation (no stored Google key)
+    env:
+      ITEM_ID: behfnnjgaoacljokaeadabniafanfgbp
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: sigill-browser-extension-v${{ needs.build.outputs.version }}
+      - id: google
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/chromewebstore
+          access_token_lifetime: 600s
+      - name: Upload to the Chrome Web Store
+        env:
+          TOKEN: ${{ steps.google.outputs.access_token }}
+          PUBLISHER: ${{ vars.CWS_PUBLISHER_ID }}
+        run: |
+          set -euo pipefail
+          zip=$(ls sigill-browser-extension-v*.zip)
+          curl -sS --fail-with-body -X POST -H "Authorization: Bearer $TOKEN" \
+            -H "Content-Type: application/zip" --data-binary "@$zip" \
+            "https://chromewebstore.googleapis.com/upload/v2/publishers/$PUBLISHER/items/$ITEM_ID:upload" | tee upload.json
+      - name: Submit for review
+        env:
+          TOKEN: ${{ steps.google.outputs.access_token }}
+          PUBLISHER: ${{ vars.CWS_PUBLISHER_ID }}
+        run: |
+          set -euo pipefail
+          curl -sS --fail-with-body -X POST -H "Authorization: Bearer $TOKEN" \
+            "https://chromewebstore.googleapis.com/v2/publishers/$PUBLISHER/items/$ITEM_ID:publish" | tee publish.json
+          curl -sS --fail-with-body -H "Authorization: Bearer $TOKEN" \
+            "https://chromewebstore.googleapis.com/v2/publishers/$PUBLISHER/items/$ITEM_ID:fetchStatus"
+
