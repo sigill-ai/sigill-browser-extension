@@ -16,6 +16,8 @@ cd "$ROOT"
 node test/adapters.test.js > /dev/null
 node test/envelope.test.js > /dev/null
 node test/ledger.test.js > /dev/null
+node test/agent-evidence.test.js > /dev/null
+node test/claude-rpc.test.js > /dev/null
 echo "tests: all green"
 
 STAGE="$(mktemp -d)"
@@ -28,12 +30,15 @@ python3 - "$ROOT/manifest.json" "$STAGE/manifest.json" <<'EOF'
 import json, sys
 manifest = json.load(open(sys.argv[1]))
 manifest.pop('version_name', None)
+# The public key only pins the extension ID for unpacked dev builds; the store
+# assigns the ID itself.
+manifest.pop('key', None)
 json.dump(manifest, open(sys.argv[2], 'w'), indent=2)
 EOF
 
 # Sanity: the packed build must identify as production.
-if grep -q '"version_name"' "$STAGE/manifest.json"; then
-  echo "ERROR: version_name survived packing" >&2
+if grep -q '"version_name"\|"key"' "$STAGE/manifest.json"; then
+  echo "ERROR: version_name or key survived packing" >&2
   exit 1
 fi
 

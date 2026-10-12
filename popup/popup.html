@@ -14,26 +14,34 @@
   </div>
 
   <div class="info-panel" id="infoPanel">
-    <div class="info-title">Stamping — your content stays local</div>
-    <p>For each conversation turn, the extension works entirely in your browser:</p>
+    <div class="info-title">Recording — your content stays local</div>
+    <p>Each conversation is recorded as one verifiable run, entirely in your browser:</p>
     <ol>
-      <li>The prompt and response are combined into an evidence envelope.</li>
-      <li>The envelope is canonicalised using <strong>JCS (RFC&nbsp;8785)</strong> — byte-for-byte identical on any device.</li>
-      <li>A <strong>SHA-256 hash</strong> is computed — a fingerprint that identifies the content without revealing it.</li>
-      <li>Only the hash is sent to a <strong>RFC&nbsp;3161 Timestamp Authority</strong>, which returns a signed timestamp token.</li>
-      <li>The token and the full envelope are stored locally. The timestamp proves the conversation existed at that moment.</li>
+      <li>Every completed answer becomes a step: the prompt, attached files and the answer are <strong>hashed with SHA-256</strong> locally.</li>
+      <li>The step is a small evidence envelope, canonicalised with <strong>JCS (RFC&nbsp;8785)</strong>, holding those digests and a link to the previous step.</li>
+      <li>Only the envelope digest is sent to Sigill, which <strong>seals</strong> it and adds an <strong>RFC&nbsp;3161 timestamp</strong>.</li>
+      <li>A conversation idle for 30 minutes is closed with a final timestamped step, which freezes the run.</li>
     </ol>
-    <p class="info-note">The TSA only ever sees a hash — your conversation content never leaves the browser during stamping.</p>
-    <div class="info-title" style="margin-top:10px;">Sealing — signing the whole bundle</div>
-    <p>When you click <strong>Seal log</strong>, the evidence bundle (chained records + anchor stamps) is hashed locally and only the hash is sent to Sigill, which returns a <strong>CAdES detached signature</strong>. You receive the bundle and a separate <code>.p7s</code> signature file — the content itself never leaves the browser.</p>
+    <p class="info-note">Sigill receives digests and the signed envelopes, never your prompts, answers or files. Runs appear under Evidence in Sigill; export one and anyone can verify it at sigill.ai/verify-run.</p>
   </div>
 
-  <section class="section">
-    <label class="label" for="apiKey">API Key</label>
-    <div class="key-row">
-      <input type="password" id="apiKey" class="input" placeholder="Bearer token" autocomplete="off" spellcheck="false" />
-      <button class="btn-ghost" id="toggleKey">Show</button>
+  <section class="section" id="connectionSection">
+    <div class="section-title">Sigill</div>
+    <div id="connectedState" hidden>
+      <div class="connected-row">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 3L4 7v5c0 5.25 3.4 10.15 8 11 4.6-.85 8-5.75 8-11V7l-8-4z" fill="#22c55e"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="connected-info">
+          <div class="connected-email">Connected</div>
+          <div class="connected-org" id="connectedSince"></div>
+        </div>
+        <button class="btn-ghost btn-xs" id="disconnectBtn">Disconnect</button>
+      </div>
     </div>
+    <div id="signInState">
+      <button class="btn-signin" id="connectBtn">Sign in with Sigill</button>
+      <div class="signin-hint" id="signInHint">Sign in once and approve recording. The extension gets permission to record conversations for your organisation, nothing else; you can disconnect it here or under Settings → Connected apps.</div>
+    </div>
+    <div class="seal-status" id="connectStatus"></div>
   </section>
 
   <section class="section">
@@ -61,40 +69,12 @@
     </div>
   </section>
 
-  <section class="section" id="identitySection">
-    <div class="section-title">Identity</div>
-
-    <!-- Connected state (shown when Sigill session is detected) -->
-    <div id="connectedState" style="display:none;">
-      <div class="connected-row">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 3L4 7v5c0 5.25 3.4 10.15 8 11 4.6-.85 8-5.75 8-11V7l-8-4z" fill="#22c55e"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div class="connected-info">
-          <div class="connected-email" id="connectedEmail"></div>
-          <div class="connected-org" id="connectedOrg"></div>
-        </div>
-        <button class="btn-ghost btn-xs" id="disconnectBtn">Disconnect</button>
-      </div>
-    </div>
-
-    <!-- Sign-in state (shown when not connected) -->
-    <div id="signInState">
-      <a class="btn-signin" href="https://sigill.ai/login" target="_blank" rel="noopener noreferrer">
-        Sign in with Sigill
-      </a>
-      <div class="signin-hint">Visit sigill.ai while signed in and the extension will pick up your identity automatically.</div>
-    </div>
-  </section>
-
   <section class="section seal-section">
-    <div class="section-title">Seal</div>
+    <div class="section-title">Seal with</div>
     <select id="certificateSelect" class="select select-block">
-      <option value="">Loading certificates...</option>
+      <option value="">Sign in to choose</option>
     </select>
-    <div class="seal-actions">
-      <button class="btn-ghost" id="refreshCertsBtn" title="Refresh certificates">Refresh</button>
-      <button class="btn" id="sealBtn">Seal log</button>
-    </div>
-    <div class="seal-hint">Seals the evidence bundle: hashed locally, signed by Sigill, downloads the bundle plus a detached .p7s signature.</div>
+    <div class="seal-hint">Conversations that start after a change use the chosen certificate; a run keeps one signer from start to end.</div>
     <div class="seal-status" id="sealStatus"></div>
   </section>
 
@@ -122,7 +102,7 @@
 
   <section class="section footer-section">
     <div class="footer-row">
-      <span class="stats" id="stats">0 turns stamped</span>
+      <span class="stats" id="stats">Nothing recorded yet</span>
       <div class="footer-actions">
         <button class="btn btn-danger" id="clearBtn">Clear log</button>
         <button class="btn" id="exportBtn">Export log</button>

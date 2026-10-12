@@ -55,7 +55,12 @@
         for (const c of raw.chunks.slice(0, MAX_CHUNKS_PER_EVENT)) {
           const text = str(c?.text, MAX_CHUNK_TEXT);
           if (text == null) continue;
-          chunks.push({ t: Number.isFinite(c.t) ? Math.round(c.t) : 0, text });
+          const chunk = { t: Number.isFinite(c.t) ? Math.round(c.t) : 0, text };
+          if (c.enc === 'b64') {
+            if (!/^[A-Za-z0-9+/]*={0,2}$/.test(text)) continue;
+            chunk.enc = 'b64';
+          }
+          chunks.push(chunk);
         }
         return chunks.length ? { kind: 'chunks', captureId, chunks } : null;
       }

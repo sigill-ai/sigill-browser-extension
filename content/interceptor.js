@@ -18,6 +18,13 @@
   const MAX_STREAM_BYTES = 4 * 1024 * 1024;   // 4 MB of streamed text per capture
   const MAX_CHUNK_TEXT = 256 * 1024;          // cap a single recorded chunk
   const FLUSH_MS = 150;
+  const BINARY_SLICE = 96 * 1024;             // bytes per base64 chunk (≈128 KB of text)
+
+  function toBase64(bytes) {
+    let s = '';
+    for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    return btoa(s);
+  }
 
   // mode 'full' records request body + streamed response chunks;
   // mode 'meta' records only that the request happened (URL, method, status) —
@@ -28,7 +35,11 @@
     {
       platform: 'claude',
       host: 'claude.ai',
-      full: p => p.includes('/chat_conversations') || /\/(completion|retry_completion)$/.test(p),
+      // Since October 2026 answers arrive on the long-lived Connect stream
+      // ConversationService/StreamTimeline (binary protobuf, lib/claude-rpc.js);
+      // the SSE /completion endpoints are kept for older deployments.
+      full: p => p.includes('/chat_conversations') || /\/(completion|retry_completion)$/.test(p) ||
+        /^\/claudeai-rpc\/[\w.]+\.ConversationService\/StreamTimeline$/.test(p),
     },
     {
       platform: 'chatgpt',
@@ -157,20 +168,24 @@
     });
   }
 
-  function addChunk(cap, text) {
+  function addChunk(cap, text, enc) {
     const state = cap.state;
     if (!text || state.truncated) return;
-    if (state.bytes + text.length > MAX_STREAM_BYTES) {
+    // Binary streams (base64) are long-lived and parsed incrementally by the
+    // worker, which keeps no copy — they are not cut off at MAX_STREAM_BYTES.
+    if (!enc && state.bytes + text.length > MAX_STREAM_BYTES) {
       state.truncated = true;
       text = text.slice(0, Math.max(0, MAX_STREAM_BYTES - state.bytes));
       if (!text) return;
     }
     state.bytes += text.length;
     state.chunkCount += 1;
-    state.pendingChunks.push({
+    const chunk = {
       t: Math.round(performance.now() - state.startedAtMs),
       text: text.length > MAX_CHUNK_TEXT ? text.slice(0, MAX_CHUNK_TEXT) : text,
-    });
+    };
+    if (enc) chunk.enc = enc;
+    state.pendingChunks.push(chunk);
     if (!flushTimer) flushTimer = setTimeout(flush, FLUSH_MS);
   }
 
@@ -315,11 +330,17 @@
     // clone() so the page consumes the untouched original stream.
     const reader = resp.clone().body.getReader();
     const decoder = new TextDecoder('utf-8');
+    const binary = /^application\/(connect\+)?proto/i.test(resp.headers.get('content-type') ?? '');
     (async () => {
       try {
         for (;;) {
           const { done, value } = await reader.read();
           if (done) break;
+          if (binary) {
+            // base64 in slices small enough to pass the relay's per-chunk cap whole
+            for (let i = 0; i < value.length; i += BINARY_SLICE) addChunk(cap, toBase64(value.subarray(i, i + BINARY_SLICE)), 'b64');
+            continue;
+          }
           addChunk(cap, decoder.decode(value, { stream: true }));
           if (cap.state.truncated) {
             reader.cancel().catch(() => {});

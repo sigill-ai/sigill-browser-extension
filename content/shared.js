@@ -41,7 +41,8 @@ function sigillConversationId() {
 // (re-)injects whenever the platform removes a badge.
 //
 // Element resolution per target, strongest first:
-//   message-id — [data-message-id] lookup (ChatGPT exposes message uuids)
+//   message-id — [data-message-id] / [data-chatgpt-selection-message-id]
+//                lookup (ChatGPT exposes message uuids)
 //   index      — nth assistant element; indices come from the worker, which
 //                maps the platform's own history response onto the ledger
 //                (BADGE_POSITIONS — Claude)
@@ -51,7 +52,8 @@ function sigillConversationId() {
 
 const SIGILL_ASSISTANT_SELECTORS = {
   claude: ['[data-is-streaming]', '[data-testid="assistant-turn"]', '[data-testid="assistant-message"]', '.font-claude-message'],
-  chatgpt: ['[data-message-author-role="assistant"]'],
+  // October 2026 markup first; the role attribute is the earlier one
+  chatgpt: ['[data-chatgpt-selection-message-id]:has([data-markdown-text-style="assistant-message"])', '[data-message-author-role="assistant"]'],
   gemini: ['model-response'],
 };
 
@@ -112,7 +114,8 @@ function sigillEnsureBadges() {
     let el = target.el?.isConnected ? target.el : null;
     if (!el && target.evidence.messageId) {
       try {
-        el = document.querySelector(`[data-message-id="${CSS.escape(target.evidence.messageId)}"]`);
+        const id = CSS.escape(target.evidence.messageId);
+        el = document.querySelector(`[data-message-id="${id}"], [data-chatgpt-selection-message-id="${id}"]`);
       } catch { /* invalid id chars */ }
     }
     if (!el && target.mode === 'index') el = els[target.index] ?? null;
@@ -184,10 +187,20 @@ function sigillGetTooltip() {
   return sigillTooltip;
 }
 
+// Where the badge sits inside an answer element. Gemini's <model-response> spans
+// the whole pane while the text column is narrower: anchor to the column's
+// action row instead, so the badge lines up with the answer.
+function sigillBadgeHost(el) {
+  if (SIGILL_PLATFORM === 'gemini') {
+    return el.querySelector('.response-container-footer') ?? el.querySelector('.response-footer') ?? el;
+  }
+  return el;
+}
+
 function sigillInjectBadge(el, evidence) {
   // Idempotent by live DOM state, not by flag — the platform may re-render
   // and strip the wrapper while the element (and any dataset) survives.
-  if (el.querySelector(':scope .sigill-stamp-host')) return;
+  if (el.querySelector('.sigill-stamp-host')) return;
 
   const a = document.createElement('a');
   a.href = 'https://sigill.ai/evidence';
@@ -256,7 +269,7 @@ function sigillInjectBadge(el, evidence) {
     <path d="M8.8 12.1l2.15 2.15 4.45-4.65" stroke="white" stroke-width="2.15" stroke-linecap="round" stroke-linejoin="round"/>
   </svg><span>Sigill</span>`;
 
-  const host = el;
+  const host = sigillBadgeHost(el);
   const hostStyle = getComputedStyle(host);
   if (hostStyle.position === 'static') host.style.position = 'relative';
 
