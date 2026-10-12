@@ -1,5 +1,6 @@
 importScripts('../lib/turn-adapters.js', '../lib/evidence-envelope.js', '../lib/evidence-ledger.js',
-  '../lib/agent-evidence.js', '../lib/sigill-auth.js', '../lib/sigill-mcp.js', '../lib/conversation-recorder.js');
+  '../lib/agent-evidence.js', '../lib/sigill-auth.js', '../lib/sigill-mcp.js', '../lib/conversation-recorder.js',
+  '../lib/claude-rpc.js');
 
 const API_BASE = 'https://api.sigill.ai';
 const PROVIDER = SigillEvidence.PROVIDER;
@@ -210,14 +211,21 @@ function handleNetEvents(events, sender) {
         capture.mode = ev.mode ?? capture.mode;
         capture.requestContentType = ev.requestContentType ?? null;
         capture.requestBody = ev.requestBody ?? null;
+        if (capture.platform === 'claude' && SigillClaudeRpc.isTimelineStream(capture.url)) {
+          capture.rpc = SigillClaudeRpc.createParser();
+          capture.rpcQueue = Promise.resolve();
+          const early = capture.chunks.splice(0); // chunks that overtook the start event
+          if (early.length) feedTimeline(capture, early);
+        }
         break;
       case 'response':
         capture.status = ev.status;
         capture.responseContentType = ev.responseContentType ?? null;
         break;
       case 'chunks':
-        capture.chunks.push(...ev.chunks);
         capture.bytes += ev.chunks.reduce((n, c) => n + c.text.length, 0);
+        if (capture.rpc) feedTimeline(capture, ev.chunks); // parsed as it streams; no copy kept
+        else capture.chunks.push(...ev.chunks);
         break;
       case 'end':
         capture.endedAt = new Date().toISOString();
@@ -594,7 +602,10 @@ async function maybeStampNetworkTurn(capture) {
   const adapter = SigillTurnAdapters[capture.platform];
   if (capture.mode !== 'full' || capture.error || !adapter?.isCompletion?.(capture)) return;
 
-  const turn = adapter.parseCompletion(capture);
+  return recordParsedTurn(adapter.parseCompletion(capture), capture);
+}
+
+async function recordParsedTurn(turn, capture) {
   pushDebug({
     type: 'turn_parsed',
     platform: capture.platform,
@@ -670,6 +681,25 @@ async function maybeStampNetworkTurn(capture) {
       tsaName: r.tsaName,
     }).catch(() => { /* tab closed — evidence is recorded regardless */ });
   }
+}
+
+// claude.ai's timeline stream carries every turn of a conversation and stays open:
+// it is parsed as it arrives (lib/claude-rpc.js) and each completed answer is
+// recorded on its own. Feeding is serialized per capture (frames may be gzipped).
+function feedTimeline(capture, chunks) {
+  capture.rpcQueue = capture.rpcQueue.then(async () => {
+    for (const c of chunks) {
+      if (c.enc !== 'b64') continue;
+      const bin = atob(c.text);
+      const bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      for (const turn of await capture.rpc.push(bytes)) {
+        await recordParsedTurn(turn, capture).catch(err => pushDebug({
+          type: 'stamp_result', platform: 'claude', ts: new Date().toISOString(), ok: false, source: 'network', error: err?.message ?? String(err),
+        }));
+      }
+    }
+  }).catch(err => pushDebug({ type: 'turn_parsed', platform: 'claude', ts: new Date().toISOString(), complete: false, warnings: [err?.message ?? String(err)] }));
 }
 
 async function getFixtureStats() {

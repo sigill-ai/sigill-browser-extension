@@ -107,6 +107,7 @@ node test/adapters.test.js
 node test/envelope.test.js
 node test/ledger.test.js
 node test/agent-evidence.test.js
+node test/claude-rpc.test.js
 
 # build the distribution zip (runs the suites first, strips dev tooling)
 tools/pack.sh

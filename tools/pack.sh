@@ -17,6 +17,7 @@ node test/adapters.test.js > /dev/null
 node test/envelope.test.js > /dev/null
 node test/ledger.test.js > /dev/null
 node test/agent-evidence.test.js > /dev/null
+node test/claude-rpc.test.js > /dev/null
 echo "tests: all green"
 
 STAGE="$(mktemp -d)"
