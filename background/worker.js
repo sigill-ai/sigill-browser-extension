@@ -226,6 +226,12 @@ function handleNetEvents(events, sender) {
         capture.bytes += ev.chunks.reduce((n, c) => n + c.text.length, 0);
         if (capture.rpc) feedTimeline(capture, ev.chunks); // parsed as it streams; no copy kept
         else capture.chunks.push(...ev.chunks);
+        // ChatGPT keeps the completion connection open after the answer: the SSE
+        // terminator, not the end of the connection, closes the turn.
+        if (capture.platform === 'chatgpt' && !capture.turnSettled &&
+            /(^|\n)data: \[DONE\]\s*$/.test(capture.chunks.slice(-4).map(c => c.text).join(''))) {
+          settleTurn(capture);
+        }
         break;
       case 'end':
         capture.endedAt = new Date().toISOString();
@@ -248,14 +254,7 @@ function handleNetEvents(events, sender) {
         });
         maybeRecordArtifactLink(capture);
         maybeSendBadgePositions(capture).catch(() => { /* display only */ });
-        maybeStampNetworkTurn(capture).catch(err => pushDebug({
-          type: 'stamp_result',
-          platform: capture.platform,
-          ts: new Date().toISOString(),
-          ok: false,
-          source: 'network',
-          error: err?.message ?? String(err),
-        }));
+        if (!capture.turnSettled) settleTurn(capture);
         break;
     }
   }
@@ -681,6 +680,19 @@ async function recordParsedTurn(turn, capture) {
       tsaName: r.tsaName,
     }).catch(() => { /* tab closed — evidence is recorded regardless */ });
   }
+}
+
+// Parse and record a finished completion capture, once.
+function settleTurn(capture) {
+  capture.turnSettled = true;
+  maybeStampNetworkTurn(capture).catch(err => pushDebug({
+    type: 'stamp_result',
+    platform: capture.platform,
+    ts: new Date().toISOString(),
+    ok: false,
+    source: 'network',
+    error: err?.message ?? String(err),
+  }));
 }
 
 // claude.ai's timeline stream carries every turn of a conversation and stays open:
