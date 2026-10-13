@@ -172,6 +172,19 @@ function memoryStorage() {
     check('a seal interrupted by a restart stops the run', r.broken && !r.pending && r.nextSeq === 3);
   }
 
+  console.log('object references (AiEvidenceEnvelopeV2 v2.1)');
+  {
+    // §3.1 production profile: non-empty segments of A–Z a–z 0–9 . _ ~ - separated by '/'.
+    const profile = u => typeof u === 'string' && u.length > 0
+      && u.split('/').every(s => s.length > 0 && s !== '.' && s !== '..' && /^[A-Za-z0-9._~-]+$/.test(s));
+    const form = /^objects\/[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+    const a = await E.newObject('model-input', 'text/plain', 'hello');
+    const b = E.digestObject('model-input', 'application/pdf', 'ab'.repeat(32), 10);
+    check('newObject URIs are objects/<uuid>', form.test(a.uri) && profile(a.uri), a.uri);
+    check('digestObject URIs are objects/<uuid>', form.test(b.uri) && profile(b.uri), b.uri);
+    check('two objects never share a URI', a.uri !== (await E.newObject('model-input', 'text/plain', 'hello')).uri);
+  }
+
   console.log(`\n${passed} passed, ${failed} failed`);
   process.exit(failed ? 1 : 0);
 })().catch(err => { console.error(err); process.exit(1); });

@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Sigill — AI Conversation Timestamper",
-  "version": "0.6.0",
-  "version_name": "0.6.0-dev",
+  "version": "0.6.1",
+  "version_name": "0.6.1-dev",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvHXW7/S8ah04/T9kmfWrxnbZBxz/Bkn+P10g2jh4f/H+eO7PDkoTC/oPDm5xdHm6oDQ+wdHJ5RzUkyCfTnqxIWM2zv3uJTz/gen0lBB8rNogxEWO0Wk06fpPge7V05cKPY1LccQElNVKSaYNgsZa0BOQioRHGigYzrqgq+xqrfCOhOpSisuWoshduIKX5RXmr8BTgqe+IhCgmtymJLTZZYU+uKcxRPwikppCmsVT8Zj9l1Hpw1yQ9GXRNvirfWZX8JM1udFmNtQy2XWr9UgHjipDeg/0m7i1X4nzSjizarr4+XoSFB+68Fau0OjBv8swwDri+cfmAnahFx62tXtA2wIDAQAB",
   "minimum_chrome_version": "111",
   "description": "Records AI conversations as verifiable evidence with Sigill: sealed and timestamped turn by turn, content stays in your browser.",
